@@ -24,10 +24,11 @@ public class TargetHandler : MonoBehaviour {
     public float lineUnblockDistance; //the distance the players line of site reaches to move out the way
     public float lineUnblockForce;
 
+    public float distToHead;
 
     Transform lineFollowing, lineFollower;
     
-    public bool debug;
+    public bool debug, debug2;
 
     string controlMode = "";
     
@@ -118,6 +119,8 @@ public class TargetHandler : MonoBehaviour {
     {
         lineFollowing = null;
         lineFollower = null;
+        distToHead = 0;
+        motor.forwardSpeedAdd1 = 0;
     }
 
 
@@ -129,10 +132,19 @@ public class TargetHandler : MonoBehaviour {
 
             Transform previousAlly = previousAllyObj.transform;
             TargetHandler previousAllyTarget = previousAlly.GetComponent<TargetHandler>();
+            
+
+            previousAllyTarget.distToHead = Vector3.Distance(transform.position, previousAlly.position) + distToHead;
+
 
             lineFollower = previousAlly.transform; //sets the follower to be previous player
             previousAllyTarget.lineFollowing = transform; //points previous player to follow you
             previousAllyTarget.SetupFollower();
+
+         /*   if (lineFollowing)
+            {
+                motor.forwardSpeedAdd1 = Vector3.Distance(transform.position, lineFollowing.position) / 15f;
+            }*/
 
         }
 
@@ -246,9 +258,11 @@ public class TargetHandler : MonoBehaviour {
         return position;
     }
 
+    int lineFormationStrength = 20;
+
     Vector3 LineFormation ()
     {
-        if (lineFollowing) return lineFollowing.position;
+        if (lineFollowing) return ((lineFollowing.position * lineFormationStrength)  + Camera.main.ScreenToWorldPoint(Input.mousePosition)) / (lineFormationStrength + 1);
         return new Vector3();
     }
 

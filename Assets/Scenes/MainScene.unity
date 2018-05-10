@@ -380,8 +380,6 @@ MonoBehaviour:
     icon: {fileID: 2800000, guid: 7878dcd257bd6c040b73b8a36c2e73be, type: 3}
   - mod: 13
     icon: {fileID: 2800000, guid: 4e77eb38515c2a7459ea808e1e76f2eb, type: 3}
-  - mod: 14
-    icon: {fileID: 2800000, guid: 9e1434ac0dbca9542a5ed8659bac97ed, type: 3}
 --- !u!1001 &658458189
 Prefab:
   m_ObjectHideFlags: 0
@@ -476,6 +474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master: {fileID: 759259405}
+  tutorialLevel: {fileID: 1752613048074000, guid: fcb19ad23fbb1034c9c4d8bd72cb576c,
+    type: 2}
   levels:
   - {fileID: 1561387255435066, guid: 1b84e8d75b13adb4cac06cccc5007049, type: 2}
   - {fileID: 1561387255435066, guid: 1b84e8d75b13adb4cac06cccc5007049, type: 2}
@@ -582,8 +582,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   master: {fileID: 759259405}
   NPCCount: 200
-  weekLength: 2000000
+  weekLength: 150
   trampleEnemies: 1
+  isTutorial: 0
 --- !u!114 &759259409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1118,7 +1119,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1629309893}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 

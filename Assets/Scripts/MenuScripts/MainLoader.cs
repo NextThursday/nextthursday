@@ -7,7 +7,8 @@ public class MainLoader : MonoBehaviour {
     public string levelToLoad;
 
 	void Start () {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey("SkipTutorial");
+        GetComponent<ResetGame>().Reset();
         Application.LoadLevel(levelToLoad);
 	}
 }

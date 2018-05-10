@@ -31,12 +31,13 @@ public class ProjectileCollision : MonoBehaviour {
 
         else if (collObj.tag == "Player")
         {
+            master.saveHandler.EndGame("DEATH");
+            /*
             master.screenshake.Shake(playerScreenshakeStrength, playerScreenshakeTime);
-            //Vector3 dirToPlayer = (transform.position - collObj.transform.position).normalized;
             Vector3 dirToPlayer = -transform.right;
             collObj.GetComponent<Rigidbody2D>().AddForce(dirToPlayer * -playerPushBackStrength);
             Debug.Log("OUCH!");
-            Debug.Break();
+            Debug.Break();*/
         }
 
         Debug.Log("projectile hit: " + collObj.name);

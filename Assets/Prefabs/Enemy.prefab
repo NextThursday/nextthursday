@@ -343,12 +343,13 @@ MonoBehaviour:
   driftInstability: 10
   driftStrength: 200
   shoot: 1
-  shootInterval: 1
-  shootDistanceMin: 5
-  shootDistanceMax: 10
+  shootInterval: 0.7
+  shootDistanceMin: 3
+  shootDistanceMax: 9
   checkShoot: 1
   collisionDistanceNoShoot: 5
   noShootVelocity: 6
+  bouncyPhysics: {fileID: 6200000, guid: 20c420daea21c5c4389ccd3d6872181d, type: 2}
   debug: 0
 --- !u!114 &114319441613403586
 MonoBehaviour:
