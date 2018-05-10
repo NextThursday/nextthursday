@@ -26,11 +26,19 @@ public class TargetHandler : MonoBehaviour {
 
 
     Transform lineFollowing, lineFollower;
-
-
-
-
+    
     public bool debug;
+
+    string controlMode = "";
+    
+
+
+    void Start ()
+    {
+        controlMode = PlayerPrefs.GetString("Controls");
+    }
+
+
 
 
     public bool isUnmarked ()
@@ -51,7 +59,8 @@ public class TargetHandler : MonoBehaviour {
     
 	void Update () {
         
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0) && controlMode == "MOUSE" || 
+            Input.GetButtonDown("A_1") && controlMode == "X360")
         {
             if (allowLine && tag == "Ally" || allowLine && tag == "Player") formation = FormationMode.LINE;
         }
@@ -158,7 +167,10 @@ public class TargetHandler : MonoBehaviour {
 
     void DoFormation()
     {
-        if (formation == FormationMode.FOLLOW_CURSOR && allowFollowCursor || isLineHead) target = FollowCursorFormation();
+        if (formation == FormationMode.FOLLOW_CURSOR && allowFollowCursor || isLineHead)
+        {
+           target = FollowCursorFormation();
+        }
         if (formation == FormationMode.LINE && allowLine)
         {
             if (!isLineHead)
@@ -203,7 +215,35 @@ public class TargetHandler : MonoBehaviour {
 
     Vector3 FollowCursorFormation()
     {
-        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 position = new Vector3();
+
+
+        if (controlMode == "MOUSE")
+        {
+            position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+
+        if (controlMode == "X360")
+        {
+            float xAxis = Input.GetAxis("L_XAxis_1");
+            float yAxis = -Input.GetAxis("L_YAxis_1");
+            Vector3 dir = new Vector3(xAxis, yAxis, 0);
+
+            if (dir.sqrMagnitude > 0.1f)
+            {
+                Vector3 dirNormal = dir.normalized;
+
+                position = dirNormal * 100;
+            }
+
+            position += transform.position;
+
+        }
+
+
+
+
+        return position;
     }
 
     Vector3 LineFormation ()

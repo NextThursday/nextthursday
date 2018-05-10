@@ -1586,6 +1586,12 @@ MonoBehaviour:
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+    - serializedVersion: 2
+      time: 30
+      value: 60
+      inSlope: 0.0000026910657
+      outSlope: 0.0000026910657
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0

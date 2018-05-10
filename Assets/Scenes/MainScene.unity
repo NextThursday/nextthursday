@@ -477,11 +477,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   master: {fileID: 759259405}
   levels:
-  - {fileID: 1469418774285924, guid: 7977508b6b39cb74195be807c268d9c1, type: 2}
-  - {fileID: 1469418774285924, guid: 7977508b6b39cb74195be807c268d9c1, type: 2}
-  - {fileID: 1469418774285924, guid: 7977508b6b39cb74195be807c268d9c1, type: 2}
-  - {fileID: 1469418774285924, guid: 7977508b6b39cb74195be807c268d9c1, type: 2}
-  - {fileID: 1469418774285924, guid: 7977508b6b39cb74195be807c268d9c1, type: 2}
+  - {fileID: 1561387255435066, guid: 1b84e8d75b13adb4cac06cccc5007049, type: 2}
+  - {fileID: 1561387255435066, guid: 1b84e8d75b13adb4cac06cccc5007049, type: 2}
+  - {fileID: 1561387255435066, guid: 1b84e8d75b13adb4cac06cccc5007049, type: 2}
+  - {fileID: 1561387255435066, guid: 1b84e8d75b13adb4cac06cccc5007049, type: 2}
+  - {fileID: 1561387255435066, guid: 1b84e8d75b13adb4cac06cccc5007049, type: 2}
   IntroSelectionPrefab: {fileID: 1162626970524140, guid: 2495c382f8ad99343b81276e3d5ba2ab,
     type: 2}
   PlayerPrefab: {fileID: 1748392166805208, guid: 3d0605ce54755cb4e84d35258f9f0519,
@@ -581,8 +581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master: {fileID: 759259405}
-  NPCCount: 50
-  weekLength: 70
+  NPCCount: 200
+  weekLength: 2000000
   trampleEnemies: 1
 --- !u!114 &759259409
 MonoBehaviour:
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1629309893}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
