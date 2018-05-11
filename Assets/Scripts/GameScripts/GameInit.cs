@@ -104,7 +104,6 @@ public class GameInit : MonoBehaviour {
 
         while (allyCount < maxAllies || nonConCount < maxNonCon) //keep looping until all allies and noncons are in places
         {
-            Debug.Log("looping once..");
             foreach (LevelData.NPCSpawn npcSpawn in levelData.npcSpawn)
             {
                 foreach (Transform child in levelData.transform)
