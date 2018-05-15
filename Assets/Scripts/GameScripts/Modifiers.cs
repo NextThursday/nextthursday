@@ -8,21 +8,20 @@ public class Modifiers : MonoBehaviour {
 
     public enum Modifier
     {
-        ANGRY,
-        WITHOUT_A_SUN,
-        BOUNCY,
-        SLIPPERY,
-        TEST5,
-        TEST6,
-        TEST7,
-        TEST8,
-        TEST9,
-        TEST10,
-        TEST11,
-        TEST12,
-        TEST13,
-        TEST14,
-        TEST15
+        ANGRY, //enemies move angrily
+        WITHOUT_A_SUN, //night
+        BOUNCY, //bouncy
+        SLIPPERY, //slippery
+        GRUESOME, //blood stains
+        BIGGER, //players are smaller
+        STORMY, //lightning storm
+        TRIPPY, //trippy
+        RED, //red tint
+        COOL_AF, //explosions
+        FROM_ANOTHER_TIME, //grainy
+        FASTER, //faster
+        PUNISHING, //allies occasionally explode, screenshake increases
+        HOT //floor is lava
     };
     
     public List<Modifier> mods = new List<Modifier>();

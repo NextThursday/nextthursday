@@ -6,6 +6,7 @@ public class GameInit : MonoBehaviour {
 
     public MasterReferences master;
 
+    public GameObject tutorialLevel;
     public List<GameObject> levels = new List<GameObject>();
 
     int level = 0;
@@ -35,7 +36,16 @@ public class GameInit : MonoBehaviour {
     public void InitLevel () {
         level = master.saveHandler.GetLevel();
         LoadMods();
-        LoadSelection();
+
+
+        if (PlayerPrefs.HasKey("SkipTutorial"))
+        {
+            LoadSelection();
+        }
+        else
+        {
+            StartGame();
+        }
 	}
 
     void LoadMods ()
@@ -64,7 +74,22 @@ public class GameInit : MonoBehaviour {
 
     LevelData LoadLevel()
     {
-        GameObject levelObj = Instantiate(levels[level - 1]);
+
+
+        GameObject levelObj;
+
+        if (PlayerPrefs.HasKey("SkipTutorial"))
+        {
+            levelObj = Instantiate(levels[level - 1]);
+        }
+        else
+        {
+            levelObj = Instantiate(tutorialLevel);
+            PlayerPrefs.SetInt("SkipTutorial", 1);
+            master.controls.isTutorial = true;
+        }
+
+
         return levelObj.GetComponent<LevelData>();
     }
 
@@ -83,6 +108,7 @@ public class GameInit : MonoBehaviour {
     {
         player = Instantiate(PlayerPrefab, levelData.playerSpawn);
         playerMotor = player.GetComponent<MoveMotor>();
+        playerMotor.master = master;
 
         player.transform.parent = levelData.transform;
 
@@ -101,6 +127,9 @@ public class GameInit : MonoBehaviour {
 
         int allyCount = 0;
         int nonConCount = 0;
+
+
+        if (levelData.isTutorial) { maxAllies = 0; maxNonCon = 5; } 
 
         while (allyCount < maxAllies || nonConCount < maxNonCon) //keep looping until all allies and noncons are in places
         {

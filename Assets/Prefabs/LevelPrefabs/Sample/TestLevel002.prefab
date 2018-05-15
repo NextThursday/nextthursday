@@ -8604,6 +8604,7 @@ MonoBehaviour:
       type: 2}
     keyTerm: building2
   sceneObjects: []
+  isTutorial: 0
   difficultyCurve:
     serializedVersion: 2
     m_Curve:
@@ -8640,7 +8641,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  enemyTimeMax: 40
+  enemyTimeMax: 400
 --- !u!114 &114971837788715082
 MonoBehaviour:
   m_ObjectHideFlags: 1

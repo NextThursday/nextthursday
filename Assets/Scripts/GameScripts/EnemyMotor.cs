@@ -66,6 +66,8 @@ public class EnemyMotor : MonoBehaviour {
     public float noShootVelocity; //the velocity when the enemy stops shooting (because it's moving quickly)
 
 
+    [Header("Mod Effects")]
+    public PhysicsMaterial2D bouncyPhysics;
 
     float randomSeed;
 
@@ -74,7 +76,84 @@ public class EnemyMotor : MonoBehaviour {
     private void Start()
     {
         randomSeed = Random.Range(0, 1000);
+
+
+        foreach (Modifiers.Modifier mod in master.modifiers.mods)
+        {
+            ModSettings_Start(mod);
+        }
     }
+
+
+    void ModSettings_Start(Modifiers.Modifier mod)
+    {
+        switch (mod)
+        {
+            case Modifiers.Modifier.ANGRY:
+                Mod_Angry();
+                break;
+            case Modifiers.Modifier.FASTER:
+                Mod_Faster();
+                break;
+
+            case Modifiers.Modifier.SLIPPERY:
+                Mod_Slippery();
+                break;
+
+
+            case Modifiers.Modifier.BOUNCY:
+                Mod_Bouncy();
+                break;
+
+            case Modifiers.Modifier.BIGGER:
+                Mod_Bigger();
+                break;
+        }
+    }
+
+
+    void Mod_Bigger()
+    {
+        transform.localScale *= Random.Range(0.3f, 0.6f);
+        rigid.mass *= 2f;
+    }
+
+    void Mod_Bouncy()
+    {
+        GetComponent<Rigidbody2D>().sharedMaterial = bouncyPhysics;
+        GetComponent<BoxCollider2D>().sharedMaterial = bouncyPhysics;
+    }
+
+
+    void Mod_Slippery()
+    {
+        GetComponent<Rigidbody2D>().drag *= 0.05f;
+        GetComponent<Rigidbody2D>().angularDrag *= 0.5f;
+        shootDistanceMax = 99;
+    }
+
+    void Mod_Angry()
+    {
+        patrolMoveTime.x = 0;
+        patrolMoveTime.y = 0.5f;
+        patrolRotateTime.x = 0;
+        patrolRotateTime.y = 0.5f;
+        patrolForwardSpeed *= 1.3f;
+        patrolSideDistance *= 10f;
+        patrolRotateSpeed *= 7;
+        driftInstability *= 10;
+        driftStrength *= 7.5f;
+        shootDistanceMax = 99;
+        shootDistanceMin = 0;
+        shootInterval *= 0.3f;
+    }
+
+    void Mod_Faster ()
+    {
+        followSpeed *= 10f;
+        lookatTargetSpeed *= 10f;
+    }
+
 
 
     void Update () {
@@ -86,6 +165,33 @@ public class EnemyMotor : MonoBehaviour {
         if (shoot && foundTarget && allowShoot) Shoot();
         if (checkShoot) CheckShoot();
         if (drift) Drift();
+
+
+        foreach (Modifiers.Modifier mod in master.modifiers.mods)
+        {
+            ModSettings_Update(mod);
+        }
+    }
+    
+
+    void ModSettings_Update(Modifiers.Modifier mod)
+    {
+        switch (mod)
+        {
+            case Modifiers.Modifier.BOUNCY:
+                Mod_Bouncy_Update();
+                break;
+        }
+    }
+
+
+
+    void Mod_Bouncy_Update()
+    {
+        if (Mathf.Abs(rigid.velocity.x) + Mathf.Abs(rigid.velocity.y) > 40)
+        {
+            rigid.velocity *= 0.8f;
+        }
     }
 
 
@@ -303,8 +409,7 @@ public class EnemyMotor : MonoBehaviour {
     void Drift ()
     {
         Vector2 randomDriftSeed = new Vector2(randomSeed * 3, randomSeed * 8);
-
-
+        
         rigid.AddForce(new Vector2(PerlinValue(Time.time + randomDriftSeed.x, driftInstability) * driftStrength,
             PerlinValue(Time.time + randomDriftSeed.y, driftInstability) * driftStrength  ));
     }

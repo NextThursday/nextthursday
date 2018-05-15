@@ -77,6 +77,8 @@ public class NPCHandler : MonoBehaviour {
     }
 
 
+    
+
 
 
 
@@ -84,7 +86,51 @@ public class NPCHandler : MonoBehaviour {
     {
         if (debug) Debug.Log(isSeenByCamera);
         isSeenByCamera = render.isVisible;
+
+        foreach (Modifiers.Modifier mod in master.modifiers.mods)
+        {
+            ModSettings_Update(mod);
+        }
     }
+
+    void ModSettings_Update(Modifiers.Modifier mod)
+    {
+        switch (mod)
+        {
+            case Modifiers.Modifier.PUNISHING:
+                Mod_Punishing();
+                break;
+
+                
+        }
+    }
+
+
+
+
+
+    float mod_punishing_counter;
+    float mod_punishing_interval = 0.3f;
+
+    void Mod_Punishing()
+    {
+        if (mode == NPCMode.ALLY)
+        {
+            //kill the npc occasionally
+            mod_punishing_counter += Time.deltaTime;
+            if (mod_punishing_counter >= mod_punishing_interval)
+            {
+                mod_punishing_counter = 0;
+                if (Random.Range(0, 5) == 1)
+                {
+                    motor.DieAlly();
+                }
+            }
+
+        }
+    }
+
+
 
 
 

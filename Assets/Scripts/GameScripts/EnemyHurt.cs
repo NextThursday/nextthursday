@@ -52,7 +52,7 @@ public class EnemyHurt : MonoBehaviour {
     IEnumerator KillEnemy ()
     {
         
-        master.scorer.AddEnemyDeath();
+        //master.scorer.AddEnemyDeath();
         bool chance = Random.Range(0, respawnChance) <= 1;
         Debug.Log(Random.Range(0, respawnChance) + " chance" + chance);
         if (chance)

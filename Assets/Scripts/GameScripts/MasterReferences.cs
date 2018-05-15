@@ -19,5 +19,6 @@ public class MasterReferences : MonoBehaviour {
 
     public GameObject player;
 
+    
 
 }

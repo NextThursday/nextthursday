@@ -26,7 +26,7 @@ public class Countdown : MonoBehaviour {
 
 	
 	void Update () {
-        if (allow)
+        if (allow && !master.controls.isTutorial)
         {
 
             if (weekCount >= master.controls.weekLength)

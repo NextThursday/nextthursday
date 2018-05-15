@@ -246,16 +246,24 @@ MonoBehaviour:
   master: {fileID: 0}
   rigid: {fileID: 50036670647506426}
   targetHandler: {fileID: 114896637458987740}
+  isPlayer: 1
   forwardInitSpeed: 0.8
+  forwardSpeed: 0
+  forwardSpeedAdd1: 0
   targetDistanceSpeed: 100
   targetDistanceThreshold: 1
   targetDistanceThresholdDamping: 0.99
   turnSpeedRange: {x: 5, y: 5}
   turnOnDelay: 0.5
   turnSpeed: 0
+  turnSpeedLineFormation: 2
   active: 0
   allowDeath: 0
   explodeRadius: 2
+  drift: 0
+  driftInstability: 100
+  driftStrength: 400
+  bouncyPhysics: {fileID: 6200000, guid: 20c420daea21c5c4389ccd3d6872181d, type: 2}
 --- !u!114 &114896637458987740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -277,4 +285,6 @@ MonoBehaviour:
   lineUnblockAngle: 40
   lineUnblockDistance: 6
   lineUnblockForce: 200
+  distToHead: 0
   debug: 0
+  debug2: 0
