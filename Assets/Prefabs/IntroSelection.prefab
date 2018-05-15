@@ -1274,10 +1274,10 @@ MonoBehaviour:
     mods: 
   modDisplays:
   - mod: 0
-    text: Unstable
+    text: Angry
     icon: {fileID: 2800000, guid: b61fb13c7831ea14a9ab455f07985d7c, type: 3}
   - mod: 1
-    text: Dark
+    text: Without a sun
     icon: {fileID: 2800000, guid: 959a906e5df02644696e58b381ae363b, type: 3}
   - mod: 2
     text: Bouncy
@@ -1286,42 +1286,38 @@ MonoBehaviour:
     text: Slippery
     icon: {fileID: 2800000, guid: 0945e7d35beff9a47900f5d1216c37a9, type: 3}
   - mod: 4
-    text: Gruesome
+    text: Placeholder 5
     icon: {fileID: 2800000, guid: 8c276b29fd50c94478f2b57db914f6af, type: 3}
   - mod: 5
-    text: Bigger
+    text: Placeholder 6
     icon: {fileID: 2800000, guid: f0f8a7faf3961d6439defd32da32a56d, type: 3}
   - mod: 6
-    text: Stormy
+    text: Placeholder 7
     icon: {fileID: 2800000, guid: 5f6ba4016ef7df9489093e639002ba6a, type: 3}
   - mod: 7
-    text: Trippy
+    text: Placeholder 8
     icon: {fileID: 2800000, guid: 1bd1d9c271011e243bb48cf39df87ef8, type: 3}
   - mod: 8
-    text: Red
+    text: Placeholder 9
     icon: {fileID: 2800000, guid: d976aef2ad8b44b4095cc78e70ffe3f3, type: 3}
   - mod: 9
-    text: Cool AF
+    text: Placeholder 10
     icon: {fileID: 2800000, guid: fe5802029b0dbda4ca19bab960dc9f86, type: 3}
   - mod: 10
-    text: Old
+    text: Placeholder 11
     icon: {fileID: 2800000, guid: c5e24399ab1871a40b4a7ccf99f764b0, type: 3}
   - mod: 11
-    text: Faster
+    text: Placeholder 12
     icon: {fileID: 2800000, guid: eb6851c9a1dfb9140878d3695199b12d, type: 3}
   - mod: 12
-    text: Punishing
+    text: Placeholder 13
     icon: {fileID: 2800000, guid: 7878dcd257bd6c040b73b8a36c2e73be, type: 3}
   - mod: 13
-    text: Hot
+    text: Placeholder 14
     icon: {fileID: 2800000, guid: 4e77eb38515c2a7459ea808e1e76f2eb, type: 3}
-<<<<<<< HEAD
   - mod: 14
     text: Placeholder 15
     icon: {fileID: 2800000, guid: 9e1434ac0dbca9542a5ed8659bac97ed, type: 3}
-=======
-  textDisplay: {fileID: 102211317923486484}
->>>>>>> scoring_and_death
   modifiers: {fileID: 0}
   gameInit: {fileID: 0}
 --- !u!114 &114961690785188776
