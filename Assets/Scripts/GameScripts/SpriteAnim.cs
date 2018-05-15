@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class SpriteAnim : MonoBehaviour
 {
+	
+	/*
+	
+		This is a sprite animation script.
+		It has a few methods to help run sprite animations.
+		Enjoy!
+		
+		- Sean
+		thosesixfaces.com		
+	
+	*/
+	
+	
 
     public enum LoopModes { SINGLE, SINGLE_END_NULL, REPEAT }
 

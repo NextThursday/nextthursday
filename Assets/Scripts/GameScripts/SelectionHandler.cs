@@ -12,7 +12,6 @@ public class SelectionHandler : MonoBehaviour {
     public struct Selection
     {
         public int level;
-        public string intro_msg;
         public SelectionMode selectionMode;
         [HideInInspector] public List<Modifiers.Modifier> mods;
     }
@@ -32,9 +31,7 @@ public class SelectionHandler : MonoBehaviour {
 
 
 
-    [Header("REFERENCES")]
-
-    public TextMesh textDisplay;
+ //   [Header("REFERENCES")]
 
     [HideInInspector] public Modifiers modifiers;
     [HideInInspector] public GameInit gameInit;
@@ -82,7 +79,7 @@ public class SelectionHandler : MonoBehaviour {
 
     void DisplayText (Selection selection)
     {
-        textDisplay.text = selection.intro_msg;
+     //   textDisplay.text = selection.intro_msg;
     }
     
 
