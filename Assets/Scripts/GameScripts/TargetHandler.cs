@@ -39,6 +39,11 @@ public class TargetHandler : MonoBehaviour {
         controlMode = PlayerPrefs.GetString("Controls");
     }
 
+    public FormationMode GetFormationMode ()
+    {
+        return formation;
+    }
+
 
 
 
@@ -232,7 +237,7 @@ public class TargetHandler : MonoBehaviour {
 
         if (controlMode == "MOUSE")
         {
-            position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
         }
 
         if (controlMode == "X360")
@@ -262,7 +267,8 @@ public class TargetHandler : MonoBehaviour {
 
     Vector3 LineFormation ()
     {
-        if (lineFollowing) return ((lineFollowing.position * lineFormationStrength)  + Camera.main.ScreenToWorldPoint(Input.mousePosition)) / (lineFormationStrength + 1);
+        if (lineFollowing)
+            return ((lineFollowing.position * lineFormationStrength)  + Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10))  ) / (lineFormationStrength + 1);
         return new Vector3();
     }
 

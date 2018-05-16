@@ -14,7 +14,8 @@ public class TextAppear : MonoBehaviour {
 
     public TextMesh thisText;
     public TextAppear useNextText;
-       
+
+    public bool allowMouseSkip;
 
 	void Start () {
         initText = thisText.text;
@@ -40,12 +41,26 @@ public class TextAppear : MonoBehaviour {
 
             EvaluateText(counter / speed);
 
+
+
+
+            if (allowMouseSkip)
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    counter += Time.deltaTime;
+                    counter += Time.deltaTime;
+                    delayToNext = 0;
+                }
+            }
+
             if (counter >= speed)
             {
                 counter = 0;
                 allow = false;
                 if (useNextText) StartCoroutine(useNextText.TurnOn(delayToNext));
             }
+
 
         }
     }

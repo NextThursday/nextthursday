@@ -9,7 +9,8 @@ public class MoveMotor : MonoBehaviour {
 
 
     [Header("REFERENCES")]
-    public Rigidbody2D rigid;
+    public Rigidbody rigid;
+    public Collider collider;
     public TargetHandler targetHandler;
 
 
@@ -64,7 +65,7 @@ public class MoveMotor : MonoBehaviour {
 
 
     [Header("Mod Effects")]
-    public PhysicsMaterial2D bouncyPhysics;
+    public PhysicMaterial bouncyPhysics;
 
 
 
@@ -162,9 +163,7 @@ public class MoveMotor : MonoBehaviour {
 
     void Mod_Bouncy()
     {
-
-        rigid.sharedMaterial = bouncyPhysics;
-        GetComponent<BoxCollider2D>().sharedMaterial = bouncyPhysics;
+        collider.sharedMaterial = bouncyPhysics;
         rigid.angularDrag *= 30f;
     }
 
@@ -284,7 +283,7 @@ public class MoveMotor : MonoBehaviour {
              child.GetComponent<Renderer>().enabled = false;
          }
 
-         GetComponent<BoxCollider2D>().size *= explodeRadius;
+         GetComponent<BoxCollider>().size *= explodeRadius;
          yield return new WaitForSeconds(0.1f);
          Destroy(gameObject);
     }

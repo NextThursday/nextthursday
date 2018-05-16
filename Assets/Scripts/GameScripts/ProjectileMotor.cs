@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectileMotor : MonoBehaviour {
 
     [Header("REFERENCES")]
-    public Rigidbody2D rigid;
+    public Rigidbody rigid;
 
     [Header("CONTROLS")]
     public float speed;

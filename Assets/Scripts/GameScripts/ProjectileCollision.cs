@@ -8,12 +8,12 @@ public class ProjectileCollision : MonoBehaviour {
     public float playerPushBackStrength, playerScreenshakeStrength, playerScreenshakeTime;
     public float AllyScreenshakeStrength, AllyScreenshakeTime;
 
-    private void OnCollisionEnter2D(Collision2D coll)
+    private void OnCollisionEnter(Collision coll)
     {
         CheckCollision(coll);
     }
 
-    void CheckCollision(Collision2D coll)
+    void CheckCollision(Collision coll)
     {
         GameObject collObj = coll.gameObject;
         if (collObj.tag == "Ally")
@@ -40,9 +40,10 @@ public class ProjectileCollision : MonoBehaviour {
             Debug.Break();*/
         }
 
-        Debug.Log("projectile hit: " + collObj.name);
 
-
-        Destroy(gameObject);
+        if (collObj.tag != "Enemy")
+        {
+            Destroy(gameObject);
+        }
     }
 }

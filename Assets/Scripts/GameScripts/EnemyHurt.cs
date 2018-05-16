@@ -32,12 +32,12 @@ public class EnemyHurt : MonoBehaviour {
     }
 
 
-    private void OnCollisionEnter2D(Collision2D coll)
+    private void OnCollisionEnter(Collision coll)
     {
         CheckCollision(coll);
     }
 
-    void CheckCollision(Collision2D coll)
+    void CheckCollision(Collision coll)
     {
         if (master.controls.trampleEnemies && !dead && !invinsible)
         {
@@ -61,7 +61,7 @@ public class EnemyHurt : MonoBehaviour {
         }
 
         tag = "Dead";
-        GetComponent<BoxCollider2D>().size *= explodeRadius;
+        GetComponent<BoxCollider>().size *= explodeRadius;
         yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }

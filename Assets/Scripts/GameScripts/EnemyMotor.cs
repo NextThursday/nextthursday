@@ -8,7 +8,7 @@ public class EnemyMotor : MonoBehaviour {
 
     [Header("REFERENCES")]
     public GameObject ProjectilePrefab;
-    public Rigidbody2D rigid;
+    public Rigidbody rigid;
 
     [Header("Stand Back")]
 
@@ -19,7 +19,8 @@ public class EnemyMotor : MonoBehaviour {
     [Header("Look at Target")]
     public bool lookatTarget;
     public float lookatTargetSpeed;
-    Collider2D foundTarget;
+    public float scanTargetDist;
+    Collider foundTarget;
 
 
     [Header("Patrol")]
@@ -67,7 +68,7 @@ public class EnemyMotor : MonoBehaviour {
 
 
     [Header("Mod Effects")]
-    public PhysicsMaterial2D bouncyPhysics;
+    public PhysicMaterial bouncyPhysics;
 
     float randomSeed;
 
@@ -84,6 +85,11 @@ public class EnemyMotor : MonoBehaviour {
         }
     }
 
+
+    public Collider GetFoundTarget ()
+    {
+        return foundTarget;
+    }
 
     void ModSettings_Start(Modifiers.Modifier mod)
     {
@@ -117,7 +123,8 @@ public class EnemyMotor : MonoBehaviour {
 
     void Mod_Punishing()
     {
-        shootInterval *= 0.5f;
+        scanTargetDist = 1000;
+        shootInterval *= 0.1f;
         shootDistanceMax = 99;
         shootDistanceMin = 0;
     }
@@ -131,15 +138,14 @@ public class EnemyMotor : MonoBehaviour {
 
     void Mod_Bouncy()
     {
-        GetComponent<Rigidbody2D>().sharedMaterial = bouncyPhysics;
-        GetComponent<BoxCollider2D>().sharedMaterial = bouncyPhysics;
+        GetComponent<BoxCollider>().sharedMaterial = bouncyPhysics;
     }
 
 
     void Mod_Slippery()
     {
-        GetComponent<Rigidbody2D>().drag *= 0.05f;
-        GetComponent<Rigidbody2D>().angularDrag *= 0.5f;
+        GetComponent<Rigidbody>().drag *= 0.05f;
+        GetComponent<Rigidbody>().angularDrag *= 0.5f;
         shootDistanceMax = 99;
     }
 
@@ -221,20 +227,48 @@ public class EnemyMotor : MonoBehaviour {
 
     void LookAtTarget ()
     {
-        if (!foundTarget)
+        SearchForNearestTarget(); //search for nearest target
+        if (foundTarget)
         {
-            SearchForLookAtTarget(); //search for a target
-        }
-        else
-        {           //if found target, look at it
             transform.rotation = Quaternion.Lerp(transform.rotation,
                 Quaternion.Euler(0, 0, Mathf.Atan2(foundTarget.transform.position.y - transform.position.y, foundTarget.transform.position.x - transform.position.x) * Mathf.Rad2Deg),
                 lookatTargetSpeed * Time.deltaTime);
         }
     }
 
-    void SearchForLookAtTarget ()
+    void SearchForNearestTarget()
     {
+        //initialise variables
+        GameObject closest = null;
+        float minDist = Mathf.Infinity;
+
+        List<GameObject> neighbours = new List<GameObject>(GameObject.FindGameObjectsWithTag("Ally"));
+        neighbours.Add(GameObject.FindGameObjectWithTag("Player"));
+
+        foreach (GameObject neighbour in neighbours)
+        {
+            float distance = Vector3.Distance(transform.position, neighbour.transform.position);
+            bool isNotMe = neighbour != this.gameObject;
+
+            if (distance < minDist && isNotMe && distance < scanTargetDist)
+            {
+                closest = neighbour;
+                minDist = distance;
+            }
+        }
+        
+        if (closest)
+        {
+            foundTarget = closest.GetComponent<BoxCollider>();
+        }
+
+
+
+
+
+
+
+        /*
         Collider2D findTarget = Physics2D.OverlapCircle(transform.position, standBackDistance + 2, 1 << LayerMask.NameToLayer("Goodies"));
         if (findTarget)
         {
@@ -242,21 +276,21 @@ public class EnemyMotor : MonoBehaviour {
             {
                 foundTarget = findTarget;
             }
-            
-
-            /*
-
-            if (findTarget.gameObject.tag == "NPC") //target non con ONLY if it is seen on the screen.
-            {                                       //that way enemies won't destroy all the non con at the start of the round
-               // NPCHandler npcHandler = findTarget.gameObject.GetComponent<NPCHandler>();
-                  //  if (npcHandler.GetVisibility())
-                   // {
-                        foundTarget = findTarget;
-                 //   }
-            }
             */
 
+        /*
+
+        if (findTarget.gameObject.tag == "NPC") //target non con ONLY if it is seen on the screen.
+        {                                       //that way enemies won't destroy all the non con at the start of the round
+           // NPCHandler npcHandler = findTarget.gameObject.GetComponent<NPCHandler>();
+              //  if (npcHandler.GetVisibility())
+               // {
+                    foundTarget = findTarget;
+             //   }
         }
+        */
+
+        //}
     }
 
 
@@ -320,11 +354,11 @@ public class EnemyMotor : MonoBehaviour {
         int layerMask = 1 << LayerMask.NameToLayer("Baddies");
         layerMask = ~layerMask;
 
-        RaycastHit2D hitNoTarget = Physics2D.Raycast(transform.position, transform.right, collisionDistanceNoTarget, layerMask);
-        RaycastHit2D hitFoundTarget = Physics2D.Raycast(transform.position,transform.right, collisionDistanceFoundTarget, layerMask);
+        bool hitNoTarget = Physics.Raycast(transform.position, transform.right, collisionDistanceNoTarget, layerMask);
+        bool hitFoundTarget = Physics.Raycast(transform.position,transform.right, collisionDistanceFoundTarget, layerMask);
 
 
-        if (!foundTarget && hitNoTarget.collider) //face opposite wall if you hit something
+        if (!foundTarget && hitNoTarget) //face opposite wall if you hit something
         {
            PatrolMove(-1f);
            transform.RotateAround(Vector3.forward, Mathf.PI); 
@@ -349,7 +383,7 @@ public class EnemyMotor : MonoBehaviour {
     {
         int layerMask = 1 << LayerMask.NameToLayer("Baddies");
         layerMask = ~layerMask;
-        RaycastHit2D hitNoShoot = Physics2D.Raycast(transform.position, transform.right, collisionDistanceNoShoot, layerMask);
+        bool hitNoShoot = Physics.Raycast(transform.position, transform.right, collisionDistanceNoShoot, layerMask);
 
         float enemyMoveVelocity = Mathf.Abs(rigid.velocity.x) + Mathf.Abs(rigid.velocity.y);
 
@@ -384,7 +418,7 @@ public class EnemyMotor : MonoBehaviour {
         float perlin = PerlinValueSimple(Time.time + randomSeed, patrolRotateChange) * patrolRotateChangeStrength;
         perlin -= (perlin / 3f); //makes it go back and forth between positive and negative values (more on the positive side)
 
-        rigid.AddTorque(perlin * patrolRotateSpeed * patrolRotateRandom * patrolDir);
+        rigid.AddTorque(new Vector3(0, perlin * patrolRotateSpeed * patrolRotateRandom * patrolDir, 0));
     }
 
 

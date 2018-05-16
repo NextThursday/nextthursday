@@ -10,8 +10,9 @@ public class NPCHandler : MonoBehaviour {
     NPCMode mode;
 
     public MoveMotor motor;
-
     public Renderer render;
+    public GameObject ConvertParticle;
+
 
 
     bool isSeenByCamera = true;
@@ -42,13 +43,13 @@ public class NPCHandler : MonoBehaviour {
     }
 
 
-    private void OnCollisionEnter2D(Collision2D coll)
+    private void OnCollisionEnter(Collision coll)
     {
         CheckCollision(coll);
         
     }
 
-    void CheckCollision (Collision2D coll)
+    void CheckCollision (Collision coll)
     {
         if (coll.gameObject.tag == "Ally")
         {
@@ -68,6 +69,11 @@ public class NPCHandler : MonoBehaviour {
     {
         mode = NPCMode.ALLY;
         tag = "Ally";
+
+        GameObject particleObject = Instantiate(ConvertParticle, transform);
+        particleObject.transform.parent = transform.root;
+        particleObject.transform.GetChild(0).GetComponent<ParticleSystem>().Emit(1);
+
         master.scorer.AddAlly();
         master.spawnEnemies.Spawn();
         motor.On();
@@ -98,7 +104,7 @@ public class NPCHandler : MonoBehaviour {
         switch (mod)
         {
             case Modifiers.Modifier.PUNISHING:
-                Mod_Punishing();
+               // Mod_Punishing();
                 break;
 
                 

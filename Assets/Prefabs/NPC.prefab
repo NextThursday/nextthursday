@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4197454217828456}
   - component: {fileID: 114476649278230120}
   - component: {fileID: 114980765044705950}
-  - component: {fileID: 50835575474291420}
-  - component: {fileID: 61114613021755624}
   - component: {fileID: 114574779848800260}
+  - component: {fileID: 65108876003723986}
+  - component: {fileID: 54127274702386226}
   m_Layer: 8
   m_Name: NPC
   m_TagString: NPC
@@ -188,51 +188,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1372128620512170}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!50 &50835575474291420
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!54 &54127274702386226
+Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1179262694402010}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  serializedVersion: 2
   m_Mass: 1
-  m_LinearDrag: 7
+  m_Drag: 7
   m_AngularDrag: 5
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_Constraints: 56
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &61114613021755624
-BoxCollider2D:
+--- !u!65 &65108876003723986
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1179262694402010}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114476649278230120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,6 +229,8 @@ MonoBehaviour:
   master: {fileID: 0}
   motor: {fileID: 114980765044705950}
   render: {fileID: 23050327334107092}
+  ConvertParticle: {fileID: 1889588138638952, guid: ae898bae2c9db634b977e4dda1b2912f,
+    type: 2}
   debug: 0
 --- !u!114 &114574779848800260
 MonoBehaviour:
@@ -284,7 +268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master: {fileID: 0}
-  rigid: {fileID: 50835575474291420}
+  rigid: {fileID: 54127274702386226}
+  collider: {fileID: 65108876003723986}
   targetHandler: {fileID: 114574779848800260}
   isPlayer: 0
   forwardInitSpeed: 0.7
@@ -303,4 +288,4 @@ MonoBehaviour:
   drift: 0
   driftInstability: 100
   driftStrength: 400
-  bouncyPhysics: {fileID: 6200000, guid: 20c420daea21c5c4389ccd3d6872181d, type: 2}
+  bouncyPhysics: {fileID: 13400000, guid: e901c53c4fd8622468583cda05397383, type: 2}

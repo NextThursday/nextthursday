@@ -5,10 +5,25 @@ using UnityEngine;
 public class AppearChildren : MonoBehaviour {
 
     public float delay;
+    public bool allowMouseSkip;
+    public float delayMouseSkip;
 
-	void Start () {
+    void Start () {
         SetChildren(false);
         StartCoroutine(Delay(delay));
+    }
+
+    private void Update()
+    {
+        if (allowMouseSkip)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                StopAllCoroutines();
+                allowMouseSkip = false;
+                StartCoroutine(Delay(delayMouseSkip));
+            }
+        }
     }
 
     IEnumerator Delay (float delay)

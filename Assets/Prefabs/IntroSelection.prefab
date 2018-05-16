@@ -1111,6 +1111,7 @@ MonoBehaviour:
   delayToNext: 0.5
   thisText: {fileID: 102499864689489778}
   useNextText: {fileID: 114356414008349332}
+  allowMouseSkip: 1
 --- !u!114 &114164302564767192
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1123,6 +1124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 5
+  allowMouseSkip: 1
+  delayMouseSkip: 1
 --- !u!114 &114320618279087564
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1135,6 +1138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 5
+  allowMouseSkip: 1
+  delayMouseSkip: 1
 --- !u!114 &114356414008349332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1151,6 +1156,7 @@ MonoBehaviour:
   delayToNext: 0
   thisText: {fileID: 102211317923486484}
   useNextText: {fileID: 0}
+  allowMouseSkip: 1
 --- !u!114 &114363694201276960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1217,6 +1223,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 5.5
+  allowMouseSkip: 1
+  delayMouseSkip: 1.5
 --- !u!114 &114766259592575090
 MonoBehaviour:
   m_ObjectHideFlags: 1
