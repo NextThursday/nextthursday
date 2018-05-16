@@ -96,6 +96,10 @@ public class EnemyMotor : MonoBehaviour {
                 Mod_Faster();
                 break;
 
+            case Modifiers.Modifier.PUNISHING:
+                Mod_Punishing();
+                break;
+
             case Modifiers.Modifier.SLIPPERY:
                 Mod_Slippery();
                 break;
@@ -109,6 +113,13 @@ public class EnemyMotor : MonoBehaviour {
                 Mod_Bigger();
                 break;
         }
+    }
+
+    void Mod_Punishing()
+    {
+        shootInterval *= 0.5f;
+        shootDistanceMax = 99;
+        shootDistanceMin = 0;
     }
 
 

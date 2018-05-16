@@ -345,10 +345,10 @@ MonoBehaviour:
   shoot: 1
   shootInterval: 0.7
   shootDistanceMin: 3
-  shootDistanceMax: 9
+  shootDistanceMax: 20
   checkShoot: 1
   collisionDistanceNoShoot: 5
-  noShootVelocity: 6
+  noShootVelocity: 9
   bouncyPhysics: {fileID: 6200000, guid: 20c420daea21c5c4389ccd3d6872181d, type: 2}
   debug: 0
 --- !u!114 &114319441613403586
