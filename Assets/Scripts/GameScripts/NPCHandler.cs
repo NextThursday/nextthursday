@@ -11,6 +11,7 @@ public class NPCHandler : MonoBehaviour {
 
     public MoveMotor motor;
     public Renderer render;
+    public SpriteAnim sprAnim;
     public GameObject ConvertParticle;
 
 
@@ -78,12 +79,32 @@ public class NPCHandler : MonoBehaviour {
         master.spawnEnemies.Spawn();
         motor.On();
 
-
-        render.material.color = new Color(0, 1, 0, 0.5f);
+        sprAnim.Play("npc/ally_walk", 0);
     }
 
 
-    
+
+    private void Start()
+    {
+
+        foreach (Modifiers.Modifier mod in motor.master.modifiers.mods)
+        {
+            ModSettings_Start(mod);
+        }
+
+
+    }
+
+
+    void ModSettings_Start(Modifiers.Modifier mod)
+    {
+        switch (mod)
+        {
+            case Modifiers.Modifier.ANGRY:
+                Mod_Angry();
+                break;
+        }
+    }
 
 
 
@@ -134,6 +155,12 @@ public class NPCHandler : MonoBehaviour {
             }
 
         }
+    }
+
+
+    void Mod_Angry()
+    {
+        render.material.color = new Color (1, 0.5f, 0.5f);
     }
 
 

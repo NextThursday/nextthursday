@@ -133,6 +133,10 @@ public class MoveMotor : MonoBehaviour {
             case Modifiers.Modifier.BIGGER:
                 Mod_Bigger();
                 break;
+
+            case Modifiers.Modifier.FASTER:
+                Mod_Faster();
+                break;
         }
     }
 
@@ -175,6 +179,12 @@ public class MoveMotor : MonoBehaviour {
         forwardSpeed *= 0.1f;
         turnSpeedInit *= 0.6f;
         turnSpeed *= 0.6f;
+    }
+
+    void Mod_Faster ()
+    {
+        forwardSpeed *= 2f;
+        forwardInitSpeed *= 2f;
     }
 
 

@@ -47,7 +47,7 @@ public class SmoothFollow : MonoBehaviour
         newPos.z = useZ ? target.position.z : transform.position.z;
         if (useZoom)
         {
-            newPos.z = -10 + zoomFactor;
+            newPos.z = -10 - zoomFactor;
             Debug.Log(newPos.z);
         }
 

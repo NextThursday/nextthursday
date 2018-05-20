@@ -207,6 +207,8 @@ MonoBehaviour:
   respawnChance: 9999999
   explodeRadius: 1
   enemyInvincibleAtSpawn: 1
+  DeathParticle: {fileID: 1594895987608978, guid: f5e49cfa523bf4946b77af36ebaaf1f1,
+    type: 2}
 --- !u!114 &114493464516932322
 MonoBehaviour:
   m_ObjectHideFlags: 1

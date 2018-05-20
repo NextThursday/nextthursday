@@ -18,8 +18,9 @@ public class EnemyHurt : MonoBehaviour {
     public float enemyInvincibleAtSpawn;
     //how long the enemy is invinsible when they spawn
 
+    public GameObject DeathParticle;
 
-    
+
     private void Start()
     {
         StartCoroutine(LoseInvinsibility());
@@ -63,6 +64,11 @@ public class EnemyHurt : MonoBehaviour {
         tag = "Dead";
         GetComponent<BoxCollider>().size *= explodeRadius;
         yield return new WaitForSeconds(0.1f);
+
+        GameObject particleObject = Instantiate(DeathParticle, transform);
+        particleObject.transform.parent = transform.root;
+        particleObject.transform.GetChild(0).GetComponent<ParticleSystem>().Emit(1);
+
         Destroy(gameObject);
     }
     
