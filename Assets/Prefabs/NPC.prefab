@@ -178,8 +178,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  setupOnStart: 1
-  playOnStart: 1
+  setupOnStart: 0
+  playOnStart: 0
 --- !u!114 &114476649278230120
 MonoBehaviour:
   m_ObjectHideFlags: 1

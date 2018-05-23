@@ -26,14 +26,17 @@ public class NPCHandler : MonoBehaviour {
     {
         return isSeenByCamera;
     }
-
-
+    
     public void SetMode (NPCMode setMode)
     {
         mode = setMode;
         if (setMode == NPCMode.ALLY)
         {
             ConvertToAlly();
+        }
+        else if (setMode == NPCMode.NONCON)
+        {
+            sprAnim.Play("npc/noncon_walk", 0);
         }
 
     }
@@ -78,7 +81,7 @@ public class NPCHandler : MonoBehaviour {
         master.scorer.AddAlly();
         master.spawnEnemies.Spawn();
         motor.On();
-
+        Debug.Log("change! " + gameObject.name);
         sprAnim.Play("npc/ally_walk", 0);
     }
 

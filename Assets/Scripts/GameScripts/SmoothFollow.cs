@@ -41,14 +41,14 @@ public class SmoothFollow : MonoBehaviour
     {
         Vector3 newPos;
 
-        Debug.Log(zoomFactor + "   ZOOM!");
+        //Debug.Log(zoomFactor + "   ZOOM!");
         newPos.x = useX ? target.position.x : transform.position.x;
         newPos.y = useY ? target.position.y : transform.position.y;
         newPos.z = useZ ? target.position.z : transform.position.z;
         if (useZoom)
         {
             newPos.z = -10 - zoomFactor;
-            Debug.Log(newPos.z);
+         //   Debug.Log(newPos.z);
         }
 
         transform.localPosition = newPos;

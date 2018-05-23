@@ -1667,7 +1667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master: {fileID: 759259405}
-  mods: 
+  mods: 05000000
 --- !u!114 &759259405
 MonoBehaviour:
   m_ObjectHideFlags: 0
