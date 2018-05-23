@@ -8,6 +8,7 @@ TagManager:
   - Ally
   - Enemy
   - Dead
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Goodies
   - Baddies
   - Bullet
-  - 
+  - Church
   - 
   - 
   - 

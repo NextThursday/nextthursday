@@ -271,5 +271,5 @@ public class TargetHandler : MonoBehaviour {
             return ((lineFollowing.position * lineFormationStrength)  + Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10))  ) / (lineFormationStrength + 1);
         return new Vector3();
     }
-
+    
 }
