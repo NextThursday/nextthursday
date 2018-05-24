@@ -10,6 +10,7 @@ public class Countdown : MonoBehaviour {
 
 
     public List<string> days;
+    public List<GameObject> calenderTops;
 
 
     bool allow = false;
@@ -17,6 +18,12 @@ public class Countdown : MonoBehaviour {
     float weekCount;
 
     int previousDayCount = -1;
+
+
+    //when you go to a new day,
+    //enable the next calenderTop
+    //and enable the current calenderTop animation
+
 
     public void StartCount ()
     {
@@ -60,6 +67,11 @@ public class Countdown : MonoBehaviour {
 
     void DisplayDay (int day)
     {
+        calenderTops[day].GetComponent<Animator>().enabled = true;
+        calenderTops[day + 1].active = true;
+
+
+
         tempDisplayDay.text = "" + GetDay(day);
     }
 
