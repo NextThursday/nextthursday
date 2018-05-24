@@ -14,7 +14,7 @@ public class MasterReferences : MonoBehaviour {
     public GameControls controls;
     public SpawnEnemies spawnEnemies;
     public Screenshake screenshake;
-
+    public CamMod camMod;
 
 
     public GameObject player;

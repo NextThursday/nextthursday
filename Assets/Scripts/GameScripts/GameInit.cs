@@ -73,6 +73,7 @@ public class GameInit : MonoBehaviour {
         SetCameraTarget(player.transform);
         playerMotor.On();
         master.countdown.StartCount();
+        master.camMod.ModSettings();
 
         scoreGUI.active = true;
     }

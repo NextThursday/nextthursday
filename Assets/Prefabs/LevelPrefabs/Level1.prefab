@@ -10296,19 +10296,25 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5105209
+      value: 0.80320036
+      inSlope: 1.1222064
+      outSlope: 1.1222064
       tangentMode: 0
     - serializedVersion: 2
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.43858707
+      outSlope: 0.43858707
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  enemyTimeMax: 100
+  enemyTimeMax: 70
   spawnInterval: 0.01
   bulletSpeedIncrease:
     serializedVersion: 2
