@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 114631364432732952}
   - component: {fileID: 54195050894155700}
   - component: {fileID: 65606538793587448}
+  - component: {fileID: 114648020130118014}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -349,6 +350,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   motor: {fileID: 114459199756412568}
   renderer: {fileID: 23735050803070882}
+--- !u!114 &114648020130118014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1748392166805208}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2bec48f69b3cf4c96d848ad8870e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minBulletDistance: 3
+  maxBulletDist: 10
+  minTimeSlow: 0.1
+  maxTimeSlow: 1
 --- !u!114 &114829917282129238
 MonoBehaviour:
   m_ObjectHideFlags: 1

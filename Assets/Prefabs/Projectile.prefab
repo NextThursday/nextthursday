@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 65990967860518810}
   m_Layer: 10
   m_Name: Projectile
-  m_TagString: Enemy
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,6 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid: {fileID: 54509952028682924}
   speed: 4000
+  speedMulti: 1
 --- !u!114 &114546006993910986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,6 +300,10 @@ MonoBehaviour:
   AllyScreenshakeStrength: 0.4
   AllyScreenshakeTime: 4
   explodeParticles: {fileID: 1162863637439618, guid: 7e1cae0b94db041459d96517bbdcee82,
+    type: 2}
+  PlayerDeathParticle: {fileID: 1240498901931674, guid: a71f1e7eaab4bad49b54d23c92902df6,
+    type: 2}
+  PointLoseParticle: {fileID: 1361266542299430, guid: 81f0af21edd807546b46a94e0947103a,
     type: 2}
 --- !u!198 &198516402911315836
 ParticleSystem:

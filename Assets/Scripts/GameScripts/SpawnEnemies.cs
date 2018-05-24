@@ -8,7 +8,6 @@ public class SpawnEnemies : MonoBehaviour {
 
     public GameObject EnemyPrefab;
 
-    public float spawnInterval; //spawn = spawn based on enemy count
     float spawnTimeCounter;
 
     public float gameTimeSpawnInterval; //gametime spawn = spawn over time
@@ -17,10 +16,13 @@ public class SpawnEnemies : MonoBehaviour {
 
 
 
+    [HideInInspector] public LevelData levelData;
     [HideInInspector] public List<Transform> spawnPoints;
     [HideInInspector] public AnimationCurve difficulty;
     [HideInInspector] public AnimationCurve enemyTimeIncrease;
     [HideInInspector] public float gameTimeEnemyMax;
+    [HideInInspector] public float spawnInterval; //spawn = spawn based on enemy count
+
 
     int spawnCount;
     
@@ -111,7 +113,8 @@ public class SpawnEnemies : MonoBehaviour {
 
         EnemyMotor motor = enemyObj.GetComponent<EnemyMotor>();
         motor.master = master;
-
+        motor.bulletSpeedMulti += levelData.bulletSpeedIncrease.Evaluate(Time.time);
+        motor.bulletIntervalMulti = levelData.bulletIntervalMulti.Evaluate(Time.time);
 
         enemyID++;
     }

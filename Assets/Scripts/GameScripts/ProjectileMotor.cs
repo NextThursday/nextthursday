@@ -10,7 +10,10 @@ public class ProjectileMotor : MonoBehaviour {
     [Header("CONTROLS")]
     public float speed;
 
-	void Update () {
-        rigid.AddForce(transform.right * speed);
+    [HideInInspector]
+    public float speedMulti = 1;
+
+    void Update () {
+        rigid.AddForce(transform.right * speed * speedMulti);
 	}
 }

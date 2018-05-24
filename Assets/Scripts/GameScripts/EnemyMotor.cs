@@ -60,6 +60,8 @@ public class EnemyMotor : MonoBehaviour {
     public float shootDistanceMin, shootDistanceMax;
     bool allowShoot;
     float shootCount = 0;
+    public float bulletSpeedMulti = 1;
+    public float bulletIntervalMulti = 1;
 
     [Header("Check Shoot")]
     public bool checkShoot;
@@ -124,7 +126,7 @@ public class EnemyMotor : MonoBehaviour {
     void Mod_Punishing()
     {
         scanTargetDist = 1000;
-        shootInterval *= 0.1f;
+        bulletSpeedMulti *= 3;
         shootDistanceMax = 99;
         shootDistanceMin = 0;
     }
@@ -162,7 +164,7 @@ public class EnemyMotor : MonoBehaviour {
         driftStrength *= 7.5f;
         shootDistanceMax = 99;
         shootDistanceMin = 0;
-        shootInterval *= 0.3f;
+     //   shootInterval *= 0.3f;
     }
 
     void Mod_Faster ()
@@ -247,13 +249,16 @@ public class EnemyMotor : MonoBehaviour {
 
         foreach (GameObject neighbour in neighbours)
         {
-            float distance = Vector3.Distance(transform.position, neighbour.transform.position);
-            bool isNotMe = neighbour != this.gameObject;
-
-            if (distance < minDist && isNotMe && distance < scanTargetDist)
+            if (transform && neighbour)
             {
-                closest = neighbour;
-                minDist = distance;
+                float distance = Vector3.Distance(transform.position, neighbour.transform.position);
+                bool isNotMe = neighbour != this.gameObject;
+
+                if (distance < minDist && isNotMe && distance < scanTargetDist)
+                {
+                    closest = neighbour;
+                    minDist = distance;
+                }
             }
         }
         
@@ -435,7 +440,7 @@ public class EnemyMotor : MonoBehaviour {
     {
         shootCount += Time.deltaTime;
 
-        if (shootCount >= shootInterval)
+        if (shootCount >= shootInterval * bulletIntervalMulti)
         {
             shootCount = 0;
             FireProjectile();
@@ -448,6 +453,8 @@ public class EnemyMotor : MonoBehaviour {
         projectile.transform.localPosition = new Vector3(1, 0, 0);
         projectile.transform.parent = transform.parent;
         projectile.GetComponent<ProjectileCollision>().master = master;
+
+        projectile.GetComponent<ProjectileMotor>().speedMulti = bulletSpeedMulti;
     }
 
 

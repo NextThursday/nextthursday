@@ -197,6 +197,8 @@ MonoBehaviour:
   sprAnim: {fileID: 114387306793993916}
   ConvertParticle: {fileID: 1889588138638952, guid: ae898bae2c9db634b977e4dda1b2912f,
     type: 2}
+  PointParticle: {fileID: 1245314894187888, guid: fc306c415b83e83418ce4aad7351edb4,
+    type: 2}
   debug: 0
 --- !u!114 &114574779848800260
 MonoBehaviour:

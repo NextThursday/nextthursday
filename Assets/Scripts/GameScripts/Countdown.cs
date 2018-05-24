@@ -10,8 +10,11 @@ public class Countdown : MonoBehaviour {
 
 
     public List<string> days;
+    public GameObject calender;
     public List<GameObject> calenderTops;
-
+    public Vector3 calenderTopStart, calenderTopEnd;
+    public Vector3 calenderTopStartRot, calenderTopEndRot;
+    public GameObject currentCalenderTop;
 
     bool allow = false;
     
@@ -28,13 +31,22 @@ public class Countdown : MonoBehaviour {
     public void StartCount ()
     {
         weekCount = 0;
+        calender.active = true;
         allow = true;
     }
 
-	
-	void Update () {
+
+    private void Start()
+    {
+        currentCalenderTop = calenderTops[0];
+        calender.active = false;
+    }
+
+    void Update () {
         if (allow && !master.controls.isTutorial)
         {
+
+
 
             if (weekCount >= master.controls.weekLength)
             {
@@ -67,8 +79,12 @@ public class Countdown : MonoBehaviour {
 
     void DisplayDay (int day)
     {
-        calenderTops[day].GetComponent<Animator>().enabled = true;
-        calenderTops[day + 1].active = true;
+        if (day > 0)
+        {
+            currentCalenderTop = calenderTops[day];
+            calenderTops[day - 1].GetComponent<Animator>().enabled = true;
+            calenderTops[day].active = true;
+        }
 
 
 
@@ -77,9 +93,17 @@ public class Countdown : MonoBehaviour {
 
     void DisplayProgress (float progress)
     {
-        progress = Mathf.FloorToInt(progress * 100f);
+        //progress = Mathf.FloorToInt(progress * 100f);
+        progress *= 7;
+        progress = progress % 1;
 
-        tempDisplayProgress.text = (100 - progress) + "s";
+        if (currentCalenderTop)
+        {
+            currentCalenderTop.transform.localPosition = Vector3.Lerp(calenderTopStart, calenderTopEnd, progress);
+            currentCalenderTop.transform.localEulerAngles = Vector3.Lerp(calenderTopStartRot, calenderTopEndRot, progress);
+        }
+
+       // tempDisplayProgress.text = (100 - progress) + "s";
     }
 
 

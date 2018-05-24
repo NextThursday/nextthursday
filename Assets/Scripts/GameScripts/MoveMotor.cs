@@ -66,7 +66,7 @@ public class MoveMotor : MonoBehaviour {
 
     [Header("Mod Effects")]
     public PhysicMaterial bouncyPhysics;
-
+    bool reverseMode;
 
 
 
@@ -137,6 +137,10 @@ public class MoveMotor : MonoBehaviour {
             case Modifiers.Modifier.FASTER:
                 Mod_Faster();
                 break;
+
+            case Modifiers.Modifier.TRIPPY:
+                Mod_Trippy();
+                break;
         }
     }
 
@@ -144,6 +148,14 @@ public class MoveMotor : MonoBehaviour {
     void Mod_Angry()
     {
         drift = true;
+    }
+
+    void Mod_Trippy()
+    {
+        if (isPlayer)
+        {
+            reverseMode = true;
+        }
     }
 
 
@@ -203,7 +215,12 @@ public class MoveMotor : MonoBehaviour {
             
                 if (GetTargetDistance() > targetDistanceThreshold)
                 {
-                    rigid.AddForce(transform.right * forwardSpeed * (GetTargetDistance() + targetDistanceSpeed));
+                    Vector3 force = transform.right * forwardSpeed * (GetTargetDistance() + targetDistanceSpeed);
+                    if (reverseMode)
+                    {
+                        force *= -1;
+                    }
+                    rigid.AddForce(force);
 
                 }
                 else

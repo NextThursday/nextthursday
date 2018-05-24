@@ -17,7 +17,7 @@ public class GameInit : MonoBehaviour {
     
     public GameObject IntroSelectionPrefab;
     public GameObject PlayerPrefab;
-
+    public GameObject scoreGUI;
 
     [Header("INTERNAL REFERENCES")]
 
@@ -73,6 +73,8 @@ public class GameInit : MonoBehaviour {
         SetCameraTarget(player.transform);
         playerMotor.On();
         master.countdown.StartCount();
+
+        scoreGUI.active = true;
     }
 
     LevelData LoadLevel()
@@ -241,10 +243,12 @@ public class GameInit : MonoBehaviour {
                 enemySpawnPoints.Add(child);
             }
         }
+        master.spawnEnemies.levelData = levelData;
         master.spawnEnemies.spawnPoints = enemySpawnPoints;
         master.spawnEnemies.difficulty = levelData.difficultyCurve;
         master.spawnEnemies.enemyTimeIncrease = levelData.enemyTimeIncrease;
         master.spawnEnemies.gameTimeEnemyMax = levelData.enemyTimeMax;
+        master.spawnEnemies.spawnInterval = levelData.spawnInterval;
         master.spawnEnemies.StartSpawn();
     }
 

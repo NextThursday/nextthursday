@@ -46,5 +46,7 @@ public class LevelData : MonoBehaviour {
     //e.g. point 1 [0,0], point 2 [4, 10] means that by the time you have 4 allies, 10 enemies will spawn. It is capped at 10 enemies.
     public AnimationCurve enemyTimeIncrease; //0,0 to 1,1 curve of speed of the enemies spawned in via game time
     public float enemyTimeMax; //by the end of the round, if no enemies are dead there should be this amount of enemies spawned in
-
+    public float spawnInterval = 0.1f;
+    public AnimationCurve bulletSpeedIncrease; //additional bullet speed over time (time = time, value = extra bullet speed)
+    public AnimationCurve bulletIntervalMulti; //bullet interval multiplier over time (time = time, value = extra bullet speed)
 }

@@ -9,6 +9,9 @@ public class ProjectileCollision : MonoBehaviour {
     public float AllyScreenshakeStrength, AllyScreenshakeTime;
     public GameObject explodeParticles;
 
+    bool playerDied = false;
+    public GameObject PlayerDeathParticle;
+    public GameObject PointLoseParticle;
 
     private void OnCollisionEnter(Collision coll)
     {
@@ -22,7 +25,15 @@ public class ProjectileCollision : MonoBehaviour {
         { //|| collObj.tag == "Player")
             master.screenshake.Shake(AllyScreenshakeStrength, AllyScreenshakeTime);
             MoveMotor motor = collObj.GetComponent<MoveMotor>();
+
+            GameObject pointObject = Instantiate(PointLoseParticle, collObj.transform);
+            pointObject.transform.parent = pointObject.transform.parent.parent;
+            pointObject.transform.localEulerAngles = Vector3.zero;
+
             motor.DieAlly();
+
+
+
         }
 
        /* else if (collObj.tag == "NPC")
@@ -31,15 +42,23 @@ public class ProjectileCollision : MonoBehaviour {
             motor.DieNPC();
         }*/
 
-        else if (collObj.tag == "Player")
+        else if (collObj.tag == "Player" && !playerDied)
         {
-            master.saveHandler.EndGame("DEATH");
-            /*
+
+            playerDied = true;
             master.screenshake.Shake(playerScreenshakeStrength, playerScreenshakeTime);
-            Vector3 dirToPlayer = -transform.right;
-            collObj.GetComponent<Rigidbody2D>().AddForce(dirToPlayer * -playerPushBackStrength);
-            Debug.Log("OUCH!");
-            Debug.Break();*/
+            collObj.active = false;
+
+
+
+            GameObject particleObject = Instantiate(PlayerDeathParticle, collObj.transform);
+            particleObject.transform.parent = transform.root;
+            particleObject.transform.GetChild(0).GetComponent<ParticleSystem>().Emit(1);
+
+
+
+            master.saveHandler.EndGame("DEATH", 1);
+
         }
 
 

@@ -13,6 +13,7 @@ public class NPCHandler : MonoBehaviour {
     public Renderer render;
     public SpriteAnim sprAnim;
     public GameObject ConvertParticle;
+    public GameObject PointParticle;
 
 
 
@@ -33,12 +34,19 @@ public class NPCHandler : MonoBehaviour {
         if (setMode == NPCMode.ALLY)
         {
             ConvertToAlly();
+            StartCoroutine(AddPointDelay(0.4f));
         }
         else if (setMode == NPCMode.NONCON)
         {
             sprAnim.Play("npc/noncon_walk", 0);
         }
 
+    }
+
+    IEnumerator AddPointDelay (float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AddPoint();
     }
 
     public NPCMode GetMode()
@@ -61,11 +69,14 @@ public class NPCHandler : MonoBehaviour {
             if (npcHandler.mode == NPCMode.ALLY && isSeenByCamera && mode != NPCMode.ALLY) //ensures it is visible and hit by an ally, and is not an ally
             {
                 ConvertToAlly();
+                AddPoint();
+
             }
         }
         else if (coll.gameObject.tag == "Player" && mode != NPCMode.ALLY) //ensures it is hit by player and is not an ally previously
         {
             ConvertToAlly();
+            AddPoint();
         }
     }
     
@@ -78,13 +89,22 @@ public class NPCHandler : MonoBehaviour {
         particleObject.transform.parent = transform.root;
         particleObject.transform.GetChild(0).GetComponent<ParticleSystem>().Emit(1);
 
-        master.scorer.AddAlly();
+
+
         master.spawnEnemies.Spawn();
         motor.On();
         Debug.Log("change! " + gameObject.name);
         sprAnim.Play("npc/ally_walk", 0);
     }
 
+    void AddPoint ()
+    {
+        master.scorer.AddAlly();
+        GameObject pointObject = Instantiate(PointParticle, transform);
+        pointObject.transform.parent = transform.parent;
+        pointObject.transform.localEulerAngles = Vector3.zero;
+
+    }
 
 
     private void Start()

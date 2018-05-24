@@ -7,12 +7,22 @@ public class SaveHandler : MonoBehaviour {
     public MasterReferences master;
     public string endScene;
 
+    public Animator blackFader;
+
+    bool playerDied = false;
+
+
     public void NextScene ()
     {
+        if (playerDied) return;
+
+
         PlayerPrefs.SetInt("LevelLoad", !PlayerPrefs.HasKey("LevelLoad") ? 2 : PlayerPrefs.GetInt("LevelLoad") + 1); //increases level number
         PlayerPrefs.SetInt("Allies", master.scorer.GetAllyCount()); //saves the number of allies for the next round
 
-        int roundScore = master.scorer.GetAllyCount() + master.scorer.GetEnemyDeaths();
+        int roundScore = master.scorer.GetAllyCount() + master.scorer.GetEnemyDeaths() ;
+
+        
         PlayerPrefs.SetInt("GameScore", PlayerPrefs.HasKey("GameScore") ? PlayerPrefs.GetInt("GameScore") + roundScore : roundScore);
 
         int levelToLoad = PlayerPrefs.GetInt("LevelLoad");
@@ -22,18 +32,34 @@ public class SaveHandler : MonoBehaviour {
             Application.LoadLevel(Application.loadedLevel);
         } else
         {
-            EndGame("WIN");
+          EndGame("WIN", 0);
         }
     }
 
 
-    public void EndGame (string state)
+    public void EndGame (string state, float delay)
     {
         if (state == "DEATH")
         {
+            playerDied = true;
             PlayerPrefs.SetInt("GameScore", 0);
+            master.scorer.Death();
         }
+
         PlayerPrefs.SetString("GameEndState", state);
+        Debug.Log("next scene " + delay);
+        StartCoroutine(LoadNextScene(state, delay));
+    }
+
+    IEnumerator LoadNextScene(string state, float delay)
+    {
+        Debug.Log("NEEEXT");
+        yield return new WaitForSeconds(delay);
+        Debug.Log("NEEEXT!!!");
+        if (state == "DEATH")
+        {
+            blackFader.enabled = true;
+        }
         Application.LoadLevel(endScene);
     }
 

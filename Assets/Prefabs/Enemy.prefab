@@ -184,9 +184,11 @@ MonoBehaviour:
   driftInstability: 10
   driftStrength: 200
   shoot: 1
-  shootInterval: 0.7
-  shootDistanceMin: 0.01
-  shootDistanceMax: 80
+  shootInterval: 1
+  shootDistanceMin: 1
+  shootDistanceMax: 6
+  bulletSpeedMulti: 1
+  bulletIntervalMulti: 1
   checkShoot: 1
   collisionDistanceNoShoot: 1
   noShootVelocity: 100
@@ -208,6 +210,8 @@ MonoBehaviour:
   explodeRadius: 1
   enemyInvincibleAtSpawn: 1
   DeathParticle: {fileID: 1594895987608978, guid: f5e49cfa523bf4946b77af36ebaaf1f1,
+    type: 2}
+  PointParticle: {fileID: 1245314894187888, guid: fc306c415b83e83418ce4aad7351edb4,
     type: 2}
 --- !u!114 &114493464516932322
 MonoBehaviour:

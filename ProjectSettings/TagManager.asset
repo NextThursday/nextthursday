@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Dead
   - Water
+  - Bullet
   layers:
   - Default
   - TransparentFX

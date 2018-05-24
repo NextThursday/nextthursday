@@ -19,6 +19,7 @@ public class EnemyHurt : MonoBehaviour {
     //how long the enemy is invinsible when they spawn
 
     public GameObject DeathParticle;
+    public GameObject PointParticle;
 
 
     private void Start()
@@ -53,7 +54,7 @@ public class EnemyHurt : MonoBehaviour {
     IEnumerator KillEnemy ()
     {
         
-        //master.scorer.AddEnemyDeath();
+        master.scorer.AddEnemyDeath();
         bool chance = Random.Range(0, respawnChance) <= 1;
         Debug.Log(Random.Range(0, respawnChance) + " chance" + chance);
         if (chance)
@@ -68,6 +69,11 @@ public class EnemyHurt : MonoBehaviour {
         GameObject particleObject = Instantiate(DeathParticle, transform);
         particleObject.transform.parent = transform.root;
         particleObject.transform.GetChild(0).GetComponent<ParticleSystem>().Emit(1);
+        
+
+        GameObject pointObject = Instantiate(PointParticle, transform);
+        pointObject.transform.parent = transform.parent.parent;
+        pointObject.transform.localEulerAngles = Vector3.zero;
 
         Destroy(gameObject);
     }

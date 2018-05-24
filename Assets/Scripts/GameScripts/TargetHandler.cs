@@ -31,7 +31,7 @@ public class TargetHandler : MonoBehaviour {
     public bool debug, debug2;
 
     string controlMode = "";
-    
+
 
 
     void Start ()
@@ -218,11 +218,12 @@ public class TargetHandler : MonoBehaviour {
             Vector3 directionToTarget = transform.position - playerPos.position;
             float angle = Vector3.Angle(playerPos.right, directionToTarget);
             float distanceToTarget = Vector3.Distance(transform.position, playerPos.position);
-
+            
             if (angle < lineUnblockAngle && distanceToTarget < lineUnblockDistance)
             {
                 if (debug) Debug.Log("ANGLE!! : " + angle);
-                motor.rigid.AddForce(directionToTarget / directionToTarget.magnitude * lineUnblockForce);
+                Vector3 force = directionToTarget / directionToTarget.magnitude * lineUnblockForce;
+                motor.rigid.AddForce(force);
             }
 
 
@@ -256,10 +257,7 @@ public class TargetHandler : MonoBehaviour {
             position += transform.position;
 
         }
-
-
-
-
+        
         return position;
     }
 
