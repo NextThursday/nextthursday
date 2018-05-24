@@ -30,6 +30,9 @@ public class GameInit : MonoBehaviour {
 
     void Start ()
     {
+        PlayerPrefs.SetInt("SkipTutorial", 1); // <<<<<<<<<<<<< !!!!!
+
+
         InitLevel();
     }
 

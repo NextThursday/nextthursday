@@ -7,6 +7,8 @@ public class ProjectileCollision : MonoBehaviour {
     [HideInInspector] public MasterReferences master;
     public float playerPushBackStrength, playerScreenshakeStrength, playerScreenshakeTime;
     public float AllyScreenshakeStrength, AllyScreenshakeTime;
+    public GameObject explodeParticles;
+
 
     private void OnCollisionEnter(Collision coll)
     {
@@ -43,6 +45,10 @@ public class ProjectileCollision : MonoBehaviour {
 
         if (collObj.tag != "Enemy")
         {
+            GameObject particleObj = Instantiate(explodeParticles, transform);
+            particleObj.transform.parent = transform.parent;
+            particleObj.GetComponent<ParticleSystem>().Emit(10);
+
             Destroy(gameObject);
         }
     }
