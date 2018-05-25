@@ -257,3 +257,5 @@ MonoBehaviour:
   driftInstability: 100
   driftStrength: 400
   bouncyPhysics: {fileID: 13400000, guid: e901c53c4fd8622468583cda05397383, type: 2}
+  PointLoseParticle: {fileID: 1361266542299430, guid: 81f0af21edd807546b46a94e0947103a,
+    type: 2}

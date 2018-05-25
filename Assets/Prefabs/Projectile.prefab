@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   master: {fileID: 0}
   playerPushBackStrength: 2000
-  playerScreenshakeStrength: 0.5
+  playerScreenshakeStrength: 2
   playerScreenshakeTime: 8
   AllyScreenshakeStrength: 0.4
   AllyScreenshakeTime: 4

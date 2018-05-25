@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class WaterSlow : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        Debug.Log(" do water mechanic ");
-	}
+    void OnTriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.tag == "Player" || coll.gameObject.tag == "Ally")
+        {
+            coll.gameObject.GetComponent<MoveMotor>().isInWater(true);
+        }
+    }
+
+    void OnTriggerExit(Collider coll)
+    {
+        if (coll.gameObject.tag == "Player" || coll.gameObject.tag == "Ally")
+        {
+            coll.gameObject.GetComponent<MoveMotor>().isInWater(false);
+        }
+    }
+
+
 }

@@ -49,6 +49,8 @@ public class MoveMotor : MonoBehaviour {
     public bool allowDeath = true;
 
     public float explodeRadius;
+
+    bool waterState;
     float randomSeed;
     //1 = normal size, 2 = 2x size
 
@@ -68,6 +70,8 @@ public class MoveMotor : MonoBehaviour {
     public PhysicMaterial bouncyPhysics;
     bool reverseMode;
 
+
+    public GameObject PointLoseParticle;
 
 
     public void On ()
@@ -106,6 +110,15 @@ public class MoveMotor : MonoBehaviour {
         }
 
 
+    }
+
+    public void Incinerate ()
+    {
+        GameObject pointObject = Instantiate(PointLoseParticle, transform);
+        pointObject.transform.parent = pointObject.transform.parent.parent;
+        pointObject.transform.localEulerAngles = Vector3.zero;
+
+        DieAlly();
     }
 
 
@@ -200,6 +213,10 @@ public class MoveMotor : MonoBehaviour {
     }
 
 
+    public void isInWater (bool state)
+    {
+        waterState = state;
+    }
 
 
     void Update () {
@@ -215,7 +232,8 @@ public class MoveMotor : MonoBehaviour {
             
                 if (GetTargetDistance() > targetDistanceThreshold)
                 {
-                    Vector3 force = transform.right * forwardSpeed * (GetTargetDistance() + targetDistanceSpeed);
+
+                    Vector3 force = transform.right * forwardSpeed * (GetTargetDistance() + targetDistanceSpeed) * GetWaterSlowdown();
                     if (reverseMode)
                     {
                         force *= -1;
@@ -249,13 +267,29 @@ public class MoveMotor : MonoBehaviour {
     {
         Vector2 randomDriftSeed = new Vector2(randomSeed * 3, randomSeed * 8);
 
-        rigid.AddForce(new Vector2(PerlinValue(Time.time + randomDriftSeed.x, driftInstability) * driftStrength,
-            PerlinValue(Time.time + randomDriftSeed.y, driftInstability) * driftStrength));
+        rigid.AddForce(new Vector2(PerlinValue(Time.time + randomDriftSeed.x, driftInstability) * driftStrength * GetWaterSlowdown(),
+            PerlinValue(Time.time + randomDriftSeed.y, driftInstability) * driftStrength) * GetWaterSlowdown());
     }
 
 
 
+    float GetWaterSlowdown ()
+    {
+        float waterSlowdown = 1;
 
+        if (waterState && targetHandler.formation != TargetHandler.FormationMode.LINE)
+        {
+            waterSlowdown = 0.04f;
+            rigid.velocity *= 0.9f;
+        } else if (waterState)
+        {
+            waterSlowdown = 0.7f;
+        }
+
+
+
+        return waterSlowdown;
+    }
 
 
 

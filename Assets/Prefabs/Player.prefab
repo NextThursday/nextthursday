@@ -314,7 +314,7 @@ MonoBehaviour:
   targetDistanceSpeed: 100
   targetDistanceThreshold: 1
   targetDistanceThresholdDamping: 0.99
-  turnSpeedRange: {x: 5, y: 5}
+  turnSpeedRange: {x: 100, y: 100}
   turnOnDelay: 0.5
   turnSpeed: 0
   turnSpeedLineFormation: 2
@@ -325,6 +325,8 @@ MonoBehaviour:
   driftInstability: 100
   driftStrength: 400
   bouncyPhysics: {fileID: 13400000, guid: e901c53c4fd8622468583cda05397383, type: 2}
+  PointLoseParticle: {fileID: 1361266542299430, guid: 81f0af21edd807546b46a94e0947103a,
+    type: 2}
 --- !u!114 &114459854573718940
 MonoBehaviour:
   m_ObjectHideFlags: 1

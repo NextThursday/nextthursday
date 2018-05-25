@@ -9,6 +9,7 @@ public class GameScorer : MonoBehaviour {
 
     public TextMesh allyText, scoreText;
     int initScore = 0;
+    bool dead = false;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class GameScorer : MonoBehaviour {
     {
         allyText.text = "xxx";
         scoreText.text = "xxxxx";
+        dead = true;
     }
 
     public void AddAlly ()
@@ -42,11 +44,13 @@ public class GameScorer : MonoBehaviour {
 
     void RefreshAllyText ()
     {
+        if (dead) return;
         allyText.text = "" + allyCount;
     }
 
     void RefreshScoreText()
     {
+        if (dead) return;
         scoreText.text = "" + (initScore + master.scorer.GetAllyCount() + master.scorer.GetEnemyDeaths());
     }
 
