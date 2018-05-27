@@ -12,7 +12,6 @@ public class SelectionHandler : MonoBehaviour {
     public struct Selection
     {
         public int level;
-        public string intro_msg;
         public SelectionMode selectionMode;
         [HideInInspector] public List<Modifiers.Modifier> mods;
     }
@@ -25,15 +24,14 @@ public class SelectionHandler : MonoBehaviour {
     {
         public Modifiers.Modifier mod;
         public string text;
+        public Texture icon;
     }
 
     public List<ModifierDisplay> modDisplays;
 
 
 
-    [Header("REFERENCES")]
-
-    public TextMesh textDisplay;
+ //   [Header("REFERENCES")]
 
     [HideInInspector] public Modifiers modifiers;
     [HideInInspector] public GameInit gameInit;
@@ -63,6 +61,7 @@ public class SelectionHandler : MonoBehaviour {
 
     void DisplayChoices (Selection selection)
     {
+        Debug.Log(">>> " + selection.selectionMode.ToString());
         SelectionSet selectionSet = GetSelectionSet(selection);
 
         selectionSet.gameObject.SetActive(true);
@@ -80,7 +79,7 @@ public class SelectionHandler : MonoBehaviour {
 
     void DisplayText (Selection selection)
     {
-        textDisplay.text = selection.intro_msg;
+     //   textDisplay.text = selection.intro_msg;
     }
     
 
@@ -107,7 +106,11 @@ public class SelectionHandler : MonoBehaviour {
     {
         foreach (Transform child in transform)
         {
-            if (child.name.Contains(selection.selectionMode.ToString())) return child.GetComponent<SelectionSet>();
+            Debug.Log(selection.selectionMode.ToString() + "   ||||| " + child.name);
+            if (child.name.Contains(selection.selectionMode.ToString()))
+            {
+                return child.GetComponent<SelectionSet>();
+            }
         }
         return new SelectionSet();
     }

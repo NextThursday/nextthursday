@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - NPC
+  - Ally
+  - Enemy
+  - Dead
+  - Water
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -13,10 +19,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Goodies
+  - Baddies
+  - Bullet
+  - Church
   - 
   - 
   - 

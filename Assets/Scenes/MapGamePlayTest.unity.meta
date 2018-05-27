@@ -1,6 +1,16 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scenes/MapGamePlayTest.unity.meta
 guid: eff2d341c61f23d469c339a3cb2d0d4e
 timeCreated: 1524554808
+=======
+guid: 10f436b6b14c5dc4899ec9ad8978d4b1
+folderAsset: yes
+<<<<<<< HEAD
+timeCreated: 1525249253
+=======
+timeCreated: 1524700549
+>>>>>>> master
+>>>>>>> master:Assets/Scenes/etc.meta
 licenseType: Free
 DefaultImporter:
   externalObjects: {}

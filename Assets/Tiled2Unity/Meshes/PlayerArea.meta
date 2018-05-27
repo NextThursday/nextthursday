@@ -1,7 +1,11 @@
 fileFormatVersion: 2
 guid: e90eee1a6c3d54746a318333f3d6657f
 folderAsset: yes
+<<<<<<< HEAD:Assets/Tiled2Unity/Meshes/PlayerArea.meta
 timeCreated: 1524554739
+=======
+timeCreated: 1527158952
+>>>>>>> master:Assets/Scenes/TestScenes/etc.meta
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
