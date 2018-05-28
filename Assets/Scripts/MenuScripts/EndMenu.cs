@@ -7,27 +7,31 @@ public class EndMenu : MonoBehaviour {
 
     public TextMesh score;
     public TextMesh gameComplete;
-	private TopScore topScore;
 
     void Start () {
         string gameState = PlayerPrefs.GetString("GameEndState");
+		int myScore = 0;
         if (gameState == "WIN")
         {
-            gameComplete.text = "You have won!";
+			TopScore topScore = new TopScore();
+            myScore = PlayerPrefs.GetInt("GameScore");
+            int rank = topScore.GetRank(myScore);
+            if (rank < 10)
+            {
+				gameComplete.text = "You won with a score of "+myScore+". Rank: "+(rank+1);
+			}else
+			{
+				gameComplete.text = "You have won!";
+			}
+            topScore.AddScore("Player", myScore);
+
         }
         else if (gameState == "DEATH")
         {
             gameComplete.text = "You have died.";
         }
+		score.text = "Score: " + myScore;
 
-		topScore = new TopScore();
-		int myScore = PlayerPrefs.GetInt("GameScore");
-        score.text = "Score: " + myScore;
-		int rank = topScore.GetRank(myScore);
-		if (rank < 10){
-			score.text += "\n" + "You are now on Top " + (rank + 1);
-		}
-		topScore.AddScore("Player", myScore);
         StartCoroutine(End());
 	}
 
