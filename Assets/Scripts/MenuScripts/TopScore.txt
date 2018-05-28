@@ -1,0 +1,10 @@
+Player1,100
+Player2,90
+PPP,80
+Pks,70
+Player,60
+PP,50
+KDN,40
+AL,30
+EKK,20
+PAK,10
