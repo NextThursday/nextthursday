@@ -104,18 +104,10 @@ public class EnemyMotor : MonoBehaviour {
                 Mod_Faster();
                 break;
 
-            case Modifiers.Modifier.PUNISHING:
-                Mod_Punishing();
-                break;
-
             case Modifiers.Modifier.SLIPPERY:
                 Mod_Slippery();
                 break;
-
-
-            case Modifiers.Modifier.BOUNCY:
-                Mod_Bouncy();
-                break;
+                
 
             case Modifiers.Modifier.BIGGER:
                 Mod_Bigger();
@@ -185,14 +177,14 @@ public class EnemyMotor : MonoBehaviour {
         if (checkShoot) CheckShoot();
         if (drift) Drift();
 
-
+/*
         foreach (Modifiers.Modifier mod in master.modifiers.mods)
         {
-            ModSettings_Update(mod);
-        }
+           ModSettings_Update(mod);
+        }*/
     }
     
-
+    /*
     void ModSettings_Update(Modifiers.Modifier mod)
     {
         switch (mod)
@@ -201,7 +193,7 @@ public class EnemyMotor : MonoBehaviour {
                 Mod_Bouncy_Update();
                 break;
         }
-    }
+    }*/
 
 
 

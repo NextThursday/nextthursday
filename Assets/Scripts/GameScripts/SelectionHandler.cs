@@ -55,6 +55,9 @@ public class SelectionHandler : MonoBehaviour {
             {
                 getMod = GetMod();
             }
+
+
+
             selection.mods.Add(getMod);
         }
     }
@@ -117,7 +120,8 @@ public class SelectionHandler : MonoBehaviour {
 
     Modifiers.Modifier GetMod()
     {
-        return modifiers.GetRandomMod();
+        int chance = Random.Range(0, 2); //50% chance one of them will be "UNCHANGED"
+        return chance == 0 ? modifiers.GetRandomMod() : modifiers.GetDefault();
     }
 
 
