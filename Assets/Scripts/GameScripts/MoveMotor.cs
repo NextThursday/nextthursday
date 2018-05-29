@@ -12,6 +12,7 @@ public class MoveMotor : MonoBehaviour {
     public Rigidbody rigid;
     public Collider collider;
     public TargetHandler targetHandler;
+    public ParticleSystem rushParticles;
 
 
 
@@ -199,8 +200,8 @@ public class MoveMotor : MonoBehaviour {
 
     void Mod_Faster ()
     {
-        forwardSpeed *= 2f;
-        forwardInitSpeed *= 2f;
+        forwardSpeed *= 1.5f;
+        forwardInitSpeed *= 1.5f;
     }
 
 
@@ -375,11 +376,15 @@ public class MoveMotor : MonoBehaviour {
                 turnSpeed = turnSpeedInit * turnSpeedLineFormation;
                 forwardSpeed = (forwardInitSpeed + forwardSpeedAdd1) * 1.6f;
                 if (drift) allowDrift = false;
+
+                if (isPlayer) rushParticles.enableEmission = true;
+
                 break;
             case TargetHandler.FormationMode.FOLLOW_CURSOR:
                 turnSpeed = turnSpeedInit;
                 forwardSpeed = (forwardInitSpeed + forwardSpeedAdd1);
                 if (drift) allowDrift = true;
+                if (isPlayer) rushParticles.enableEmission = false;
                 break;
 
         }

@@ -65,7 +65,7 @@ MonoBehaviour:
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: Default
+  m_LastLoadedLayoutName: 
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -106,10 +106,10 @@ MonoBehaviour:
     y: 30
     width: 1904
     height: 931
-  m_MinSize: {x: 881, y: 492}
-  m_MaxSize: {x: 16006, y: 14042}
+  m_MinSize: {x: 887, y: 492}
+  m_MaxSize: {x: 16012, y: 14042}
   vertical: 0
-  controlID: 68545
+  controlID: 4698
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -130,10 +130,10 @@ MonoBehaviour:
     y: 0
     width: 1518
     height: 931
-  m_MinSize: {x: 604, y: 492}
-  m_MaxSize: {x: 12004, y: 14042}
+  m_MinSize: {x: 610, y: 492}
+  m_MaxSize: {x: 12010, y: 14042}
   vertical: 1
-  controlID: 68523
+  controlID: 4699
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -155,10 +155,10 @@ MonoBehaviour:
     y: 0
     width: 1518
     height: 563
-  m_MinSize: {x: 604, y: 221}
-  m_MaxSize: {x: 12004, y: 4021}
+  m_MinSize: {x: 610, y: 221}
+  m_MaxSize: {x: 12010, y: 4021}
   vertical: 0
-  controlID: 68524
+  controlID: 4700
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -390,9 +390,9 @@ MonoBehaviour:
     height: 542
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: e6370000
     m_LastClickedID: 0
-    m_ExpandedIDs: 10fcbeff3ca0c6ff62a0c6ff86a0c6ff1294e4ff84dbfcff8cdbfcff94dbfcffc0dbfcffc2dbfcffcadbfcff6c36feff9236feffb636feff8a65feffb865feffc065feff02b5ffff000000005249000074490000f64900000a4a0000ee3c0300243d0300
+    m_ExpandedIDs: 0cb0fdff54b5fdffa6fbffff000000000c3b00002e3b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -554,20 +554,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/GameScripts
+    - Assets/Prefabs
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Scripts/GameScripts
+  - Assets/Prefabs
   m_LastFoldersGridSize: 96
   m_LastProjectPath: A:\My Files\Uni\2018\Semester I\31262 - Game Design\Assignments\Video
     Game\ProjectFile\nextthursday
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 666}
-    m_SelectedIDs: b23d0000
-    m_LastClickedID: 15794
-    m_ExpandedIDs: 00000000863c0000163d0000583d00005e3d00006c3e0000723e0000dc3e0000283f0000363f0000bc400000484200002c430000484300005a430000764300006646000068460000c646000000470000184700001e4700009c470000d447000000ca9a3bffffff7f
+    m_SelectedIDs: 8e330000
+    m_LastClickedID: 13198
+    m_ExpandedIDs: 00000000c6290000682a0000a82b0000ae2b0000e02c0000e62c0000502d0000ac2d0000c22d0000742f00004a3100004033000060330000723300008e330000ae360000b0360000163700005c370000783700007e370000463800008838000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -595,7 +595,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000863c0000163d0000583d00005e3d00006c3e0000723e0000dc3e0000283f0000363f0000bc400000484200002c430000484300005a430000764300006646000068460000c646000000470000184700001e4700009c470000d447000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000c6290000682a0000a82b0000ae2b0000e02c0000e62c0000502d0000ac2d0000c22d0000742f00004a3100004033000060330000723300008e330000ae360000b0360000163700005c370000783700007e370000463800008838000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -623,7 +623,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c6230000303e0000b82d0000ce2c000000000000
+    m_ExpandedInstanceIDs: c6230000303e0000b82d0000ce2c000000000000dc370000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -647,7 +647,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 43}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 96
   m_DirectoriesAreaWidth: 115
 --- !u!114 &18

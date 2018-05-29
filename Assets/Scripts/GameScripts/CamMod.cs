@@ -14,6 +14,7 @@ public class CamMod : MonoBehaviour {
     public GameObject nightPlane;
     public UnityStandardAssets.ImageEffects.ContrastEnhance nightEffect;
     public UnityStandardAssets.ImageEffects.ColorCorrectionCurves seriousEffect;
+    public UnityStandardAssets.ImageEffects.NoiseAndScratches seriousEffect2;
 
 
 
@@ -72,7 +73,7 @@ public class CamMod : MonoBehaviour {
 
     void Mod_Faster()
     {
-        Time.timeScale = 2;
+        Time.timeScale = 1.5f;
     }
 
 
@@ -90,6 +91,7 @@ public class CamMod : MonoBehaviour {
     void Mod_Serious()
     {
         seriousEffect.enabled = true;
+        seriousEffect2.enabled = true;
     }
 
 

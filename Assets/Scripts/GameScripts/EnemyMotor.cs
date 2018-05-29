@@ -9,6 +9,8 @@ public class EnemyMotor : MonoBehaviour {
     [Header("REFERENCES")]
     public GameObject ProjectilePrefab;
     public Rigidbody rigid;
+   // public Renderer spellChargeRenderer;
+   // public ParticleSystem spellChargeParticles;
 
     [Header("Stand Back")]
 
@@ -394,10 +396,7 @@ public class EnemyMotor : MonoBehaviour {
 
 
         allowShoot = !hitNoShoot && enemyMoveVelocity < noShootVelocity && inDist;
-        if (debug)
-        {
-            Debug.Log(enemyMoveVelocity + " velocity");
-        }
+       // if (!allowShoot) SetChargeDisplay(0);
 
     }
 
@@ -431,13 +430,24 @@ public class EnemyMotor : MonoBehaviour {
     void Shoot ()
     {
         shootCount += Time.deltaTime;
-
+       // SetChargeDisplay(shootCount / (shootInterval * bulletIntervalMulti));
         if (shootCount >= shootInterval * bulletIntervalMulti)
         {
             shootCount = 0;
             FireProjectile();
         }
     }
+    
+/*
+    void SetChargeDisplay(float chargePercent)
+    {
+        if (debug) Debug.Log(chargePercent + " charge");
+        Color spellChargeCol = spellChargeRenderer.material.color;
+        spellChargeCol.a = chargePercent;
+        spellChargeRenderer.material.color = spellChargeCol;
+        spellChargeParticles.emissionRate = chargePercent * 20;
+        spellChargeParticles.gameObject.active = chargePercent != 0;
+    }*/
 
     void FireProjectile ()
     {
