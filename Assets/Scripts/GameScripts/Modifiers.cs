@@ -10,18 +10,15 @@ public class Modifiers : MonoBehaviour {
     {
         ANGRY, //enemies move angrily
         WITHOUT_A_SUN, //night
-        BOUNCY, //bouncy
         SLIPPERY, //slippery
         GRUESOME, //blood stains
         BIGGER, //players are smaller
-        STORMY, //lightning storm
         TRIPPY, //trippy
         RED, //red tint
-        COOL_AF, //explosions
         FROM_ANOTHER_TIME, //grainy
         FASTER, //faster
-        PUNISHING, //allies occasionally explode, screenshake increases
-        HOT //floor is lava
+        HOT, //floor is lava
+        DEFAULT
     };
     
     public List<Modifier> mods = new List<Modifier>();
@@ -44,6 +41,11 @@ public class Modifiers : MonoBehaviour {
         int randomModIndex = Random.Range(0, System.Enum.GetValues(typeof(Modifier)).Length);
         Modifier getMod = GetMod(randomModIndex);
         return mods.Contains(getMod) ? GetRandomMod() : getMod; //if mod already exists on mods list, find another random mod, otherwise use this mod.
+    }
+
+    public Modifier GetDefault ()
+    {
+        return Modifier.DEFAULT;
     }
 
 

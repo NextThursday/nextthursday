@@ -136,20 +136,20 @@ public class NPCHandler : MonoBehaviour {
     {
         if (debug) Debug.Log(isSeenByCamera);
         isSeenByCamera = render.isVisible;
-
+/*
         foreach (Modifiers.Modifier mod in master.modifiers.mods)
         {
             ModSettings_Update(mod);
-        }
+        }*/
     }
 
     void ModSettings_Update(Modifiers.Modifier mod)
     {
         switch (mod)
         {
-            case Modifiers.Modifier.PUNISHING:
+        //    case Modifiers.Modifier.PUNISHING:
                // Mod_Punishing();
-                break;
+            //    break;
 
                 
         }

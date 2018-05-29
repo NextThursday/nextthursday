@@ -96,6 +96,8 @@ public class GameInit : MonoBehaviour {
         }
 
 
+        ModLevel(levelObj);
+
         return levelObj.GetComponent<LevelData>();
     }
 
@@ -257,6 +259,42 @@ public class GameInit : MonoBehaviour {
     {
         master.camFollow.SetTarget(target);
     }
-    
+
+
+
+    void ModLevel (GameObject levelObj)
+    {
+        foreach (Modifiers.Modifier mod in master.modifiers.mods)
+        {
+            ModSettings(mod, levelObj);
+        }
+    }
+
+    void ModSettings(Modifiers.Modifier mod, GameObject levelObj)
+    {
+        switch (mod)
+        {
+            case Modifiers.Modifier.SLIPPERY:
+                Mod_Slippery(levelObj);
+                break;
+        }
+    }
+
+    void Mod_Slippery(GameObject levelObj)
+    {
+        Renderer[] renders = levelObj.GetComponentsInChildren<Renderer>();
+        foreach (Renderer render in renders)
+        {
+            for (int i = 0; i < render.materials.Length; i++)
+            {
+                Color renderCol = render.materials[i].color;
+             //   renderCol.r -= 0.1f;
+                renderCol.b += 0.6f;
+                renderCol.g += 0.2f;
+                render.materials[i].color = renderCol;
+
+            }
+        }
+    }
 
 }

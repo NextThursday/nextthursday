@@ -39,6 +39,7 @@ public class SaveHandler : MonoBehaviour {
 
     public void EndGame (string state, float delay)
     {
+        Time.timeScale = 1;
         if (state == "DEATH")
         {
             playerDied = true;
