@@ -75,10 +75,6 @@ public class TopScore {
         return scoreList.Count;
     }
 
-	void AddScore(PlayerScore playerScore){
-        scoreList.Insert(GetRank(playerScore.score), playerScore);
-    }
-
     /// <summary>
     /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:TopScore"/>.
     /// </summary>
@@ -99,5 +95,10 @@ public class TopScore {
             txt += scoreList[i].name + "," + scoreList[i].score + "\n";
         }
         return txt;
+    }
+
+	void AddScore(PlayerScore playerScore)
+    {
+        scoreList.Insert(GetRank(playerScore.score), playerScore);
     }
 }
