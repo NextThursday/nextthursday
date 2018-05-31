@@ -92,10 +92,22 @@ public class TopScore {
         string txt = "";
 		for (int i = 0; i < maxPosition && i < scoreList.Count; i++)
         {
-            txt += scoreList[i].name + "," + scoreList[i].score + "\n";
+			txt += AddSpace(scoreList[i].name) + AddSpace(scoreList[i].score+"") + "\n";
         }
         return txt;
     }
+
+	string AddSpace(string s){
+		return AddSpace(s, 10-s.Length);
+	}
+
+	string AddSpace(string s, int n){
+		string newString = s;
+		for (int i = 0; i < n; i++){
+			newString += " ";
+		}
+		return newString;
+	}
 
 	void AddScore(PlayerScore playerScore)
     {
