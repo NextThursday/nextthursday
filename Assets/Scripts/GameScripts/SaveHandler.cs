@@ -20,7 +20,7 @@ public class SaveHandler : MonoBehaviour {
         PlayerPrefs.SetInt("LevelLoad", !PlayerPrefs.HasKey("LevelLoad") ? 2 : PlayerPrefs.GetInt("LevelLoad") + 1); //increases level number
         PlayerPrefs.SetInt("Allies", master.scorer.GetAllyCount()); //saves the number of allies for the next round
 
-        int roundScore = master.scorer.GetAllyCount() + master.scorer.GetEnemyDeaths() ;
+        int roundScore = master.scorer.GetAllyCount() + ( master.scorer.GetEnemyDeaths() * 5) ;
 
         
         PlayerPrefs.SetInt("GameScore", PlayerPrefs.HasKey("GameScore") ? PlayerPrefs.GetInt("GameScore") + roundScore : roundScore);

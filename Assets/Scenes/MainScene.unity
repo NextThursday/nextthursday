@@ -1419,9 +1419,9 @@ MonoBehaviour:
     type: 2}
   levels:
   - {fileID: 1547605666381136, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-  - {fileID: 1547605666381136, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-  - {fileID: 1547605666381136, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-  - {fileID: 1547605666381136, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
+  - {fileID: 1815543007804062, guid: 9f446f7ea89637d458d242ad49ca77df, type: 2}
+  - {fileID: 1889640468311612, guid: 0bf7d35077fe6344d9e902ce59f0f41b, type: 2}
+  - {fileID: 1815543007804062, guid: 9f446f7ea89637d458d242ad49ca77df, type: 2}
   - {fileID: 1547605666381136, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
   IntroSelectionPrefab: {fileID: 1162626970524140, guid: 2495c382f8ad99343b81276e3d5ba2ab,
     type: 2}
@@ -1543,7 +1543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   master: {fileID: 759259405}
   NPCCount: 200
-  weekLength: 10
+  weekLength: 90
   trampleEnemies: 1
   isTutorial: 0
 --- !u!114 &759259409
@@ -9170,52 +9170,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1001 &1164202086
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4056152662139756, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056152662139756, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056152662139756, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056152662139756, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056152662139756, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056152662139756, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056152662139756, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056152662139756, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547605666381136, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 6611ef91684a02f4f833cc3ab4a57126, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1195024381
 GameObject:
   m_ObjectHideFlags: 0
