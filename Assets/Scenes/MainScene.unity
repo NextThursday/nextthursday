@@ -1543,7 +1543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   master: {fileID: 759259405}
   NPCCount: 200
-  weekLength: 90
+  weekLength: 10
   trampleEnemies: 1
   isTutorial: 0
 --- !u!114 &759259409

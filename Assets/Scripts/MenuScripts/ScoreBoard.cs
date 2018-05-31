@@ -6,11 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ScoreBoard : MonoBehaviour {
 
-<<<<<<< HEAD
 	public Text myText;
-=======
-	public TextMesh myText;
->>>>>>> master
 	private TopScore topScore;
 
 	// Use this for initialization
