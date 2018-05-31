@@ -42,7 +42,14 @@ public class TopScore {
 		reader.Close();
 	}
 
+<<<<<<< HEAD
 	void SaveScore(){
+=======
+    /// <summary>
+    /// Saves the score into text file.
+    /// </summary>
+	public void SaveScore(){
+>>>>>>> master
 		Stream stream = new FileStream(scorePath, FileMode.Truncate);
 		StreamWriter writer = new StreamWriter(stream);
 		writer.Write(ScoreToTxt());
@@ -72,17 +79,28 @@ public class TopScore {
         return scoreList.Count;
     }
 
+<<<<<<< HEAD
+=======
+	void AddScore(PlayerScore playerScore){
+        scoreList.Insert(GetRank(playerScore.score), playerScore);
+    }
+
+>>>>>>> master
     /// <summary>
     /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:TopScore"/>.
     /// </summary>
     /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:TopScore"/>.</returns>
 	public override string ToString(){
+<<<<<<< HEAD
 		string txt = "";
         for (int i = 0; i < scoreList.Count; i++)
         {
             txt += AddSpace(scoreList[i].name) + AddSpace(scoreList[i].score + "") + "\n";
         }
         return txt;
+=======
+		return ScoreToTxt();
+>>>>>>> master
 	}
 
 	string ScoreToTxt(){
@@ -94,6 +112,7 @@ public class TopScore {
         string txt = "";
 		for (int i = 0; i < maxPosition && i < scoreList.Count; i++)
         {
+<<<<<<< HEAD
 			//txt += AddSpace(scoreList[i].name) + AddSpace(scoreList[i].score + "") + "\n";
 			txt += scoreList[i].name + "," + scoreList[i].score + "\n";
         }
@@ -116,4 +135,10 @@ public class TopScore {
     {
         scoreList.Insert(GetRank(playerScore.score), playerScore);
     }
+=======
+            txt += scoreList[i].name + "..." + scoreList[i].score + "\n";
+        }
+        return txt;
+    }
+>>>>>>> master
 }

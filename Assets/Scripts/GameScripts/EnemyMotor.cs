@@ -9,6 +9,8 @@ public class EnemyMotor : MonoBehaviour {
     [Header("REFERENCES")]
     public GameObject ProjectilePrefab;
     public Rigidbody rigid;
+   // public Renderer spellChargeRenderer;
+   // public ParticleSystem spellChargeParticles;
 
     [Header("Stand Back")]
 
@@ -20,6 +22,7 @@ public class EnemyMotor : MonoBehaviour {
     public bool lookatTarget;
     public float lookatTargetSpeed;
     public float scanTargetDist;
+    public float scanTargetIncrement;
     Collider foundTarget;
 
 
@@ -58,6 +61,7 @@ public class EnemyMotor : MonoBehaviour {
     public bool shoot;
     public float shootInterval;
     public float shootDistanceMin, shootDistanceMax;
+    public float shootDistIncrement = 0;
     bool allowShoot;
     float shootCount = 0;
     public float bulletSpeedMulti = 1;
@@ -104,18 +108,10 @@ public class EnemyMotor : MonoBehaviour {
                 Mod_Faster();
                 break;
 
-            case Modifiers.Modifier.PUNISHING:
-                Mod_Punishing();
-                break;
-
             case Modifiers.Modifier.SLIPPERY:
                 Mod_Slippery();
                 break;
-
-
-            case Modifiers.Modifier.BOUNCY:
-                Mod_Bouncy();
-                break;
+                
 
             case Modifiers.Modifier.BIGGER:
                 Mod_Bigger();
@@ -185,14 +181,14 @@ public class EnemyMotor : MonoBehaviour {
         if (checkShoot) CheckShoot();
         if (drift) Drift();
 
-
+/*
         foreach (Modifiers.Modifier mod in master.modifiers.mods)
         {
-            ModSettings_Update(mod);
-        }
+           ModSettings_Update(mod);
+        }*/
     }
     
-
+    /*
     void ModSettings_Update(Modifiers.Modifier mod)
     {
         switch (mod)
@@ -201,7 +197,7 @@ public class EnemyMotor : MonoBehaviour {
                 Mod_Bouncy_Update();
                 break;
         }
-    }
+    }*/
 
 
 
@@ -227,9 +223,20 @@ public class EnemyMotor : MonoBehaviour {
         }
     }
 
+    float searchForNearestTargetCounter = 0;
+
     void LookAtTarget ()
     {
-        SearchForNearestTarget(); //search for nearest target
+        scanTargetDist += scanTargetIncrement * 0.1f;
+        searchForNearestTargetCounter += Time.deltaTime;
+
+        if (searchForNearestTargetCounter > 0.5f)
+        {
+            searchForNearestTargetCounter = 0;
+            SearchForNearestTarget(); //search for nearest target
+        }
+
+
         if (foundTarget)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation,
@@ -394,6 +401,8 @@ public class EnemyMotor : MonoBehaviour {
 
         bool inDist = true;
 
+        shootDistanceMax += shootDistIncrement * 0.1f;
+
         if (foundTarget) //if you've found a target, then shoot if in distance
         {
             float dist = Vector3.Distance(transform.position, foundTarget.transform.position);
@@ -402,10 +411,7 @@ public class EnemyMotor : MonoBehaviour {
 
 
         allowShoot = !hitNoShoot && enemyMoveVelocity < noShootVelocity && inDist;
-        if (debug)
-        {
-            Debug.Log(enemyMoveVelocity + " velocity");
-        }
+       // if (!allowShoot) SetChargeDisplay(0);
 
     }
 
@@ -439,13 +445,24 @@ public class EnemyMotor : MonoBehaviour {
     void Shoot ()
     {
         shootCount += Time.deltaTime;
-
+       // SetChargeDisplay(shootCount / (shootInterval * bulletIntervalMulti));
         if (shootCount >= shootInterval * bulletIntervalMulti)
         {
             shootCount = 0;
             FireProjectile();
         }
     }
+    
+/*
+    void SetChargeDisplay(float chargePercent)
+    {
+        if (debug) Debug.Log(chargePercent + " charge");
+        Color spellChargeCol = spellChargeRenderer.material.color;
+        spellChargeCol.a = chargePercent;
+        spellChargeRenderer.material.color = spellChargeCol;
+        spellChargeParticles.emissionRate = chargePercent * 20;
+        spellChargeParticles.gameObject.active = chargePercent != 0;
+    }*/
 
     void FireProjectile ()
     {

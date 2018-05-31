@@ -53,9 +53,21 @@ Shader "Hidden/ChromaticAberration" {
 			// Work around Cg's code generation bug for D3D9 pixel shaders :(
 			color.g = color.g * 0.0001 + tex2D (_MainTex, UnityStereoScreenSpaceUVAdjust(uvG, _MainTex_ST)).g;
 		#else
-			color.g = tex2D (_MainTex, UnityStereoScreenSpaceUVAdjust(uvG, _MainTex_ST)).g;
+			color.r = tex2D (_MainTex, UnityStereoScreenSpaceUVAdjust(uvG, _MainTex_ST)).g;
 		#endif
-		
+
+			half4 tempColor = color;
+
+			color.r = tempColor.g;
+			color.g = tempColor.b;
+			color.b = tempColor.r;
+
+			//color.g = tempColor.r;
+
+		//color.b += coordDot / 2;
+		//color.g += coordDot / 3;
+		//color.r += coordDot / 3;
+		//color.b += coordDot / 3;
 		return color;
 	}
 

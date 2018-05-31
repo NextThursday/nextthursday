@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 WATEVER,100
 SB,90
 Alex,80
@@ -8,3 +9,15 @@ Player,50
 NP,40
 Player,30
 PPP,20
+=======
+Player,150
+Player,150
+Player,150
+Player1,100
+Player,100
+Player,100
+Player,100
+Player,100
+Player,100
+Player,100
+>>>>>>> master

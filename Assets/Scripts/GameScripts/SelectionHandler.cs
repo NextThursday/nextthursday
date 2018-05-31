@@ -6,7 +6,7 @@ public class SelectionHandler : MonoBehaviour {
     
 
     
-    public enum SelectionMode { INTRO, SINGULAR, BINARY };
+    public enum SelectionMode { INTRO, SINGULAR, BINARY, TRIPLE };
 
     [System.Serializable]
     public struct Selection
@@ -55,13 +55,15 @@ public class SelectionHandler : MonoBehaviour {
             {
                 getMod = GetMod();
             }
+
+
+
             selection.mods.Add(getMod);
         }
     }
 
     void DisplayChoices (Selection selection)
     {
-        Debug.Log(">>> " + selection.selectionMode.ToString());
         SelectionSet selectionSet = GetSelectionSet(selection);
 
         selectionSet.gameObject.SetActive(true);
@@ -117,7 +119,8 @@ public class SelectionHandler : MonoBehaviour {
 
     Modifiers.Modifier GetMod()
     {
-        return modifiers.GetRandomMod();
+        int chance = Random.Range(0, 4); //25% chance it will be "UNCHANGED"
+        return chance == 0 ? modifiers.GetRandomMod() : modifiers.GetDefault();
     }
 
 
@@ -156,6 +159,10 @@ public class SelectionHandler : MonoBehaviour {
 
             case SelectionMode.BINARY:
                 choiceCount = 2;
+                break;
+
+            case SelectionMode.TRIPLE:
+                choiceCount = 3;
                 break;
         }
         return choiceCount;

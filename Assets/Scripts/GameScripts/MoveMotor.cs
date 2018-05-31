@@ -12,6 +12,7 @@ public class MoveMotor : MonoBehaviour {
     public Rigidbody rigid;
     public Collider collider;
     public TargetHandler targetHandler;
+    public ParticleSystem rushParticles;
 
 
 
@@ -62,14 +63,16 @@ public class MoveMotor : MonoBehaviour {
 
     [Header("Drift")]
     public bool drift;
+    bool allowDrift;
     public float driftInstability;
     public float driftStrength;
 
 
     [Header("Mod Effects")]
+    bool modUpdateAllow;
     public PhysicMaterial bouncyPhysics;
     bool reverseMode;
-
+    Vector3 initScale;
 
     public GameObject PointLoseParticle;
 
@@ -103,13 +106,14 @@ public class MoveMotor : MonoBehaviour {
 
 
 
-
         foreach (Modifiers.Modifier mod in master.modifiers.mods)
         {
             ModSettings_Start(mod);
         }
 
 
+        initScale = transform.localScale;
+        modUpdateAllow = true;
     }
 
     public void Incinerate ()
@@ -135,9 +139,9 @@ public class MoveMotor : MonoBehaviour {
                 break;
 
 
-            case Modifiers.Modifier.BOUNCY:
-                Mod_Bouncy();
-                break;
+        //    case Modifiers.Modifier.BOUNCY:
+         //       Mod_Bouncy();
+          //      break;
 
             case Modifiers.Modifier.ANGRY:
                 Mod_Angry();
@@ -150,10 +154,6 @@ public class MoveMotor : MonoBehaviour {
             case Modifiers.Modifier.FASTER:
                 Mod_Faster();
                 break;
-
-            case Modifiers.Modifier.TRIPPY:
-                Mod_Trippy();
-                break;
         }
     }
 
@@ -161,14 +161,6 @@ public class MoveMotor : MonoBehaviour {
     void Mod_Angry()
     {
         drift = true;
-    }
-
-    void Mod_Trippy()
-    {
-        if (isPlayer)
-        {
-            reverseMode = true;
-        }
     }
 
 
@@ -208,8 +200,8 @@ public class MoveMotor : MonoBehaviour {
 
     void Mod_Faster ()
     {
-        forwardSpeed *= 2f;
-        forwardInitSpeed *= 2f;
+        forwardSpeed *= 1.5f;
+        forwardInitSpeed *= 1.5f;
     }
 
 
@@ -249,16 +241,18 @@ public class MoveMotor : MonoBehaviour {
 
 
 
-            if (drift) Drift();
+            if (drift && allowDrift) Drift();
         }
 
 
 
 
-
-        foreach (Modifiers.Modifier mod in master.modifiers.mods)
+        if (modUpdateAllow)
         {
-            ModSettings_Update(mod);
+            foreach (Modifiers.Modifier mod in master.modifiers.mods)
+            {
+                ModSettings_Update(mod);
+            }
         }
     }
 
@@ -267,8 +261,8 @@ public class MoveMotor : MonoBehaviour {
     {
         Vector2 randomDriftSeed = new Vector2(randomSeed * 3, randomSeed * 8);
 
-        rigid.AddForce(new Vector2(PerlinValue(Time.time + randomDriftSeed.x, driftInstability) * driftStrength * GetWaterSlowdown(),
-            PerlinValue(Time.time + randomDriftSeed.y, driftInstability) * driftStrength) * GetWaterSlowdown());
+        rigid.AddForce(new Vector2(  (PerlinValue(Time.time + randomDriftSeed.x, driftInstability) + 0.07f) * driftStrength * GetWaterSlowdown(),
+            (PerlinValue(Time.time + randomDriftSeed.y, driftInstability) + 0.07f) * driftStrength * GetWaterSlowdown()  ));
     }
 
 
@@ -297,10 +291,26 @@ public class MoveMotor : MonoBehaviour {
     {
         switch (mod)
         {
-            case Modifiers.Modifier.BOUNCY:
-                Mod_Bouncy_Update();
+     //       case Modifiers.Modifier.BOUNCY:
+        //        Mod_Bouncy_Update();
+        //        break;
+
+            case Modifiers.Modifier.TRIPPY:
+                Mod_Trippy_Update();
                 break;
         }
+    }
+
+
+
+    void Mod_Trippy_Update()
+    {
+        Vector3 scaleChange = initScale;
+        scaleChange.x *= (PerlinValue(Time.time + randomSeed, 20) / 2f) + 1.25f;
+        scaleChange.y *= (PerlinValue(Time.time + (1.5f * randomSeed), 20) / 2f) + 1.25f;
+        transform.localScale = scaleChange;
+
+
     }
 
     void Mod_Bouncy_Update()
@@ -365,10 +375,16 @@ public class MoveMotor : MonoBehaviour {
             case TargetHandler.FormationMode.LINE:
                 turnSpeed = turnSpeedInit * turnSpeedLineFormation;
                 forwardSpeed = (forwardInitSpeed + forwardSpeedAdd1) * 1.6f;
+                if (drift) allowDrift = false;
+
+                if (isPlayer) rushParticles.enableEmission = true;
+
                 break;
             case TargetHandler.FormationMode.FOLLOW_CURSOR:
                 turnSpeed = turnSpeedInit;
                 forwardSpeed = (forwardInitSpeed + forwardSpeedAdd1);
+                if (drift) allowDrift = true;
+                if (isPlayer) rushParticles.enableEmission = false;
                 break;
 
         }
@@ -382,7 +398,7 @@ public class MoveMotor : MonoBehaviour {
         return Vector2.Distance(target, transform.position);
     }
 
-    float PerlinValue(float time, float speed)
+    float PerlinValue(float time, float speed) //between -1 and 1
     {
         return (Mathf.PerlinNoise(time * speed / 10f, 0) * 2) - 1;
     }

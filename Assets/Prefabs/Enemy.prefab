@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1202620820688568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.465, y: 2.1406, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6260111, y: 1.6260108, z: 1.6260108}
   m_Children:
   - {fileID: 4406259665361904}
@@ -165,10 +165,11 @@ MonoBehaviour:
   lookatTarget: 1
   lookatTargetSpeed: 20
   scanTargetDist: 5
+  scanTargetIncrement: 0.1
   patrol: 1
   patrolMoveTime: {x: 0.5, y: 1}
   patrolRotateTime: {x: 0.5, y: 1}
-  patrolForwardSpeed: 230
+  patrolForwardSpeed: 530
   patrolSideDistance: 40
   patrolSideSpeed: 3
   patrolRotateSpeed: 0.7
@@ -187,6 +188,7 @@ MonoBehaviour:
   shootInterval: 1
   shootDistanceMin: 1
   shootDistanceMax: 6
+  shootDistIncrement: 0.1
   bulletSpeedMulti: 1
   bulletIntervalMulti: 1
   checkShoot: 1
