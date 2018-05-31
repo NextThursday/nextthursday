@@ -42,10 +42,7 @@ public class TopScore {
 		reader.Close();
 	}
 
-    /// <summary>
-    /// Saves the score into text file.
-    /// </summary>
-	public void SaveScore(){
+	void SaveScore(){
 		Stream stream = new FileStream(scorePath, FileMode.Truncate);
 		StreamWriter writer = new StreamWriter(stream);
 		writer.Write(ScoreToTxt());
@@ -80,7 +77,12 @@ public class TopScore {
     /// </summary>
     /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:TopScore"/>.</returns>
 	public override string ToString(){
-		return ScoreToTxt();
+		string txt = "";
+        for (int i = 0; i < scoreList.Count; i++)
+        {
+            txt += AddSpace(scoreList[i].name) + AddSpace(scoreList[i].score + "") + "\n";
+        }
+        return txt;
 	}
 
 	string ScoreToTxt(){
@@ -92,7 +94,8 @@ public class TopScore {
         string txt = "";
 		for (int i = 0; i < maxPosition && i < scoreList.Count; i++)
         {
-			txt += AddSpace(scoreList[i].name) + AddSpace(scoreList[i].score+"") + "\n";
+			//txt += AddSpace(scoreList[i].name) + AddSpace(scoreList[i].score + "") + "\n";
+			txt += scoreList[i].name + "," + scoreList[i].score + "\n";
         }
         return txt;
     }

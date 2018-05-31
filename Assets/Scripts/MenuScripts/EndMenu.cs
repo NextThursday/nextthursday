@@ -23,12 +23,12 @@ public class EndMenu : MonoBehaviour {
 
 		bool waitForType = false;
 		string gameState = PlayerPrefs.GetString("GameEndState");
-		//gameState = "WIN";
+		gameState = "WIN";
         if (gameState == "WIN")
         {
 			TopScore topScore = new TopScore();
             myScore = PlayerPrefs.GetInt("GameScore");
-			//myScore = 80;
+			myScore = 80;
             int rank = topScore.GetRank(myScore);
             if (rank < 10)
             {
