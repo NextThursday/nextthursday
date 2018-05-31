@@ -22,6 +22,7 @@ public class EnemyMotor : MonoBehaviour {
     public bool lookatTarget;
     public float lookatTargetSpeed;
     public float scanTargetDist;
+    public float scanTargetIncrement;
     Collider foundTarget;
 
 
@@ -60,6 +61,7 @@ public class EnemyMotor : MonoBehaviour {
     public bool shoot;
     public float shootInterval;
     public float shootDistanceMin, shootDistanceMax;
+    public float shootDistIncrement = 0;
     bool allowShoot;
     float shootCount = 0;
     public float bulletSpeedMulti = 1;
@@ -221,9 +223,20 @@ public class EnemyMotor : MonoBehaviour {
         }
     }
 
+    float searchForNearestTargetCounter = 0;
+
     void LookAtTarget ()
     {
-        SearchForNearestTarget(); //search for nearest target
+        scanTargetDist += scanTargetIncrement * 0.1f;
+        searchForNearestTargetCounter += Time.deltaTime;
+
+        if (searchForNearestTargetCounter > 0.5f)
+        {
+            searchForNearestTargetCounter = 0;
+            SearchForNearestTarget(); //search for nearest target
+        }
+
+
         if (foundTarget)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation,
@@ -387,6 +400,8 @@ public class EnemyMotor : MonoBehaviour {
         float enemyMoveVelocity = Mathf.Abs(rigid.velocity.x) + Mathf.Abs(rigid.velocity.y);
 
         bool inDist = true;
+
+        shootDistanceMax += shootDistIncrement * 0.1f;
 
         if (foundTarget) //if you've found a target, then shoot if in distance
         {

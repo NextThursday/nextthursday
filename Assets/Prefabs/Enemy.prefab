@@ -165,10 +165,11 @@ MonoBehaviour:
   lookatTarget: 1
   lookatTargetSpeed: 20
   scanTargetDist: 5
+  scanTargetIncrement: 0.1
   patrol: 1
   patrolMoveTime: {x: 0.5, y: 1}
   patrolRotateTime: {x: 0.5, y: 1}
-  patrolForwardSpeed: 230
+  patrolForwardSpeed: 530
   patrolSideDistance: 40
   patrolSideSpeed: 3
   patrolRotateSpeed: 0.7
@@ -187,6 +188,7 @@ MonoBehaviour:
   shootInterval: 1
   shootDistanceMin: 1
   shootDistanceMax: 6
+  shootDistIncrement: 0.1
   bulletSpeedMulti: 1
   bulletIntervalMulti: 1
   checkShoot: 1

@@ -9,8 +9,7 @@ public class ProjectileMotor : MonoBehaviour {
 
     [Header("CONTROLS")]
     public float speed;
-
-    [HideInInspector]
+    
     public float speedMulti = 1;
 
     void Update () {
