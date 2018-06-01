@@ -119,8 +119,9 @@ public class SelectionHandler : MonoBehaviour {
 
     Modifiers.Modifier GetMod()
     {
-        int chance = Random.Range(0, 4); //25% chance it will be "UNCHANGED"
-        return chance == 0 ? modifiers.GetRandomMod() : modifiers.GetDefault();
+        // int chance = Random.Range(0, 4); //25% chance it will be "UNCHANGED"
+        //return chance == 0 ? modifiers.GetRandomMod() : modifiers.GetDefault();
+        return modifiers.GetRandomMod();
     }
 
 
