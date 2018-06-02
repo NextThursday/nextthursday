@@ -9,9 +9,11 @@ public class TopScore {
 	public struct PlayerScore{
         public string name;
         public int score;
-		public PlayerScore(string name, int score){
+		public int passedLevel;
+		public PlayerScore(string name, int score, int level){
 			this.name = name;
 			this.score = score;
+			this.passedLevel = level;
 		}
 	}
 
@@ -25,18 +27,17 @@ public class TopScore {
 
 	void LoadScore(){
         if (!System.IO.File.Exists(scorePath))
-        {
-            System.IO.File.WriteAllText(scorePath,"Player1,0\nPlayer1, 0\nPlayer1, 0\nPlayer1, 0\nPlayer1, 0\nPlayer1, 0\nPlayer1, 0\nPlayer1, 0\nPlayer1, 0\nPlayer1, 0\n");
-        }
+			InitScore();
+		
         StreamReader reader = new StreamReader(scorePath);
 		scoreList.Clear();
 		if (reader != null){
 			string line;
 			while((line = reader.ReadLine()) != null){
 				string[] parts = line.Split(',');
-				if (parts.Length == 2)
+				if (parts.Length == 3)
 				{
-					PlayerScore playerScore = new PlayerScore(parts[0], int.Parse(parts[1]));
+					PlayerScore playerScore = new PlayerScore(parts[0], int.Parse(parts[1]), int.Parse(parts[2]));
 					scoreList.Add(playerScore);
 				}
 				else
@@ -58,8 +59,8 @@ public class TopScore {
     /// </summary>
     /// <param name="player">Player's name.</param>
     /// <param name="score">Score.</param>
-	public void AddScore(string player, int score){
-		AddScore(new PlayerScore(player, score));
+	public void AddScore(string player, int score, int level){
+		AddScore(new PlayerScore(player, score, level));
         SaveScore();
     }
 
@@ -84,7 +85,9 @@ public class TopScore {
 		string txt = "";
         for (int i = 0; i < scoreList.Count; i++)
         {
-            txt += AddSpace(scoreList[i].name) + AddSpace(scoreList[i].score + "") + "\n";
+			int level = scoreList[i].passedLevel;
+			string levelMsg = (level == 6 ? "COMPLETE" : "Lvl" + level);
+			txt += AddSpace(scoreList[i].name) + AddSpace(scoreList[i].score + "") + AddSpace(levelMsg) + "\n";
         }
         return txt;
 	}
@@ -99,7 +102,7 @@ public class TopScore {
 		for (int i = 0; i < maxPosition && i < scoreList.Count; i++)
         {
 			//txt += AddSpace(scoreList[i].name) + AddSpace(scoreList[i].score + "") + "\n";
-			txt += scoreList[i].name + "," + scoreList[i].score + "\n";
+			txt += scoreList[i].name + "," + scoreList[i].score + "," + scoreList[i].passedLevel + "\n";
         }
         return txt;
     }
@@ -120,4 +123,12 @@ public class TopScore {
     {
         scoreList.Insert(GetRank(playerScore.score), playerScore);
     }
+
+	void InitScore(){
+		scoreList.Clear();
+		for (int i = 0; i < 10; i++){
+			scoreList.Add(new PlayerScore("Player", 0, 0));
+		}
+		SaveScore();
+	}
 }

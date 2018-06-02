@@ -43,7 +43,7 @@ public class SaveHandler : MonoBehaviour {
         if (state == "DEATH")
         {
             playerDied = true;
-            PlayerPrefs.SetInt("GameScore", 0);
+           // PlayerPrefs.SetInt("GameScore", 0);
             master.scorer.Death();
         }
 

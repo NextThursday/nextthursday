@@ -13,42 +13,42 @@ public class EndMenu : MonoBehaviour {
 
 	private string playerName;
 	private int myScore;
-
-    private bool entered = false;
+	private int passedLevel;
 
 	void Start () {
         
         input.SetActive(false);
         playerName = "Player";
         myScore = 0;
+		passedLevel = 0;
         
+		TopScore topScore = new TopScore();
+        myScore = PlayerPrefs.GetInt("GameScore");
+        passedLevel = PlayerPrefs.GetInt("LevelLoad");
+		int rank = topScore.GetRank(myScore);
+
         bool waitForType = false;
 		string gameState = PlayerPrefs.GetString("GameEndState");
 		//gameState = "WIN";
         if (gameState == "WIN")
         {
             Debug.Log("win!!");
-			TopScore topScore = new TopScore();
-            myScore = PlayerPrefs.GetInt("GameScore");
-			//myScore = 180;
-            int rank = topScore.GetRank(myScore);
-            if (rank < 10)
-            {
-				gameDesc.text = "You won with a score of "+myScore+". Rank: "+(rank+1);
-			}else
-			{
-				gameDesc.text = "You have won!";
-			}
-
-			waitForType = true;
-			SetName();
-
+			gameDesc.text = "You have won!";
+			passedLevel++;
         }
         else if (gameState == "DEATH")
         {
             Debug.Log("death");
             gameDesc.text = "You have died.";
         }
+
+        if (rank < 10)
+        {
+            gameDesc.text += "\nYou got a score of " + myScore + ". Rank: " + (rank + 1);
+			waitForType = true;
+            SetName();
+        }
+
 		score.text = "Score: " + myScore;
 
         if (!waitForType)
@@ -63,15 +63,11 @@ public class EndMenu : MonoBehaviour {
 
     void GetInput(string myname)
     {
-        if (!entered)
-        {
-            TopScore topScore = new TopScore();
-            playerName = myname;
-            Debug.Log(playerName);
-            topScore.AddScore(playerName, myScore);
-            entered = true;
-            SceneManager.LoadScene("HighScore");
-        }
+        TopScore topScore = new TopScore();
+        playerName = myname;
+        Debug.Log(playerName);
+        topScore.AddScore(playerName, myScore, passedLevel);
+        SceneManager.LoadScene("HighScore");
     }
 
     IEnumerator End ()

@@ -4,24 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ScoreBoard : MonoBehaviour {
+public class ScoreBoard : MonoBehaviour
+{
 
 	public Text myText;
 	private TopScore topScore;
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		topScore = new TopScore();
 		myText.text = topScore.ToString();
 
-        StartCoroutine(End());
-    }
+		StartCoroutine(End());
+	}
 
-    IEnumerator End()
-    {
-        yield return new WaitForSeconds(5);
-        GetComponent<ResetGame>().Reset();
-        //Application.LoadLevel("MainMenu");
+	IEnumerator End()
+	{
+		yield return new WaitForSeconds(5);
+		GetComponent<ResetGame>().Reset();
+		//Application.LoadLevel("MainMenu");
 		SceneManager.LoadScene("MainMenu");
-    }
+	}
 }
