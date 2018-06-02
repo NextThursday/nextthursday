@@ -72,6 +72,11 @@ public class PlayerScript : MonoBehaviour
         accessoryHolder.material.mainTexture = accessory;
     }
 
+    public void RefreshAccessory()
+    {
+        accessoryHolder.material.mainTexture = LoadAccessory();
+    }
+
 
     void ModSettings_Start(Modifiers.Modifier mod)
     {
