@@ -12,6 +12,8 @@ public class ProjectileMotor : MonoBehaviour {
     
     public float speedMulti = 1;
 
+    public bool isHarmless;
+
     void Update () {
         rigid.AddForce(transform.right * speed * speedMulti);
 	}

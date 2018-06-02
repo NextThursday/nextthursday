@@ -31,7 +31,7 @@ public class GameInit : MonoBehaviour {
     void Start ()
     {
         // PlayerPrefs.SetInt("SkipTutorial", 1); // <<<<<<<<<<<<< !!!!!
-        PlayerPrefs.DeleteKey("SkipTutorial"); // <<<<<<<<<<<<< !!!!!
+        //PlayerPrefs.DeleteKey("SkipTutorial"); // <<<<<<<<<<<<< !!!!!
 
         InitLevel();
     }
@@ -137,7 +137,7 @@ public class GameInit : MonoBehaviour {
         int nonConCount = 0;
 
 
-        if (levelData.isTutorial) { maxAllies = 0; maxNonCon = 5; } 
+        if (levelData.isTutorial) { maxAllies = 0; maxNonCon = 22; } 
 
         while (allyCount < maxAllies || nonConCount < maxNonCon) //keep looping until all allies and noncons are in places
         {
