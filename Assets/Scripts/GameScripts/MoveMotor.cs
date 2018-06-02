@@ -114,6 +114,12 @@ public class MoveMotor : MonoBehaviour {
 
         initScale = transform.localScale;
         modUpdateAllow = true;
+
+        if (master.controls.isTutorial)
+        {
+            forwardInitSpeed *= 0.5f;
+            forwardSpeed *= 0.5f;
+        }
     }
 
     public void Incinerate ()
