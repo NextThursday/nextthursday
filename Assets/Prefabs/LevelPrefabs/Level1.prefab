@@ -4819,6 +4819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4056152662139756}
   - component: {fileID: 114402676848271786}
+  - component: {fileID: 114125373565640698}
   m_Layer: 0
   m_Name: Level1
   m_TagString: Untagged
@@ -32190,6 +32191,18 @@ MonoBehaviour:
   zSpeed: 0.1
   multi: 1
   randomInversion: 1
+--- !u!114 &114125373565640698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1547605666381136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a165aa607b18a714598f825588526fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  master: {fileID: 0}
 --- !u!114 &114155124975324434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -32553,7 +32566,7 @@ MonoBehaviour:
       tangentMode: 0
     - serializedVersion: 2
       time: 60
-      value: 0.8
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -32565,13 +32578,13 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 1.25
+      value: 2
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
       time: 60
-      value: 1.1
+      value: 1.6
       inSlope: 0
       outSlope: 0
       tangentMode: 0

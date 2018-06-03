@@ -74,6 +74,7 @@ public class GameInit : MonoBehaviour {
         playerMotor.On();
         master.countdown.StartCount();
         master.camMod.ModSettings();
+        master.objectMod.ModSettings();
 
         scoreGUI.active = true;
     }
@@ -94,6 +95,9 @@ public class GameInit : MonoBehaviour {
             PlayerPrefs.SetInt("SkipTutorial", 1);
             master.controls.isTutorial = true;
         }
+
+        levelObj.GetComponent<LevelMod>().master = master;
+        levelObj.GetComponent<LevelMod>().RunMod();
 
 
         ModLevel(levelObj);

@@ -5,10 +5,7 @@ using UnityEngine;
 public class LevelData : MonoBehaviour {
 
     // STRUCTS
-
     
-
-
     [System.Serializable]
     public struct NPCSpawn
     {

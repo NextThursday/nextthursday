@@ -161,7 +161,7 @@ MonoBehaviour:
   rigid: {fileID: 54200419785921138}
   standBack: 1
   standBackDistance: 6
-  standBackSpeed: 100
+  standBackSpeed: 40
   lookatTarget: 1
   lookatTargetSpeed: 20
   scanTargetDist: 5
@@ -191,6 +191,7 @@ MonoBehaviour:
   shootDistIncrement: 0.1
   bulletSpeedMulti: 1
   bulletIntervalMulti: 1
+  isHarmless: 0
   checkShoot: 1
   collisionDistanceNoShoot: 1
   noShootVelocity: 100

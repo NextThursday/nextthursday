@@ -18,6 +18,19 @@ public class Modifiers : MonoBehaviour {
         FROM_ANOTHER_TIME, //grainy
         FASTER, //faster
         HOT, //floor is lava
+        UNCHANGED,
+        UNSTABLE,
+        SMALLER,
+        SPINNING,
+        VOID,
+        WIDE,
+        INCEPTION,
+        NULLREF,
+        LEFTHANDED,
+        WATCHINGYOU,
+        OUTTOGETYA,
+        CINEMATIC
+
     };
     
     public List<Modifier> mods = new List<Modifier>();

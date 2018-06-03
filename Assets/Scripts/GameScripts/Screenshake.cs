@@ -6,10 +6,18 @@ public class Screenshake : MonoBehaviour {
 
     float screenShakeAmount;
     float shakeSpeed = 0;
+    public bool unstable;
+    public float unstableAmount;
+
 
     void Update()
     {
-        
+        if (unstable)
+        {
+            Vector3 newPos = Random.insideUnitSphere * unstableAmount;
+            newPos.z = 0;
+            transform.localPosition = newPos;
+        }
 
         if (screenShakeAmount > 0)
         {

@@ -219,8 +219,8 @@ MonoBehaviour:
   lineRefresh: 0
   lineRefreshInterval: 1
   lineUnblockAngle: 40
-  lineUnblockDistance: 6
-  lineUnblockForce: 200
+  lineUnblockDistance: 10
+  lineUnblockForce: 500
   distToHead: 0
   debug: 0
   debug2: 0
@@ -239,6 +239,7 @@ MonoBehaviour:
   rigid: {fileID: 54127274702386226}
   collider: {fileID: 65108876003723986}
   targetHandler: {fileID: 114574779848800260}
+  rushParticles: {fileID: 0}
   isPlayer: 0
   forwardInitSpeed: 0.7
   forwardSpeed: 0

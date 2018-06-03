@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class CamMod : MonoBehaviour {
 
     public MasterReferences master;
+    public Screenshake screenshake;
+    public PostProcessingBehaviour ppProfile;
+    public PostProcessingProfile cinematicProfile;
     public Assets.Pixelation.Scripts.Pixelation pixelateEffect;
     public UnityStandardAssets.ImageEffects.Twirl alienEffect;
     public GameObject alienPlane;
@@ -15,6 +19,12 @@ public class CamMod : MonoBehaviour {
     public UnityStandardAssets.ImageEffects.ContrastEnhance nightEffect;
     public UnityStandardAssets.ImageEffects.ColorCorrectionCurves seriousEffect;
     public UnityStandardAssets.ImageEffects.NoiseAndScratches seriousEffect2;
+    public UnityStandardAssets.ImageEffects.Fisheye wideEffect;
+    public UnityStandardAssets.ImageEffects.ScreenOverlay cinematicEffect;
+    public GameObject fpsCam;
+    public GameObject errorParticles;
+    public MirrorFlipCamera flipCam;
+    public GameObject cinematicRatio, calenderUI;
 
 
 
@@ -51,7 +61,60 @@ public class CamMod : MonoBehaviour {
             case Modifiers.Modifier.GRUESOME:
                 Mod_Serious();
                 break;
+            case Modifiers.Modifier.UNSTABLE:
+                Mod_Unstable();
+                break;
+            case Modifiers.Modifier.WIDE:
+                Mod_Wide();
+                break;
+            case Modifiers.Modifier.INCEPTION:
+                Mod_Inception();
+                break;
+            case Modifiers.Modifier.NULLREF:
+                Mod_Error();
+                break;
+            case Modifiers.Modifier.LEFTHANDED:
+                Mod_LeftHand();
+                break;
+            case Modifiers.Modifier.CINEMATIC:
+                Mod_Cinematic();
+                break;
         }
+    }
+
+    void Mod_Cinematic()
+    {
+        ppProfile.profile = cinematicProfile;
+        cinematicEffect.enabled = true;
+        cinematicRatio.active = true;
+        calenderUI.active = false;
+    }
+
+    void Mod_LeftHand()
+    {
+        flipCam.flipHorizontal = true;
+    }
+
+
+    void Mod_Error()
+    {
+        errorParticles.active = true;
+    }
+
+    void Mod_Inception()
+    {
+        fpsCam.active = true;
+    }
+
+    void Mod_Unstable ()
+    {
+        screenshake.unstable = true;
+
+    }
+
+    void Mod_Wide()
+    {
+        wideEffect.enabled = true;
     }
 
     void Mod_Retro()

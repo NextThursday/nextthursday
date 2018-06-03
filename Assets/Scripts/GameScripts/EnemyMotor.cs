@@ -119,6 +119,9 @@ public class EnemyMotor : MonoBehaviour {
             case Modifiers.Modifier.BIGGER:
                 Mod_Bigger();
                 break;
+            case Modifiers.Modifier.SMALLER:
+                Mod_Smaller();
+                break;
         }
     }
 
@@ -135,6 +138,13 @@ public class EnemyMotor : MonoBehaviour {
     {
         transform.localScale *= Random.Range(0.3f, 0.6f);
         rigid.mass *= 2f;
+    }
+
+    void Mod_Smaller()
+    {
+        transform.localScale *= Random.Range(1.5f, 1.8f);
+        scanTargetDist *= 2;
+        rigid.mass *= 0.5f;
     }
 
     void Mod_Bouncy()
