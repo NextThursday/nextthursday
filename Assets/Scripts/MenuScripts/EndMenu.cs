@@ -24,7 +24,7 @@ public class EndMenu : MonoBehaviour {
         
 		TopScore topScore = new TopScore();
         myScore = PlayerPrefs.GetInt("GameScore");
-        passedLevel = PlayerPrefs.GetInt("LevelLoad");
+		passedLevel = GetLevel();
 		int rank = topScore.GetRank(myScore);
 
         bool waitForType = false;
@@ -34,7 +34,6 @@ public class EndMenu : MonoBehaviour {
         {
             Debug.Log("win!!");
 			gameDesc.text = "You have won!";
-			passedLevel++;
         }
         else if (gameState == "DEATH")
         {
@@ -54,6 +53,17 @@ public class EndMenu : MonoBehaviour {
         if (!waitForType)
 			StartCoroutine(End());
 	}
+
+	int GetLevel()
+    {
+		int level = PlayerPrefs.GetInt("LevelLoad");
+		if (level == 0)
+			return 1;
+		else if (level == 7)
+			return 6;
+
+        return level;
+    }
 
 	public void SetName()
     {

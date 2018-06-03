@@ -91,7 +91,7 @@ public class TopScore {
         }
         return txt;
 	}
-
+    
 	string ScoreToTxt(){
 		return ScoreToTxt(10);
 	}

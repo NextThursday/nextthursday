@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuLoad : MonoBehaviour {
 
-    public string gameScene;
+	public void StartGame(){
+		SceneManager.LoadScene("MainScene");
+	}
 
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.S))
-        {
-            Application.LoadLevel(gameScene);
-        }
+	public void Tutorial(){
+		Debug.Log("This is tutorial!");
+		PlayerPrefs.DeleteKey("RunTutorial");
+		SceneManager.LoadScene("MainScene");
+	}
+
+	public void QuitGame(){
+		Debug.Log("QUIT!");
+		Application.Quit();
 	}
 }
