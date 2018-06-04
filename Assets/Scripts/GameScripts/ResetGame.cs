@@ -12,6 +12,7 @@ public class ResetGame : MonoBehaviour {
         PlayerPrefs.DeleteKey("GameScore");
         PlayerPrefs.DeleteKey("GameEndState");
         PlayerPrefs.DeleteKey("Accessory");
+        PlayerPrefs.DeleteKey("LevelsPlayed");
         Debug.Log("resetting game");
     }
 }

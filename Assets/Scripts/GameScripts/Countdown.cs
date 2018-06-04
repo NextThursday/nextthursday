@@ -15,8 +15,11 @@ public class Countdown : MonoBehaviour {
     public Vector3 calenderTopStart, calenderTopEnd;
     public Vector3 calenderTopStartRot, calenderTopEndRot;
     public GameObject currentCalenderTop;
+    public TextMesh winPointsText, winPointsText2;
+    public GameObject winPointsObject;
 
     bool allow = false;
+    public bool gotWinPts = false;
     
     float weekCount;
 
@@ -58,6 +61,13 @@ public class Countdown : MonoBehaviour {
                 weekCount += Time.deltaTime;
                 DisplayProgress(weekCount / master.controls.weekLength);
 
+                if (weekCount >= master.controls.weekLength - 2 && !gotWinPts)
+                {
+                    gotWinPts = true;
+                    GetWinPoints();
+                }
+
+
                 int dayCount = Mathf.FloorToInt(weekCount / master.controls.weekLength * 7);
                 if (dayCount != previousDayCount)
                 {
@@ -71,6 +81,13 @@ public class Countdown : MonoBehaviour {
 
         }		
 	}
+
+    void GetWinPoints ()
+    {
+        master.scorer.allowBonus = true;
+        winPointsText2.text = winPointsText.text = "+" + master.scorer.GetBonusRoundPts() + "!";
+        winPointsObject.active = true;
+    }
 
     void End ()
     {

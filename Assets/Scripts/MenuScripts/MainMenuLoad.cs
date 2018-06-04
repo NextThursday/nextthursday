@@ -1,15 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuLoad : MonoBehaviour {
+    
+	public Slider volumeSlider;
 
-    public string gameScene;
+	void Start()
+	{
+		volumeSlider.value = PlayerPrefs.HasKey("Volume") ? PlayerPrefs.GetFloat("Volume") : 1;
+	}
+	public void StartGame(){
+		SceneManager.LoadScene("MainScene");
+	}
 
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.S))
-        {
-            Application.LoadLevel(gameScene);
-        }
+	public void Tutorial(){
+		Debug.Log("This is tutorial!");
+		PlayerPrefs.DeleteKey("SkipTutorial");
+		SceneManager.LoadScene("MainScene");
+	}
+
+	public void SetVolume(float volume){
+		PlayerPrefs.SetFloat("Volume", volume);
+		VolumeController volumeController = FindObjectOfType<VolumeController>();
+		volumeController.ResetVolume();
+	}
+
+	public void QuitGame(){
+		Debug.Log("QUIT!");
+		Application.Quit();
 	}
 }

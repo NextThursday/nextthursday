@@ -85,15 +85,28 @@ public class GameInit : MonoBehaviour {
 
         GameObject levelObj;
 
+        Debug.Log(level + " level!!");
+
         if (PlayerPrefs.HasKey("SkipTutorial"))
         {
-            levelObj = Instantiate(levels[level - 1]);
+            if (level == 1)
+            {
+                levelObj = Instantiate(levels[0]);
+            }
+            else
+            {
+
+                levelObj = Instantiate(levels[GetRandomLevel()]);
+            }
+
         }
         else
         {
+            Debug.Log("start tutorial");
             levelObj = Instantiate(tutorialLevel);
             PlayerPrefs.SetInt("SkipTutorial", 1);
             master.controls.isTutorial = true;
+            master.countdown.gotWinPts = true;
         }
 
         levelObj.GetComponent<LevelMod>().master = master;
@@ -105,6 +118,18 @@ public class GameInit : MonoBehaviour {
         return levelObj.GetComponent<LevelData>();
     }
 
+
+    int GetRandomLevel ()
+    {
+        int choice = Random.Range(1, levels.Count);
+        string levelsPlayed = PlayerPrefs.GetString("LevelsPlayed"); 
+        if (levelsPlayed.Contains(""+choice))
+        {
+            choice = GetRandomLevel();
+        }
+        PlayerPrefs.SetString("LevelsPlayed", PlayerPrefs.GetString("LevelsPlayed") + choice);
+        return choice;
+    }
 
     void SpawnGame(LevelData levelData)
     {

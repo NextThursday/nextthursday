@@ -20,12 +20,11 @@ public class EyeFollow : MonoBehaviour {
         {
             if (!hit)
             {
-                float step = speed * Time.deltaTime;
+                float step = speed * Time.deltaTime * 0.6f;
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
                 if (lookat) transform.LookAt(player.transform);
             }
-
-            Debug.Log(gameObject.name + " " + Vector3.Distance(transform.position, player.transform.position));
+            
             if (!hit && Vector3.Distance(transform.position, player.transform.position) < 1 && freezePlayer)
             {
                 if (motor)

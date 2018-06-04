@@ -31569,14 +31569,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  enemyTimeMax: 90
+  enemyTimeMax: 80
   spawnInterval: 0.01
   bulletSpeedIncrease:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0.5
+      value: 0.4
       inSlope: 0
       outSlope: 0
       tangentMode: 0

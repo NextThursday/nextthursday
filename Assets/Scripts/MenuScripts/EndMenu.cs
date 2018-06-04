@@ -9,6 +9,7 @@ public class EndMenu : MonoBehaviour {
     public TextMesh score;
     public TextMesh gameComplete;
 	public TextMesh gameDesc;
+    public Text placeholder;
 	public GameObject input;
 
 	private string playerName;
@@ -16,48 +17,69 @@ public class EndMenu : MonoBehaviour {
 
     private bool entered = false;
 
-	void Start () {
+    bool lostScore = false;
+
+
+    void Start () {
         
-        input.SetActive(false);
+
+
+        
         playerName = "Player";
-        myScore = 0;
+        myScore = PlayerPrefs.GetInt("GameScore");
         
-        bool waitForType = false;
 		string gameState = PlayerPrefs.GetString("GameEndState");
-		//gameState = "WIN";
-        if (gameState == "WIN")
-        {
-            Debug.Log("win!!");
-			TopScore topScore = new TopScore();
-            myScore = PlayerPrefs.GetInt("GameScore");
+		TopScore topScore = new TopScore();
 			//myScore = 180;
-            int rank = topScore.GetRank(myScore);
-            if (rank < 10)
-            {
-				gameDesc.text = "You won with a score of "+myScore+". Rank: "+(rank+1);
-			}else
-			{
-				gameDesc.text = "You have won!";
-			}
+        int rank = topScore.GetRank(myScore) + 1;
 
-			waitForType = true;
-			SetName();
 
-        }
-        else if (gameState == "DEATH")
+
+
+
+        if (gameState == "DEATH")
         {
-            Debug.Log("death");
-            gameDesc.text = "You have died.";
+            gameComplete.text = "Game Over";
+            gameComplete.color = Color.red;
+            gameDesc.text = ":(";
+            gameDesc.color = Color.red;
+        } else
+        {
+            gameDesc.color = Color.green;
         }
-		score.text = "Score: " + myScore;
 
-        if (!waitForType)
-			StartCoroutine(End());
+
+        if (rank <= 10)
+        {
+            gameDesc.color = Color.green;
+            if (rank <= 1)
+            {
+                gameDesc.text = "You are the top!";
+            }
+            else
+            {
+                gameDesc.text = "You are on the scoreboard!";
+            }
+            SetName();
+        }
+        else
+        {
+
+            lostScore = true;
+            if (gameState == "WIN")
+            {
+                gameDesc.text = "Good job";
+            }
+            placeholder.text = "Click to continue";
+
+        }
+        
+        score.text = "Score: " + myScore + " Rank: " + rank;
+        
 	}
 
 	public void SetName()
     {
-		input.SetActive(true);
         input.GetComponent<InputField>().onEndEdit.AddListener(GetInput);
     }
 
@@ -74,11 +96,13 @@ public class EndMenu : MonoBehaviour {
         }
     }
 
-    IEnumerator End ()
+
+    private void Update()
     {
-        yield return new WaitForSeconds(5);
-		SceneManager.LoadScene("HighScore");
-        
+        if (lostScore && Input.GetMouseButtonDown(0))
+        {
+            SceneManager.LoadScene("HighScore");
+        }
     }
-	
+
 }

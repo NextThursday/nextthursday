@@ -14,16 +14,10 @@ public class SaveHandler : MonoBehaviour {
 
     public void NextScene ()
     {
+        SaveScore();
+
         if (playerDied) return;
 
-
-        PlayerPrefs.SetInt("LevelLoad", !PlayerPrefs.HasKey("LevelLoad") ? 2 : PlayerPrefs.GetInt("LevelLoad") + 1); //increases level number
-        PlayerPrefs.SetInt("Allies", master.scorer.GetAllyCount()); //saves the number of allies for the next round
-
-        int roundScore = master.scorer.GetAllyCount() + ( master.scorer.GetEnemyDeaths() * 5) ;
-
-        
-        PlayerPrefs.SetInt("GameScore", PlayerPrefs.HasKey("GameScore") ? PlayerPrefs.GetInt("GameScore") + roundScore : roundScore);
 
         int levelToLoad = PlayerPrefs.GetInt("LevelLoad");
         if (levelToLoad <= 5)
@@ -36,6 +30,17 @@ public class SaveHandler : MonoBehaviour {
         }
     }
 
+    void SaveScore ()
+    {
+
+        PlayerPrefs.SetInt("LevelLoad", !PlayerPrefs.HasKey("LevelLoad") ? 2 : PlayerPrefs.GetInt("LevelLoad") + 1); //increases level number
+        PlayerPrefs.SetInt("Allies", master.scorer.GetAllyCount()); //saves the number of allies for the next round
+        int roundScore = master.scorer.GetAllyCount() + (master.scorer.GetEnemyDeaths() * 5) + master.scorer.GetBonusRoundPts();
+        Debug.Log("setting score to : " + PlayerPrefs.GetInt("GameScore") + roundScore);
+        PlayerPrefs.SetInt("GameScore", PlayerPrefs.HasKey("GameScore") ? PlayerPrefs.GetInt("GameScore") + roundScore : roundScore);
+        Debug.Log("score is: " + PlayerPrefs.GetInt("GameScore"));
+    }
+
 
     public void EndGame (string state, float delay)
     {
@@ -43,9 +48,13 @@ public class SaveHandler : MonoBehaviour {
         if (state == "DEATH")
         {
             playerDied = true;
-            PlayerPrefs.SetInt("GameScore", 0);
-            master.scorer.Death();
+            SaveScore();
+            master.scorer.Death(); 
         }
+
+
+
+
 
         PlayerPrefs.SetString("GameEndState", state);
         Debug.Log("next scene " + delay);
@@ -54,9 +63,7 @@ public class SaveHandler : MonoBehaviour {
 
     IEnumerator LoadNextScene(string state, float delay)
     {
-        Debug.Log("NEEEXT");
         yield return new WaitForSeconds(delay);
-        Debug.Log("NEEEXT!!!");
         if (state == "DEATH")
         {
             blackFader.enabled = true;
