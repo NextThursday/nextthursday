@@ -23,3 +23,4 @@ Controls --- String --- MOUSE, X360 --- The controls to support
 TutorialText_Tutorial, TutorialText_Level1 .. --- Int --- Null/0, 1 --- Keep track of whether to display the tutorial text
 RunTutorial --- Int --- Null/0 --- Whether to skip the tutorial
 Accessory --- Int --- Null/-1, 1, 2, 3.. --- ID of accessory to display
+Volume --- Float --- 0 - 1 --- Volume of audio sources.
