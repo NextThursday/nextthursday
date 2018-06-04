@@ -21,7 +21,6 @@ public class Rotate : MonoBehaviour {
             randomI.x = GetRandomInversionFactor();
             randomI.y = GetRandomInversionFactor();
             randomI.z = GetRandomInversionFactor();
-            Debug.Log("random inversion: " + randomI);
         }
     }
 

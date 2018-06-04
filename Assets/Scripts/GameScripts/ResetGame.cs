@@ -11,5 +11,7 @@ public class ResetGame : MonoBehaviour {
         PlayerPrefs.DeleteKey("Allies");
         PlayerPrefs.DeleteKey("GameScore");
         PlayerPrefs.DeleteKey("GameEndState");
+        PlayerPrefs.DeleteKey("Accessory");
+        Debug.Log("resetting game");
     }
 }

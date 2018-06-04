@@ -30,8 +30,8 @@ public class GameInit : MonoBehaviour {
 
     void Start ()
     {
-        PlayerPrefs.SetInt("SkipTutorial", 1); // <<<<<<<<<<<<< !!!!!
-
+        // PlayerPrefs.SetInt("SkipTutorial", 1); // <<<<<<<<<<<<< !!!!!
+      //  PlayerPrefs.DeleteKey("SkipTutorial"); // <<<<<<<<<<<<< !!!!!
 
         InitLevel();
     }
@@ -74,6 +74,7 @@ public class GameInit : MonoBehaviour {
         playerMotor.On();
         master.countdown.StartCount();
         master.camMod.ModSettings();
+        master.objectMod.ModSettings();
 
         scoreGUI.active = true;
     }
@@ -94,6 +95,9 @@ public class GameInit : MonoBehaviour {
             PlayerPrefs.SetInt("SkipTutorial", 1);
             master.controls.isTutorial = true;
         }
+
+        levelObj.GetComponent<LevelMod>().master = master;
+        levelObj.GetComponent<LevelMod>().RunMod();
 
 
         ModLevel(levelObj);
@@ -137,7 +141,7 @@ public class GameInit : MonoBehaviour {
         int nonConCount = 0;
 
 
-        if (levelData.isTutorial) { maxAllies = 0; maxNonCon = 5; } 
+        if (levelData.isTutorial) { maxAllies = 0; maxNonCon = 22; } 
 
         while (allyCount < maxAllies || nonConCount < maxNonCon) //keep looping until all allies and noncons are in places
         {

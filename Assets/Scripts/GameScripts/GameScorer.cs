@@ -51,7 +51,7 @@ public class GameScorer : MonoBehaviour {
     void RefreshScoreText()
     {
         if (dead) return;
-        scoreText.text = "" + (initScore + master.scorer.GetAllyCount() + master.scorer.GetEnemyDeaths());
+        scoreText.text = "" + (initScore + master.scorer.GetAllyCount() + (master.scorer.GetEnemyDeaths() * 5) );
     }
 
     public void AddEnemyDeath ()

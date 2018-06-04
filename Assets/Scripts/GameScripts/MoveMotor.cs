@@ -51,7 +51,7 @@ public class MoveMotor : MonoBehaviour {
 
     public float explodeRadius;
 
-    bool waterState;
+    bool waterState, teleportalState;
     float randomSeed;
     //1 = normal size, 2 = 2x size
 
@@ -114,6 +114,14 @@ public class MoveMotor : MonoBehaviour {
 
         initScale = transform.localScale;
         modUpdateAllow = true;
+
+        if (master.controls.isTutorial)
+        {
+            forwardInitSpeed *= 0.5f;
+            forwardSpeed *= 0.5f;
+        }
+
+        rigid.AddForce(new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0));
     }
 
     public void Incinerate ()
@@ -151,6 +159,10 @@ public class MoveMotor : MonoBehaviour {
                 Mod_Bigger();
                 break;
 
+            case Modifiers.Modifier.SMALLER:
+                Mod_Smaller();
+                break;
+
             case Modifiers.Modifier.FASTER:
                 Mod_Faster();
                 break;
@@ -182,6 +194,12 @@ public class MoveMotor : MonoBehaviour {
         }
     }
 
+
+    void Mod_Smaller()
+    {
+        transform.localScale *= Random.Range(1.5f, 1.7f);
+    }
+
     void Mod_Bouncy()
     {
         collider.sharedMaterial = bouncyPhysics;
@@ -210,6 +228,11 @@ public class MoveMotor : MonoBehaviour {
         waterState = state;
     }
 
+    public void isInTeleportal (bool state)
+    {
+        teleportalState = state;
+    }
+
 
     void Update () {
         
@@ -225,7 +248,7 @@ public class MoveMotor : MonoBehaviour {
                 if (GetTargetDistance() > targetDistanceThreshold)
                 {
 
-                    Vector3 force = transform.right * forwardSpeed * (GetTargetDistance() + targetDistanceSpeed) * GetWaterSlowdown();
+                    Vector3 force = transform.right * forwardSpeed * (GetTargetDistance() + targetDistanceSpeed) * GetWaterSlowdown() * GetTeleportalSpeed();
                     if (reverseMode)
                     {
                         force *= -1;
@@ -267,22 +290,67 @@ public class MoveMotor : MonoBehaviour {
 
 
 
-    float GetWaterSlowdown ()
+    float GetWaterSlowdown()
     {
         float waterSlowdown = 1;
-
-        if (waterState && targetHandler.formation != TargetHandler.FormationMode.LINE)
+        if (waterState)
         {
-            waterSlowdown = 0.04f;
-            rigid.velocity *= 0.9f;
-        } else if (waterState)
-        {
-            waterSlowdown = 0.7f;
+            if (targetHandler.formation == TargetHandler.FormationMode.LINE)
+            {
+                rigid.velocity *= 1.01f;
+                waterSlowdown = 2;
+            }
+            else
+            {
+                waterSlowdown = 0.1f;
+                rigid.velocity *= 0.9f;
+            }
         }
-
-
+        /*
+        if (isPlayer) //leader
+        {
+            if (waterState)
+            {
+                if (targetHandler.formation == TargetHandler.FormationMode.LINE)
+                {
+                    rigid.velocity *= 1.01f;
+                    waterSlowdown = 2;
+                }
+                else
+                {
+                    waterSlowdown = 0.1f;
+                    rigid.velocity *= 0.9f;
+                }
+            }
+        }
+        else
+        {
+            rigid.velocity *= 1.01f;
+             waterSlowdown = 1.5f;
+        }
+        */
 
         return waterSlowdown;
+    }
+
+
+    float GetTeleportalSpeed ()
+    {
+        float teleportalSpeed = 1;
+        if (teleportalState)
+        {
+            teleportalSpeed = 50f;
+        }
+        else
+        {
+            teleportalSpeed = 1;
+            if (rigid.velocity.magnitude > 50)
+            {
+                rigid.velocity *= 0.01f;
+            }
+        }
+
+        return teleportalSpeed;
     }
 
 

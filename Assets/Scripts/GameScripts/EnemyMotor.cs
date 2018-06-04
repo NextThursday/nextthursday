@@ -66,6 +66,7 @@ public class EnemyMotor : MonoBehaviour {
     float shootCount = 0;
     public float bulletSpeedMulti = 1;
     public float bulletIntervalMulti = 1;
+    public bool isHarmless;
 
     [Header("Check Shoot")]
     public bool checkShoot;
@@ -84,10 +85,12 @@ public class EnemyMotor : MonoBehaviour {
     {
         randomSeed = Random.Range(0, 1000);
 
-
-        foreach (Modifiers.Modifier mod in master.modifiers.mods)
+        if (master)
         {
-            ModSettings_Start(mod);
+            foreach (Modifiers.Modifier mod in master.modifiers.mods)
+            {
+                ModSettings_Start(mod);
+            }
         }
     }
 
@@ -116,6 +119,9 @@ public class EnemyMotor : MonoBehaviour {
             case Modifiers.Modifier.BIGGER:
                 Mod_Bigger();
                 break;
+            case Modifiers.Modifier.SMALLER:
+                Mod_Smaller();
+                break;
         }
     }
 
@@ -132,6 +138,13 @@ public class EnemyMotor : MonoBehaviour {
     {
         transform.localScale *= Random.Range(0.3f, 0.6f);
         rigid.mass *= 2f;
+    }
+
+    void Mod_Smaller()
+    {
+        transform.localScale *= Random.Range(1.5f, 1.8f);
+        scanTargetDist *= 2;
+        rigid.mass *= 0.5f;
     }
 
     void Mod_Bouncy()
@@ -212,8 +225,9 @@ public class EnemyMotor : MonoBehaviour {
 
     void StandBack ()
     {
-        Collider2D[] nearbies = Physics2D.OverlapCircleAll(transform.position, standBackDistance, 1 << LayerMask.NameToLayer("Goodies"));
-        foreach (Collider2D nearby in nearbies)
+        Collider[] nearbies = Physics.OverlapSphere(transform.position, standBackDistance, 1 << LayerMask.NameToLayer("Goodies"));
+        
+        foreach (Collider nearby in nearbies)
         {
             if (nearby.gameObject.tag == "Ally" || nearby.gameObject.tag == "Player")
             {
@@ -470,8 +484,8 @@ public class EnemyMotor : MonoBehaviour {
         projectile.transform.localPosition = new Vector3(1, 0, 0);
         projectile.transform.parent = transform.parent;
         projectile.GetComponent<ProjectileCollision>().master = master;
-
         projectile.GetComponent<ProjectileMotor>().speedMulti = bulletSpeedMulti;
+        projectile.GetComponent<ProjectileMotor>().isHarmless = isHarmless;
     }
 
 

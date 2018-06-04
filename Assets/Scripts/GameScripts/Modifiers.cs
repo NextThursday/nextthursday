@@ -18,7 +18,23 @@ public class Modifiers : MonoBehaviour {
         FROM_ANOTHER_TIME, //grainy
         FASTER, //faster
         HOT, //floor is lava
-        DEFAULT
+        UNCHANGED,
+        UNSTABLE,
+        SMALLER,
+        SPINNING,
+        VOID,
+        WIDE,
+        INCEPTION,
+        NULLREF,
+        LEFTHANDED,
+        WATCHINGYOU,
+        OUTTOGETYA,
+        CINEMATIC,
+        PRESENTLESS,
+        OFFCENTER,
+        LOVELY,
+        TWO_D,
+        GROUNDLESS
     };
     
     public List<Modifier> mods = new List<Modifier>();
@@ -43,10 +59,10 @@ public class Modifiers : MonoBehaviour {
         return mods.Contains(getMod) ? GetRandomMod() : getMod; //if mod already exists on mods list, find another random mod, otherwise use this mod.
     }
 
-    public Modifier GetDefault ()
-    {
-        return Modifier.DEFAULT;
-    }
+   // public Modifier GetDefault ()
+    //{
+      //  return Modifier.DEFAULT;
+  //  }
 
 
     Modifier GetMod (int index)

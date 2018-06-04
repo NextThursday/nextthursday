@@ -20,6 +20,7 @@ public class EnemyHurt : MonoBehaviour {
 
     public GameObject DeathParticle;
     public GameObject PointParticle;
+    
 
 
     private void Start()
@@ -41,7 +42,9 @@ public class EnemyHurt : MonoBehaviour {
 
     void CheckCollision(Collision coll)
     {
-        if (master.controls.trampleEnemies && !dead && !invinsible)
+        //Debug.Log("hit enemy: " + coll + " " + dead + invinsible);
+        //  if (master.controls.trampleEnemies && !dead && !invinsible)
+        if (!dead && !invinsible)
         {
             if (coll.gameObject.tag == "Ally" || coll.gameObject.tag == "Player")
             {
@@ -53,13 +56,17 @@ public class EnemyHurt : MonoBehaviour {
 
     IEnumerator KillEnemy ()
     {
-        
-        master.scorer.AddEnemyDeath();
-        bool chance = Random.Range(0, respawnChance) <= 1;
-        Debug.Log(Random.Range(0, respawnChance) + " chance" + chance);
-        if (chance)
+
+        if (master)
         {
-            master.spawnEnemies.AddSpawn(1);
+
+            master.scorer.AddEnemyDeath();
+            bool chance = Random.Range(0, respawnChance) <= 1;
+            Debug.Log(Random.Range(0, respawnChance) + " chance" + chance);
+            if (chance)
+            {
+                master.spawnEnemies.AddSpawn(1);
+            }
         }
 
         tag = "Dead";
@@ -69,11 +76,14 @@ public class EnemyHurt : MonoBehaviour {
         GameObject particleObject = Instantiate(DeathParticle, transform);
         particleObject.transform.parent = transform.root;
         particleObject.transform.GetChild(0).GetComponent<ParticleSystem>().Emit(1);
-        
 
-        GameObject pointObject = Instantiate(PointParticle, transform);
-        pointObject.transform.parent = transform.parent.parent;
-        pointObject.transform.localEulerAngles = Vector3.zero;
+        if (master)
+        {
+
+            GameObject pointObject = Instantiate(PointParticle, transform);
+            pointObject.transform.parent = transform.parent.parent;
+            pointObject.transform.localEulerAngles = Vector3.zero;
+        }
 
         Destroy(gameObject);
     }

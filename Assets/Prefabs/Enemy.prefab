@@ -161,7 +161,7 @@ MonoBehaviour:
   rigid: {fileID: 54200419785921138}
   standBack: 1
   standBackDistance: 6
-  standBackSpeed: 100
+  standBackSpeed: 40
   lookatTarget: 1
   lookatTargetSpeed: 20
   scanTargetDist: 5
@@ -191,6 +191,7 @@ MonoBehaviour:
   shootDistIncrement: 0.1
   bulletSpeedMulti: 1
   bulletIntervalMulti: 1
+  isHarmless: 0
   checkShoot: 1
   collisionDistanceNoShoot: 1
   noShootVelocity: 100
@@ -213,7 +214,7 @@ MonoBehaviour:
   enemyInvincibleAtSpawn: 1
   DeathParticle: {fileID: 1594895987608978, guid: f5e49cfa523bf4946b77af36ebaaf1f1,
     type: 2}
-  PointParticle: {fileID: 1245314894187888, guid: fc306c415b83e83418ce4aad7351edb4,
+  PointParticle: {fileID: 1245314894187888, guid: 27ba93f7a25b85c4ead4969d012db9c3,
     type: 2}
 --- !u!114 &114493464516932322
 MonoBehaviour:
