@@ -10,4 +10,5 @@ public class GameControls : MonoBehaviour {
     public float weekLength;
     public bool trampleEnemies;
     [HideInInspector] public bool isTutorial;
+    [HideInInspector] public bool loadNextScene = true;
 }

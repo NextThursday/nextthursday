@@ -32,7 +32,7 @@ public class EyeFollow : MonoBehaviour {
                 {
                     motor.forwardInitSpeed *= 0.6f;
                     motor.forwardSpeed *= 0.6f;
-                    transform.GetChild(0).GetComponent<Renderer>().material.color = Color.white;
+                    transform.GetChild(0).GetComponent<Renderer>().material.color = Color.black;
                     hit = true;
                 }
                 else

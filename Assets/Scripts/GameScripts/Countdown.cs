@@ -74,6 +74,7 @@ public class Countdown : MonoBehaviour {
 
     void End ()
     {
+        if (master.controls.loadNextScene)
         master.saveHandler.NextScene();
     }
 

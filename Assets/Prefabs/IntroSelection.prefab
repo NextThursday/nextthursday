@@ -2250,6 +2250,21 @@ MonoBehaviour:
   - mod: 21
     text: Cinematic
     icon: {fileID: 2800000, guid: bc9827d3d3248f64f9a1fb43884f1a08, type: 3}
+  - mod: 22
+    text: Presentless
+    icon: {fileID: 2800000, guid: 93b3bc3164bfbbe4d845b90ded7c07fd, type: 3}
+  - mod: 23
+    text: Off Center
+    icon: {fileID: 2800000, guid: ad9016e6de51a5a49bab130fa4dd6f4f, type: 3}
+  - mod: 24
+    text: Lovely
+    icon: {fileID: 2800000, guid: 9f42e5f7ec128a14385cea2d791a52ef, type: 3}
+  - mod: 25
+    text: < 2D >
+    icon: {fileID: 2800000, guid: 63db453cfd8d043409756c0844f93695, type: 3}
+  - mod: 26
+    text: In the Clouds
+    icon: {fileID: 2800000, guid: e3dc6a05788d0b24fa29bf204d39ce74, type: 3}
   modifiers: {fileID: 0}
   gameInit: {fileID: 0}
 --- !u!114 &114961690785188776

@@ -6,6 +6,7 @@ using UnityEngine.PostProcessing;
 public class CamMod : MonoBehaviour {
 
     public MasterReferences master;
+    public Camera thisCam;
     public Screenshake screenshake;
     public PostProcessingBehaviour ppProfile;
     public PostProcessingProfile cinematicProfile;
@@ -24,8 +25,9 @@ public class CamMod : MonoBehaviour {
     public GameObject fpsCam;
     public GameObject errorParticles;
     public MirrorFlipCamera flipCam;
-    public GameObject cinematicRatio, calenderUI;
+    public GameObject cinematicRatio, calenderUI, blackFader, scoreCounter, modHolder;
 
+    public GameObject lovelyParticles;
 
 
     public void ModSettings ()
@@ -79,7 +81,33 @@ public class CamMod : MonoBehaviour {
             case Modifiers.Modifier.CINEMATIC:
                 Mod_Cinematic();
                 break;
+            case Modifiers.Modifier.OFFCENTER:
+                Mod_OffCenter();
+                break;
+            case Modifiers.Modifier.TWO_D:
+                Mod_2D();
+                break;
+            case Modifiers.Modifier.LOVELY:
+                Mod_Lovely();
+                break;
         }
+    }
+
+    void Mod_Lovely()
+    {
+        lovelyParticles.active = true;
+    }
+
+    void Mod_2D()
+    {
+        thisCam.orthographic = true;
+        blackFader.active = false;
+        scoreCounter.transform.localPosition = new Vector3(-5.84f, 8.78f, 0.77f);
+        scoreCounter.transform.localScale = new Vector3(8.967305f, 8.967305f, 8.967305f);
+        calenderUI.transform.localPosition = new Vector3(-9.28f, 9.06f, 4.52f);
+        calenderUI.transform.localScale = new Vector3(0.3436995f, 0.3436995f, 0.3436995f);
+        modHolder.transform.localPosition = new Vector3(-0.45831f, 10.189f, 16.442f);
+        modHolder.transform.localScale = new Vector3(1.894143f, 1.894143f, 1.894143f);
     }
 
     void Mod_Cinematic()
@@ -88,6 +116,17 @@ public class CamMod : MonoBehaviour {
         cinematicEffect.enabled = true;
         cinematicRatio.active = true;
         calenderUI.active = false;
+    }
+
+    void Mod_OffCenter()
+    {
+        Vector3 parentPos = transform.parent.localPosition;
+        parentPos.x += Random.Range(4, 7);
+        parentPos.x *= Random.Range(0, 2) == 1 ? -1 : 1;
+
+        parentPos.y += Random.Range(1, 3);
+        parentPos.y *= Random.Range(0, 2) == 1 ? -1 : 1;
+        transform.parent.localPosition = parentPos;
     }
 
     void Mod_LeftHand()

@@ -30,8 +30,48 @@ public class LevelMod : MonoBehaviour {
             case Modifiers.Modifier.VOID:
                 Mod_Void();
                 break;
+            case Modifiers.Modifier.PRESENTLESS:
+                Mod_Presentless();
+                break;
+            case Modifiers.Modifier.GROUNDLESS:
+                Mod_Groundless();
+                break;
+            case Modifiers.Modifier.LOVELY:
+                Mod_Lovely();
+                break;
         }
     }
+
+    void Mod_Lovely()
+    {
+        Renderer[] renders = transform.GetComponentsInChildren<Renderer>();
+        foreach (Renderer render in renders)
+        {
+            Material[] mats = render.materials;
+
+            foreach (Material mat in mats)
+            {
+                bool chance = Random.Range(0, 100) < 15; //15% red
+
+                if (chance)
+                {
+                    mat.color = new Color(1, 0, 0);
+                }
+            }
+        }
+    }
+
+    void Mod_Groundless ()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.name.Contains("Base"))
+            {
+                child.gameObject.active = false;
+            }
+        }
+    }
+
 
     void Mod_Spinning()
     {
@@ -55,6 +95,17 @@ public class LevelMod : MonoBehaviour {
                 {
                     mat.color = new Color(0, 0, 0);
                 }
+            }
+        }
+    }
+
+    void Mod_Presentless ()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.name.Contains("Present"))
+            {
+                child.gameObject.active = false;
             }
         }
     }

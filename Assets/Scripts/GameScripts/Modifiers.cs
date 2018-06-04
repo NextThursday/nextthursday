@@ -29,8 +29,12 @@ public class Modifiers : MonoBehaviour {
         LEFTHANDED,
         WATCHINGYOU,
         OUTTOGETYA,
-        CINEMATIC
-
+        CINEMATIC,
+        PRESENTLESS,
+        OFFCENTER,
+        LOVELY,
+        TWO_D,
+        GROUNDLESS
     };
     
     public List<Modifier> mods = new List<Modifier>();

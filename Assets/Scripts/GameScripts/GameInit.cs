@@ -31,7 +31,7 @@ public class GameInit : MonoBehaviour {
     void Start ()
     {
         // PlayerPrefs.SetInt("SkipTutorial", 1); // <<<<<<<<<<<<< !!!!!
-        //PlayerPrefs.DeleteKey("SkipTutorial"); // <<<<<<<<<<<<< !!!!!
+      //  PlayerPrefs.DeleteKey("SkipTutorial"); // <<<<<<<<<<<<< !!!!!
 
         InitLevel();
     }
