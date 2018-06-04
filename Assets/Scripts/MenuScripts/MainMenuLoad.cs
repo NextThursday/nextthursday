@@ -24,6 +24,8 @@ public class MainMenuLoad : MonoBehaviour {
 
 	public void SetVolume(float volume){
 		PlayerPrefs.SetFloat("Volume", volume);
+		VolumeController volumeController = FindObjectOfType<VolumeController>();
+		volumeController.ResetVolume();
 	}
 
 	public void QuitGame(){

@@ -8,8 +8,13 @@ public class VolumeController : MonoBehaviour {
 	private AudioSource[] audioSources;
 
 	void Start(){
+		ResetVolume();
+	}
+
+	public void ResetVolume(){
+		float volume = PlayerPrefs.HasKey("Volume") ? PlayerPrefs.GetFloat("Volume") : 1.0f;
 		audioSources = FindObjectsOfType<AudioSource>();
 		foreach (AudioSource myAudio in audioSources)
-			myAudio.volume = PlayerPrefs.GetFloat("Volume");
+            myAudio.volume = volume;
 	}
 }
