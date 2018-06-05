@@ -31569,7 +31569,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  enemyTimeMax: 80
+  enemyTimeMax: 70
   spawnInterval: 0.01
   bulletSpeedIncrease:
     serializedVersion: 2
