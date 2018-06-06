@@ -33,6 +33,8 @@ public class ProjectileCollision : MonoBehaviour {
     void CheckCollision(Collision coll)
     {
         GameObject collObj = coll.gameObject;
+		AudioManager audioManager = FindObjectOfType<AudioManager>();
+
         if (collObj.tag == "Ally")
         { //|| collObj.tag == "Player")
             master.screenshake.Shake(AllyScreenshakeStrength, AllyScreenshakeTime);
@@ -45,7 +47,8 @@ public class ProjectileCollision : MonoBehaviour {
                 pointObject.transform.localEulerAngles = Vector3.zero;
 
                 motor.DieAlly();
-
+				audioManager.AddSoundTo(collObj, AudioManager.Sound.HURT, true);
+				//collObj.GetComponent<AudioSource>().PlayOneShot(audioManager.getHurt, PlayerPrefs.GetFloat("Volume"));
             }
 
         }
@@ -68,6 +71,8 @@ public class ProjectileCollision : MonoBehaviour {
             }
             master.screenshake.Shake(playerScreenshakeStrength, playerScreenshakeTime);
 
+			audioManager.AddSoundTo(collObj, AudioManager.Sound.HURT, true);
+			//collObj.GetComponent<AudioSource>().PlayOneShot(audioManager.getHurt, PlayerPrefs.GetFloat("Volume"));
 
 
 

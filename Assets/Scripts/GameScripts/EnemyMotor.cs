@@ -486,6 +486,11 @@ public class EnemyMotor : MonoBehaviour {
         projectile.GetComponent<ProjectileCollision>().master = master;
         projectile.GetComponent<ProjectileMotor>().speedMulti = bulletSpeedMulti;
         projectile.GetComponent<ProjectileMotor>().isHarmless = isHarmless;
+
+		AudioManager audioManager = FindObjectOfType<AudioManager>();
+		audioManager.AddSoundTo(gameObject, AudioManager.Sound.SPELL, true);
+
+		//GetComponent<AudioSource>().PlayOneShot(audioManager.spell, PlayerPrefs.GetFloat("Volume"));
     }
 
 

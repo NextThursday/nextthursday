@@ -89,7 +89,10 @@ public class NPCHandler : MonoBehaviour {
         particleObject.transform.parent = transform.root;
         particleObject.transform.GetChild(0).GetComponent<ParticleSystem>().Emit(1);
 
+		AudioManager audioManager = FindObjectOfType<AudioManager>();
+		audioManager.AddSoundTo(gameObject, AudioManager.Sound.CONVINCED, true);
 
+        //GetComponent<AudioSource>().PlayOneShot(audioManager.convinced, PlayerPrefs.GetFloat("Volume"));
 
         master.spawnEnemies.Spawn();
         motor.On();

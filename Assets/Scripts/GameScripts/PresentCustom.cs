@@ -20,6 +20,10 @@ public class PresentCustom : MonoBehaviour {
         if (coll.gameObject.tag == "Player")
         {
             coll.gameObject.GetComponent<PlayerScript>().GetGift();
+
+			AudioManager audioManager = FindObjectOfType<AudioManager>();
+            audioManager.AddSoundTo(coll.gameObject, AudioManager.Sound.PRESENT, false);
+
             DestroyGift(coll);
         }
     }
