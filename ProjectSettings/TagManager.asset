@@ -12,6 +12,7 @@ TagManager:
   - Bullet
   - Music
   - Sound
+  - Narrator
   layers:
   - Default
   - TransparentFX

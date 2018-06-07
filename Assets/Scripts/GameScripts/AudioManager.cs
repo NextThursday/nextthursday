@@ -1,19 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour {
 
-	//public AudioClip convinced;
-	//public AudioClip getHurt;
-	//public AudioClip spell;
-	//public AudioClip speedUp;
-	//public AudioClip present;
-	//public AudioClip push;
+	public class TutorialNarrative {
+		public AudioClip audio;
+		public DateTime time;
+
+		public TutorialNarrative(AudioClip audio, DateTime time) {
+			this.audio = audio;
+			this.time = time;
+		}
+	}
+
+	public static string NARRATOR = "Narrator";
+
 	public AudioClip[] audioClips;
 	public AudioClip[] musics;
 	public AudioClip[] narrative;
+	public List<TutorialNarrative> tutorialNarrative = new List<TutorialNarrative>();
+	public AudioClip currentNarrative;
 	public GameObject speakerPrefab;
 
 	public enum Sound
@@ -34,12 +43,16 @@ public class AudioManager : MonoBehaviour {
 	};
 
 	public enum Narration {
-		
+		TUTORIAL,
+		LEVEL_ONE,
+		WATER_LEVEL,
+		PORTAL_LEVEL,
+		CORRIDOR_LEVEL,
+		INCINERATOR_LEVEL
 	}
 
 
 	GameObject speaker;
-	GameObject speaker2;
 
 	public void PlayMusic(Music music){
 		PlayMusic(music, false);
@@ -66,7 +79,7 @@ public class AudioManager : MonoBehaviour {
 
 		int index;
 		if (isRandom)
-			index = Random.Range(0, musics.Length - 1);
+			index = UnityEngine.Random.Range(0, musics.Length - 1);
 		else
 			index = (int)music;
 		
@@ -98,8 +111,8 @@ public class AudioManager : MonoBehaviour {
         float pitch = 1;
         if (isRandom)
         {
-            volume *= Random.Range(0.6f, 1f);
-            pitch *= Random.Range(0.8f, 1.2f);
+			volume *= UnityEngine.Random.Range(0.6f, 1f);
+			pitch *= UnityEngine.Random.Range(0.8f, 1.2f);
         }
         audioSource.volume = volume;
         audioSource.pitch = pitch;
@@ -111,27 +124,69 @@ public class AudioManager : MonoBehaviour {
         StartCoroutine(DestroySpeaker(duration, speaker));
     }
 
-	public void PlayNarration(Narration narration) {
+
+
+	public void PlayTutorialNarrative(Narration narration) {
 		if ((int)narration >= narrative.Length){
 			Debug.Log("Can't find the narrative");
 			return;
 		}
 
+		speaker = InstallSpeaker ();
 
-		speaker2 = InstallSpeaker ();
+		AudioSource audioSource = speaker.GetComponent<AudioSource>();
 
-		AudioSource audioSource = speaker2.GetComponent<AudioSource>();
+		float volume = PlayerPrefs.GetFloat(MainMenuLoad.NARRATOR_VOLUME);
+		audioSource.tag = NARRATOR;
+		audioSource.volume = volume;
+		audioSource.clip = narrative [(int)narration];
 
-		if (audioSource.isPlaying) {
-			return;
+		addToTutorialNarrative (narrative [(int)narration]);
+
+		if (tutorialNarrative.Count > 0 && DateTime.Now < tutorialNarrative [tutorialNarrative.Count - 1].time  ) {
+			float delay = (float)(DateTime.Now - tutorialNarrative [tutorialNarrative.Count - 1].time).TotalMilliseconds;
+			audioSource.PlayDelayed (delay);
+		} else {
+			audioSource.Play ();
+		}
+	}
+
+	public void addToTutorialNarrative (AudioClip narration) {
+		tutorialNarrative.Add (new TutorialNarrative(narration, DateTime.Now.AddMilliseconds(narration.length)));
+	}
+
+	public void PlayNarration() {
+		int level = PlayerPrefs.GetInt("LevelLoad");
+		Narration narration;
+
+		switch (level) {
+			case 1:
+				narration = Narration.CORRIDOR_LEVEL;
+				break;
+			case 2:
+				narration = Narration.WATER_LEVEL;
+				break;
+			case 3:
+				narration = Narration.INCINERATOR_LEVEL;
+				break;
+			case 4:
+				narration = Narration.PORTAL_LEVEL;
+				break;
+			case 0:
+			default:
+				narration = Narration.LEVEL_ONE;
+				break;
 		}
 
-		float volume = PlayerPrefs.GetFloat("NarratorVolume");
-		audioSource.tag = "Narrator";
-		audioSource.volume = volume;
-		audioSource.clip (narration);
+		speaker = InstallSpeaker ();
 
-		audioSource.Play()
+		AudioSource audioSource = speaker.GetComponent<AudioSource>();
+
+		float volume = PlayerPrefs.GetFloat(MainMenuLoad.NARRATOR_VOLUME);
+		audioSource.tag = NARRATOR;
+		audioSource.volume = volume;
+
+		audioSource.PlayOneShot (narrative[(int)narration]);
 	}
 
 	private GameObject InstallSpeaker(GameObject obj)

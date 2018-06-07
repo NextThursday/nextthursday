@@ -4,10 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class MainMenuLoad : MonoBehaviour {
-    
+	
+	public static string NARRATOR_VOLUME = "NarratorVolume";
+
 	public Slider soundVolumeSlider;
 	public Slider musicVolumeSlider;
+	public Slider narratorVolumeSlider;
 	public Button[] buttons;
 
 	//private AudioManager audioManager;
@@ -27,6 +31,13 @@ public class MainMenuLoad : MonoBehaviour {
             musicVolumeSlider.value = 1;
             PlayerPrefs.SetFloat("MusicVolume", 1f);
         }
+
+		if (PlayerPrefs.HasKey (NARRATOR_VOLUME)) {
+			narratorVolumeSlider.value = PlayerPrefs.GetFloat (NARRATOR_VOLUME);
+		} else {
+			narratorVolumeSlider.value = 1;
+			PlayerPrefs.SetFloat (NARRATOR_VOLUME, 1f);
+		}
 
 		//audioManager = FindObjectOfType<AudioManager>();
 		GetComponent<ResetGame>().Reset();
@@ -54,6 +65,12 @@ public class MainMenuLoad : MonoBehaviour {
         VolumeController volumeController = FindObjectOfType<VolumeController>();
         volumeController.ResetVolume();
     }
+
+	public void SetNarratorVolume(float volume) {
+		PlayerPrefs.SetFloat (NARRATOR_VOLUME, volume);
+		VolumeController volumeController = FindObjectOfType<VolumeController> ();
+		volumeController.ResetVolume();
+	}
 
 	public void OnMouseOver()
 	{

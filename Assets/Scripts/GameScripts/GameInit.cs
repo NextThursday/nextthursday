@@ -99,6 +99,7 @@ public class GameInit : MonoBehaviour {
                 levelObj = Instantiate(levels[GetRandomLevel()]);
             }
 			audioManager.PlayMusic(AudioManager.Music.GAMEPLAY);
+			audioManager.PlayNarration ();
 
         }
         else
@@ -108,6 +109,7 @@ public class GameInit : MonoBehaviour {
             PlayerPrefs.SetInt("SkipTutorial", 1);
             master.controls.isTutorial = true;
             master.countdown.gotWinPts = true;
+			audioManager.PlayTutorialNarrative (AudioManager.Narration.TUTORIAL);
 			audioManager.PlayMusic(AudioManager.Music.TUTORIAL);
         }
 
