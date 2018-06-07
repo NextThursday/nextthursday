@@ -14,6 +14,7 @@ public class ProjectileCollision : MonoBehaviour {
     public GameObject PointLoseParticle;
 
     ProjectileMotor projectileMotor;
+	private AudioManager audioManager;
 
     private void Start()
     {
@@ -22,6 +23,8 @@ public class ProjectileCollision : MonoBehaviour {
         {
             master = GameObject.Find("[MASTER]").GetComponent<MasterReferences>();
         }
+
+		audioManager = FindObjectOfType<AudioManager>();
     }
 
 
@@ -33,7 +36,6 @@ public class ProjectileCollision : MonoBehaviour {
     void CheckCollision(Collision coll)
     {
         GameObject collObj = coll.gameObject;
-		AudioManager audioManager = FindObjectOfType<AudioManager>();
 
         if (collObj.tag == "Ally")
         { //|| collObj.tag == "Player")
@@ -48,7 +50,6 @@ public class ProjectileCollision : MonoBehaviour {
 
                 motor.DieAlly();
 				audioManager.AddSoundTo(collObj, AudioManager.Sound.HURT, true);
-				//collObj.GetComponent<AudioSource>().PlayOneShot(audioManager.getHurt, PlayerPrefs.GetFloat("Volume"));
             }
 
         }
@@ -72,7 +73,6 @@ public class ProjectileCollision : MonoBehaviour {
             master.screenshake.Shake(playerScreenshakeStrength, playerScreenshakeTime);
 
 			audioManager.AddSoundTo(collObj, AudioManager.Sound.HURT, true);
-			//collObj.GetComponent<AudioSource>().PlayOneShot(audioManager.getHurt, PlayerPrefs.GetFloat("Volume"));
 
 
 

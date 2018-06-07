@@ -80,6 +80,7 @@ public class EnemyMotor : MonoBehaviour {
     float randomSeed;
 
     public bool debug;
+	private AudioManager audioManager;
 
     private void Start()
     {
@@ -92,6 +93,8 @@ public class EnemyMotor : MonoBehaviour {
                 ModSettings_Start(mod);
             }
         }
+
+		audioManager = FindObjectOfType<AudioManager>();
     }
 
 
@@ -487,10 +490,7 @@ public class EnemyMotor : MonoBehaviour {
         projectile.GetComponent<ProjectileMotor>().speedMulti = bulletSpeedMulti;
         projectile.GetComponent<ProjectileMotor>().isHarmless = isHarmless;
 
-		AudioManager audioManager = FindObjectOfType<AudioManager>();
 		audioManager.AddSoundTo(gameObject, AudioManager.Sound.SPELL, true);
-
-		//GetComponent<AudioSource>().PlayOneShot(audioManager.spell, PlayerPrefs.GetFloat("Volume"));
     }
 
 

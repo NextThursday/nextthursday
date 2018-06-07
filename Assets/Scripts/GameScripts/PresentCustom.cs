@@ -9,7 +9,14 @@ public class PresentCustom : MonoBehaviour {
     bool destroyed = false;
     bool scaleDown = false;
 
-    private void OnCollisionEnter(Collision coll)
+	private AudioManager audioManager;
+
+	private void Start()
+	{
+		audioManager = FindObjectOfType<AudioManager>();
+	}
+
+	private void OnCollisionEnter(Collision coll)
     {
         CheckCollision(coll);
     }
@@ -21,8 +28,7 @@ public class PresentCustom : MonoBehaviour {
         {
             coll.gameObject.GetComponent<PlayerScript>().GetGift();
 
-			AudioManager audioManager = FindObjectOfType<AudioManager>();
-            audioManager.AddSoundTo(coll.gameObject, AudioManager.Sound.PRESENT, false);
+			audioManager.AddSoundTo(coll.gameObject, AudioManager.Sound.PRESENT, false);
 
             DestroyGift(coll);
         }

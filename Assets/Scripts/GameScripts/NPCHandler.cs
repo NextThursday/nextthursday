@@ -15,7 +15,7 @@ public class NPCHandler : MonoBehaviour {
     public GameObject ConvertParticle;
     public GameObject PointParticle;
 
-
+	private AudioManager audioManager;
 
     bool isSeenByCamera = true;
 
@@ -89,10 +89,7 @@ public class NPCHandler : MonoBehaviour {
         particleObject.transform.parent = transform.root;
         particleObject.transform.GetChild(0).GetComponent<ParticleSystem>().Emit(1);
 
-		AudioManager audioManager = FindObjectOfType<AudioManager>();
 		audioManager.AddSoundTo(gameObject, AudioManager.Sound.CONVINCED, true);
-
-        //GetComponent<AudioSource>().PlayOneShot(audioManager.convinced, PlayerPrefs.GetFloat("Volume"));
 
         master.spawnEnemies.Spawn();
         motor.On();
@@ -118,7 +115,7 @@ public class NPCHandler : MonoBehaviour {
             ModSettings_Start(mod);
         }
 
-
+		audioManager = FindObjectOfType<AudioManager>();
     }
 
 

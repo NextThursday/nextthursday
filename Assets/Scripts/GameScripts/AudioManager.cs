@@ -35,8 +35,8 @@ public class AudioManager : MonoBehaviour {
 		float volume = PlayerPrefs.GetFloat("Volume");
 		float pitch = 1;
 		if (isRandom){
-			volume *= Random.Range(0.7f, 1.3f);
-			pitch *= Random.Range(0.5f, 1.5f);
+			volume *= Random.Range(0.6f, 1f);
+			pitch *= Random.Range(0.8f, 1.2f);
 		}
 		audioSource.volume = volume;
 		audioSource.pitch = pitch;
