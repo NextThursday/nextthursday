@@ -10,7 +10,7 @@ public class MainMenuLoad : MonoBehaviour {
 	public Slider musicVolumeSlider;
 	public Button[] buttons;
 
-	private AudioManager audioManager;
+	//private AudioManager audioManager;
 
 	void Start()
 	{
@@ -28,7 +28,7 @@ public class MainMenuLoad : MonoBehaviour {
             PlayerPrefs.SetFloat("MusicVolume", 1f);
         }
 
-		audioManager = FindObjectOfType<AudioManager>();
+		//audioManager = FindObjectOfType<AudioManager>();
 		GetComponent<ResetGame>().Reset();
 	}
 
