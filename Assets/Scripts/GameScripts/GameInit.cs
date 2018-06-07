@@ -24,15 +24,15 @@ public class GameInit : MonoBehaviour {
     GameObject player;
     MoveMotor playerMotor;
 
-
+	private AudioManager audioManager;
 
 
 
     void Start ()
     {
-        // PlayerPrefs.SetInt("SkipTutorial", 1); // <<<<<<<<<<<<< !!!!!
-      //  PlayerPrefs.DeleteKey("SkipTutorial"); // <<<<<<<<<<<<< !!!!!
-
+		// PlayerPrefs.SetInt("SkipTutorial", 1); // <<<<<<<<<<<<< !!!!!
+		//  PlayerPrefs.DeleteKey("SkipTutorial"); // <<<<<<<<<<<<< !!!!!
+		audioManager = FindObjectOfType<AudioManager>();
         InitLevel();
     }
 
@@ -98,6 +98,7 @@ public class GameInit : MonoBehaviour {
 
                 levelObj = Instantiate(levels[GetRandomLevel()]);
             }
+			audioManager.PlayMusic(AudioManager.Music.GAMEPLAY);
 
         }
         else
@@ -107,6 +108,7 @@ public class GameInit : MonoBehaviour {
             PlayerPrefs.SetInt("SkipTutorial", 1);
             master.controls.isTutorial = true;
             master.countdown.gotWinPts = true;
+			audioManager.PlayMusic(AudioManager.Music.TUTORIAL);
         }
 
         levelObj.GetComponent<LevelMod>().master = master;
@@ -123,11 +125,13 @@ public class GameInit : MonoBehaviour {
     {
         int choice = Random.Range(1, levels.Count);
         string levelsPlayed = PlayerPrefs.GetString("LevelsPlayed"); 
+		//Debug.Log(levelsPlayed);
         if (levelsPlayed.Contains(""+choice))
         {
             choice = GetRandomLevel();
         }
         PlayerPrefs.SetString("LevelsPlayed", PlayerPrefs.GetString("LevelsPlayed") + choice);
+		Debug.Log(levelsPlayed);
         return choice;
     }
 

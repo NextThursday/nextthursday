@@ -20,12 +20,13 @@ public class EnemyHurt : MonoBehaviour {
 
     public GameObject DeathParticle;
     public GameObject PointParticle;
-    
 
+	private AudioManager audioManager;
 
     private void Start()
     {
         StartCoroutine(LoseInvinsibility());
+		audioManager = FindObjectOfType<AudioManager>();
     }
 
     IEnumerator LoseInvinsibility ()
@@ -49,6 +50,7 @@ public class EnemyHurt : MonoBehaviour {
             if (coll.gameObject.tag == "Ally" || coll.gameObject.tag == "Player")
             {
                 dead = true;
+				audioManager.AddSoundTo(gameObject, AudioManager.Sound.HURT, true);
                 StartCoroutine( KillEnemy());
             }
         }

@@ -10,11 +10,15 @@ public class ScoreBoard : MonoBehaviour
 	public TextMesh myText;
 	private TopScore topScore;
 
+	private AudioManager audioManager;
+
 	// Use this for initialization
 	void Start()
 	{
 		topScore = new TopScore();
 		myText.text = topScore.ToString();
+		audioManager = FindObjectOfType<AudioManager>();
+		audioManager.PlayMusic(AudioManager.Music.SCOREBOARD);
 	}
 
     private void Update()

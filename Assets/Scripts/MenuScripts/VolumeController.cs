@@ -12,9 +12,14 @@ public class VolumeController : MonoBehaviour {
 	}
 
 	public void ResetVolume(){
-		float volume = PlayerPrefs.HasKey("Volume") ? PlayerPrefs.GetFloat("Volume") : 1.0f;
+		float svolume = PlayerPrefs.HasKey("SoundVolume") ? PlayerPrefs.GetFloat("SoundVolume") : 1.0f;
+		float mvolume = PlayerPrefs.HasKey("MusicVolume") ? PlayerPrefs.GetFloat("MusicVolume") : 1.0f;
 		audioSources = FindObjectsOfType<AudioSource>();
-		foreach (AudioSource myAudio in audioSources)
-            myAudio.volume = volume;
+		foreach (AudioSource myAudio in audioSources){
+			if (myAudio.tag == "Sound")
+				myAudio.volume = svolume;
+			else if (myAudio.tag == "Music")
+				myAudio.volume = mvolume;
+		}
 	}
 }

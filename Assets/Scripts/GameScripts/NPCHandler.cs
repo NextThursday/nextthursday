@@ -68,6 +68,8 @@ public class NPCHandler : MonoBehaviour {
             NPCHandler npcHandler = coll.gameObject.GetComponent<NPCHandler>();
             if (npcHandler.mode == NPCMode.ALLY && isSeenByCamera && mode != NPCMode.ALLY) //ensures it is visible and hit by an ally, and is not an ally
             {
+				audioManager.AddSoundTo(gameObject, AudioManager.Sound.CONVINCED, true);
+
                 ConvertToAlly();
                 AddPoint();
 
@@ -75,6 +77,8 @@ public class NPCHandler : MonoBehaviour {
         }
         else if (coll.gameObject.tag == "Player" && mode != NPCMode.ALLY) //ensures it is hit by player and is not an ally previously
         {
+			audioManager.AddSoundTo(gameObject, AudioManager.Sound.CONVINCED, true);
+
             ConvertToAlly();
             AddPoint();
         }
@@ -88,8 +92,6 @@ public class NPCHandler : MonoBehaviour {
         GameObject particleObject = Instantiate(ConvertParticle, transform);
         particleObject.transform.parent = transform.root;
         particleObject.transform.GetChild(0).GetComponent<ParticleSystem>().Emit(1);
-
-		audioManager.AddSoundTo(gameObject, AudioManager.Sound.CONVINCED, true);
 
         master.spawnEnemies.Spawn();
         motor.On();

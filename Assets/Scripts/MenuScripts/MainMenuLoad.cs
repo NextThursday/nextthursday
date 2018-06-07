@@ -6,12 +6,20 @@ using UnityEngine.UI;
 
 public class MainMenuLoad : MonoBehaviour {
     
-	public Slider volumeSlider;
+	public Slider soundVolumeSlider;
+	public Slider musicVolumeSlider;
+	public Button[] buttons;
+
+	private AudioManager audioManager;
 
 	void Start()
 	{
-		volumeSlider.value = PlayerPrefs.HasKey("Volume") ? PlayerPrefs.GetFloat("Volume") : 1;
+		soundVolumeSlider.value = PlayerPrefs.HasKey("SoundVolume") ? PlayerPrefs.GetFloat("SoundVolume") : 1;
+		musicVolumeSlider.value = PlayerPrefs.HasKey("MusicVolume") ? PlayerPrefs.GetFloat("MusicVolume") : 1;
+		audioManager = FindObjectOfType<AudioManager>();
+		GetComponent<ResetGame>().Reset();
 	}
+
 	public void StartGame(){
 		SceneManager.LoadScene("MainScene");
 	}
@@ -22,10 +30,27 @@ public class MainMenuLoad : MonoBehaviour {
 		SceneManager.LoadScene("MainScene");
 	}
 
-	public void SetVolume(float volume){
-		PlayerPrefs.SetFloat("Volume", volume);
+	public void SetSoundVolume(float volume){
+		PlayerPrefs.SetFloat("SoundVolume", volume);
 		VolumeController volumeController = FindObjectOfType<VolumeController>();
 		volumeController.ResetVolume();
+	}
+    
+	public void SetMusicVolume(float volume)
+    {
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+        VolumeController volumeController = FindObjectOfType<VolumeController>();
+        volumeController.ResetVolume();
+    }
+
+	public void OnMouseOver()
+	{
+		//audioManager.AddSoundTo(AudioManager.Sound.HURT);
+	}
+
+	public void OnMouseDown()
+	{
+		//audioManager.AddSoundTo(AudioManager.Sound.SPELL);
 	}
 
 	public void QuitGame(){

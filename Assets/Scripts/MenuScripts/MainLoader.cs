@@ -9,7 +9,6 @@ public class MainLoader : MonoBehaviour {
 
 	void Start () {
         PlayerPrefs.DeleteKey("SkipTutorial");
-        GetComponent<ResetGame>().Reset();
         StartCoroutine(NextLevel(delayTime));
 
 	}

@@ -32,11 +32,14 @@ public class TargetHandler : MonoBehaviour {
 
     string controlMode = "";
 
-
+	private bool isHoldingMouse;
+	private AudioManager audioManager;
 
     void Start ()
     {
         controlMode = PlayerPrefs.GetString("Controls");
+		isHoldingMouse = true;
+		audioManager = FindObjectOfType<AudioManager>();
     }
 
     public FormationMode GetFormationMode ()
@@ -64,15 +67,19 @@ public class TargetHandler : MonoBehaviour {
     }
     
 	void Update () {
-        
         if(Input.GetMouseButton(0) && controlMode == "MOUSE" || 
             Input.GetButtonDown("A_1") && controlMode == "X360")
         {
             if (allowLine && tag == "Ally" || allowLine && tag == "Player") formation = FormationMode.LINE;
+			if (!isHoldingMouse){
+				audioManager.AddSoundTo(motor.gameObject, AudioManager.Sound.SPEEDUP, false);
+				isHoldingMouse = true;
+			}
         }
         else
         {
             if (allowFollowCursor) formation = FormationMode.FOLLOW_CURSOR;
+			isHoldingMouse = false;
         }
 
         CheckForChangeFormation();
