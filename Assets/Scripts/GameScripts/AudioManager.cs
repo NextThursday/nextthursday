@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour {
 	//public AudioClip push;
 	public AudioClip[] audioClips;
 	public AudioClip[] musics;
+	public AudioClip[] narrative;
 	public GameObject speakerPrefab;
 
 	public enum Sound
@@ -32,8 +33,13 @@ public class AudioManager : MonoBehaviour {
         SCOREBOARD
 	};
 
+	public enum Narration {
+		
+	}
+
 
 	GameObject speaker;
+	GameObject speaker2;
 
 	public void PlayMusic(Music music){
 		PlayMusic(music, false);
@@ -104,6 +110,29 @@ public class AudioManager : MonoBehaviour {
         float duration = audioClips[(int)sound].length;
         StartCoroutine(DestroySpeaker(duration, speaker));
     }
+
+	public void PlayNarration(Narration narration) {
+		if ((int)narration >= narrative.Length){
+			Debug.Log("Can't find the narrative");
+			return;
+		}
+
+
+		speaker2 = InstallSpeaker ();
+
+		AudioSource audioSource = speaker2.GetComponent<AudioSource>();
+
+		if (audioSource.isPlaying) {
+			return;
+		}
+
+		float volume = PlayerPrefs.GetFloat("NarratorVolume");
+		audioSource.tag = "Narrator";
+		audioSource.volume = volume;
+		audioSource.clip (narration);
+
+		audioSource.Play()
+	}
 
 	private GameObject InstallSpeaker(GameObject obj)
     {
