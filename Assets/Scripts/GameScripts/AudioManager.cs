@@ -64,7 +64,8 @@ public class AudioManager : MonoBehaviour {
 		else
 			index = (int)music;
 		
-		audioSource.PlayOneShot(musics[index]);
+		audioSource.clip = musics[index];
+		audioSource.Play();
 	}
 
 	public void AddSoundTo(Sound sound)
