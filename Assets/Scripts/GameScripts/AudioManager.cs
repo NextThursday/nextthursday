@@ -155,8 +155,9 @@ public class AudioManager : MonoBehaviour {
 		tutorialNarrative.Add (new TutorialNarrative(narration, DateTime.Now.AddMilliseconds(narration.length)));
 	}
 
-	public void PlayNarration() {
-		int level = PlayerPrefs.GetInt("LevelLoad");
+	public void PlayNarration()
+    {
+        int level = PlayerPrefs.GetInt("LevelObjectToLoad");
 		Narration narration;
 
 		switch (level) {
@@ -189,7 +190,25 @@ public class AudioManager : MonoBehaviour {
 		audioSource.PlayOneShot (narrative[(int)narration]);
 	}
 
-	private GameObject InstallSpeaker(GameObject obj)
+
+
+
+    public void PlayNarrationClip(Narration narration)
+    {
+
+        speaker = InstallSpeaker();
+
+        AudioSource audioSource = speaker.GetComponent<AudioSource>();
+
+        float volume = PlayerPrefs.GetFloat(MainMenuLoad.NARRATOR_VOLUME);
+        audioSource.tag = NARRATOR;
+        audioSource.volume = volume;
+
+        audioSource.PlayOneShot(narrative[(int)narration]);
+    }
+
+
+    private GameObject InstallSpeaker(GameObject obj)
     {
         GameObject newSpeaker = Instantiate(speakerPrefab);
 		newSpeaker.transform.position = obj.transform.position;

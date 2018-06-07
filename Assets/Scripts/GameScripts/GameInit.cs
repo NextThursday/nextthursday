@@ -92,11 +92,13 @@ public class GameInit : MonoBehaviour {
             if (level == 1)
             {
                 levelObj = Instantiate(levels[0]);
+                PlayerPrefs.SetInt("LevelObjectToLoad", 0);
             }
             else
             {
-
-                levelObj = Instantiate(levels[GetRandomLevel()]);
+                int newLevel = GetRandomLevel();
+                PlayerPrefs.SetInt("LevelObjectToLoad", newLevel);
+                levelObj = Instantiate(levels[newLevel]);
             }
 			audioManager.PlayMusic(AudioManager.Music.GAMEPLAY);
 			audioManager.PlayNarration ();

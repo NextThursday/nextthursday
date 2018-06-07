@@ -8,8 +8,10 @@ public class MainLoader : MonoBehaviour {
     public float delayTime;
 
 	void Start () {
-      //  PlayerPrefs.DeleteKey("SkipTutorial");
+        //  PlayerPrefs.DeleteKey("SkipTutorial");
         //GetComponent<ResetGame>().Reset();
+     //   PlayerPrefs.DeleteAll();
+        Debug.Log("load!");
         StartCoroutine(NextLevel(delayTime));
 
 	}
@@ -17,6 +19,7 @@ public class MainLoader : MonoBehaviour {
     IEnumerator NextLevel (float delay)
     {
         yield return new WaitForSeconds(delay);
+        Debug.Log("load2" + levelToLoad);
         Application.LoadLevel(levelToLoad);
 
     }

@@ -28,8 +28,8 @@ public class MainMenuLoad : MonoBehaviour {
 		if (PlayerPrefs.HasKey("MusicVolume")){
             musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         }else{
-            musicVolumeSlider.value = 1;
-            PlayerPrefs.SetFloat("MusicVolume", 1f);
+            musicVolumeSlider.value = 0.5f;
+            PlayerPrefs.SetFloat("MusicVolume", 0.1f);
         }
 
 		if (PlayerPrefs.HasKey (NARRATOR_VOLUME)) {

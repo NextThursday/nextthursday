@@ -23,7 +23,6 @@ public class EndMenu : MonoBehaviour {
     void Start () {
         
 
-
         
         playerName = "Player";
         myScore = PlayerPrefs.GetInt("GameScore");
