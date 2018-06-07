@@ -14,8 +14,20 @@ public class MainMenuLoad : MonoBehaviour {
 
 	void Start()
 	{
-		soundVolumeSlider.value = PlayerPrefs.HasKey("SoundVolume") ? PlayerPrefs.GetFloat("SoundVolume") : 1;
-		musicVolumeSlider.value = PlayerPrefs.HasKey("MusicVolume") ? PlayerPrefs.GetFloat("MusicVolume") : 1;
+		if (PlayerPrefs.HasKey("SoundVolume")){
+			soundVolumeSlider.value = PlayerPrefs.GetFloat("SoundVolume");
+		}else{
+			soundVolumeSlider.value = 1;
+			PlayerPrefs.SetFloat("SoundVolume", 1f);
+		}
+
+		if (PlayerPrefs.HasKey("MusicVolume")){
+            musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        }else{
+            musicVolumeSlider.value = 1;
+            PlayerPrefs.SetFloat("MusicVolume", 1f);
+        }
+
 		audioManager = FindObjectOfType<AudioManager>();
 		GetComponent<ResetGame>().Reset();
 	}
