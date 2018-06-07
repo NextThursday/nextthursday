@@ -71,7 +71,7 @@ public class TargetHandler : MonoBehaviour {
             Input.GetButtonDown("A_1") && controlMode == "X360")
         {
             if (allowLine && tag == "Ally" || allowLine && tag == "Player") formation = FormationMode.LINE;
-			if (!isHoldingMouse){
+			if (!isHoldingMouse && tag == "Player"){
 				audioManager.AddSoundTo(motor.gameObject, AudioManager.Sound.SPEEDUP, false);
 				isHoldingMouse = true;
 			}
