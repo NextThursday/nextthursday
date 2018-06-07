@@ -10,6 +10,8 @@ TagManager:
   - Dead
   - Water
   - Bullet
+  - Music
+  - Sound
   layers:
   - Default
   - TransparentFX
